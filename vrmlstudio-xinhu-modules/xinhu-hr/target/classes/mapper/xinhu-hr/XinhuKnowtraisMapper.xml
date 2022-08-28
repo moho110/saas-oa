@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuKnowtraisMapper">
+    
+    <resultMap type="XinhuKnowtrais" id="XinhuKnowtraisResult">
+        <result property="id"    column="id"    />
+        <result property="mid"    column="mid"    />
+        <result property="uid"    column="uid"    />
+        <result property="kssdt"    column="kssdt"    />
+        <result property="ksedt"    column="ksedt"    />
+        <result property="fenshu"    column="fenshu"    />
+        <result property="kstime"    column="kstime"    />
+        <result property="isks"    column="isks"    />
+        <result property="tkids"    column="tkids"    />
+        <result property="dyids"    column="dyids"    />
+        <result property="dyjgs"    column="dyjgs"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuKnowtraisVo">
+        select id, mid, uid, kssdt, ksedt, fenshu, kstime, isks, tkids, dyids, dyjgs, comid from xinhu_knowtrais
+    </sql>
+
+    <select id="selectXinhuKnowtraisList" parameterType="XinhuKnowtrais" resultMap="XinhuKnowtraisResult">
+        <include refid="selectXinhuKnowtraisVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="kssdt != null "> and kssdt = #{kssdt}</if>
+            <if test="ksedt != null "> and ksedt = #{ksedt}</if>
+            <if test="fenshu != null "> and fenshu = #{fenshu}</if>
+            <if test="kstime != null "> and kstime = #{kstime}</if>
+            <if test="isks != null "> and isks = #{isks}</if>
+            <if test="tkids != null  and tkids != ''"> and tkids = #{tkids}</if>
+            <if test="dyids != null  and dyids != ''"> and dyids = #{dyids}</if>
+            <if test="dyjgs != null  and dyjgs != ''"> and dyjgs = #{dyjgs}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuKnowtraisById" parameterType="Long" resultMap="XinhuKnowtraisResult">
+        <include refid="selectXinhuKnowtraisVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuKnowtrais" parameterType="XinhuKnowtrais">
+        insert into xinhu_knowtrais
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="mid != null">mid,</if>
+            <if test="uid != null">uid,</if>
+            <if test="kssdt != null">kssdt,</if>
+            <if test="ksedt != null">ksedt,</if>
+            <if test="fenshu != null">fenshu,</if>
+            <if test="kstime != null">kstime,</if>
+            <if test="isks != null">isks,</if>
+            <if test="tkids != null and tkids != ''">tkids,</if>
+            <if test="dyids != null and dyids != ''">dyids,</if>
+            <if test="dyjgs != null and dyjgs != ''">dyjgs,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="kssdt != null">#{kssdt},</if>
+            <if test="ksedt != null">#{ksedt},</if>
+            <if test="fenshu != null">#{fenshu},</if>
+            <if test="kstime != null">#{kstime},</if>
+            <if test="isks != null">#{isks},</if>
+            <if test="tkids != null and tkids != ''">#{tkids},</if>
+            <if test="dyids != null and dyids != ''">#{dyids},</if>
+            <if test="dyjgs != null and dyjgs != ''">#{dyjgs},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuKnowtrais" parameterType="XinhuKnowtrais">
+        update xinhu_knowtrais
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="kssdt != null">kssdt = #{kssdt},</if>
+            <if test="ksedt != null">ksedt = #{ksedt},</if>
+            <if test="fenshu != null">fenshu = #{fenshu},</if>
+            <if test="kstime != null">kstime = #{kstime},</if>
+            <if test="isks != null">isks = #{isks},</if>
+            <if test="tkids != null and tkids != ''">tkids = #{tkids},</if>
+            <if test="dyids != null and dyids != ''">dyids = #{dyids},</if>
+            <if test="dyjgs != null and dyjgs != ''">dyjgs = #{dyjgs},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuKnowtraisById" parameterType="Long">
+        delete from xinhu_knowtrais where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuKnowtraisByIds" parameterType="String">
+        delete from xinhu_knowtrais where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

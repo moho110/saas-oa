@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.resources.mapper.XinhuTodoMapper">
+    
+    <resultMap type="XinhuTodo" id="XinhuTodoResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="title"    column="title"    />
+        <result property="mess"    column="mess"    />
+        <result property="status"    column="status"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="tables"    column="tables"    />
+        <result property="mid"    column="mid"    />
+        <result property="readdt"    column="readdt"    />
+        <result property="tododt"    column="tododt"    />
+        <result property="modenum"    column="modenum"    />
+        <result property="url"    column="url"    />
+    </resultMap>
+
+    <sql id="selectXinhuTodoVo">
+        select id, uid, title, mess, status, optdt, tables, mid, readdt, tododt, modenum, url from xinhu_todo
+    </sql>
+
+    <select id="selectXinhuTodoList" parameterType="XinhuTodo" resultMap="XinhuTodoResult">
+        <include refid="selectXinhuTodoVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="mess != null  and mess != ''"> and mess = #{mess}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="tables != null  and tables != ''"> and tables = #{tables}</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="readdt != null "> and readdt = #{readdt}</if>
+            <if test="tododt != null "> and tododt = #{tododt}</if>
+            <if test="modenum != null  and modenum != ''"> and modenum = #{modenum}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuTodoById" parameterType="Long" resultMap="XinhuTodoResult">
+        <include refid="selectXinhuTodoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuTodo" parameterType="XinhuTodo">
+        insert into xinhu_todo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uid != null">uid,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="mess != null and mess != ''">mess,</if>
+            <if test="status != null">status,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="tables != null and tables != ''">tables,</if>
+            <if test="mid != null">mid,</if>
+            <if test="readdt != null">readdt,</if>
+            <if test="tododt != null">tododt,</if>
+            <if test="modenum != null and modenum != ''">modenum,</if>
+            <if test="url != null and url != ''">url,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="mess != null and mess != ''">#{mess},</if>
+            <if test="status != null">#{status},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="tables != null and tables != ''">#{tables},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="readdt != null">#{readdt},</if>
+            <if test="tododt != null">#{tododt},</if>
+            <if test="modenum != null and modenum != ''">#{modenum},</if>
+            <if test="url != null and url != ''">#{url},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuTodo" parameterType="XinhuTodo">
+        update xinhu_todo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="mess != null and mess != ''">mess = #{mess},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="tables != null and tables != ''">tables = #{tables},</if>
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="readdt != null">readdt = #{readdt},</if>
+            <if test="tododt != null">tododt = #{tododt},</if>
+            <if test="modenum != null and modenum != ''">modenum = #{modenum},</if>
+            <if test="url != null and url != ''">url = #{url},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuTodoById" parameterType="Long">
+        delete from xinhu_todo where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuTodoByIds" parameterType="String">
+        delete from xinhu_todo where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

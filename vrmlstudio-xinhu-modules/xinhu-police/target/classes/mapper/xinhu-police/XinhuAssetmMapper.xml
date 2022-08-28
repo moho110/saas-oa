@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.police.mapper.XinhuAssetmMapper">
+    
+    <resultMap type="XinhuAssetm" id="XinhuAssetmResult">
+        <result property="id"    column="id"    />
+        <result property="typeid"    column="typeid"    />
+        <result property="title"    column="title"    />
+        <result property="num"    column="num"    />
+        <result property="brand"    column="brand"    />
+        <result property="model"    column="model"    />
+        <result property="laiyuan"    column="laiyuan"    />
+        <result property="shuname"    column="shuname"    />
+        <result property="dt"    column="dt"    />
+        <result property="ckid"    column="ckid"    />
+        <result property="state"    column="state"    />
+        <result property="content"    column="content"    />
+        <result property="optname"    column="optname"    />
+        <result property="adddt"    column="adddt"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="buydt"    column="buydt"    />
+        <result property="price"    column="price"    />
+        <result property="optid"    column="optid"    />
+        <result property="status"    column="status"    />
+        <result property="useid"    column="useid"    />
+        <result property="usename"    column="usename"    />
+        <result property="fengmian"    column="fengmian"    />
+        <result property="comid"    column="comid"    />
+        <result property="address"    column="address"    />
+    </resultMap>
+
+    <sql id="selectXinhuAssetmVo">
+        select id, typeid, title, num, brand, model, laiyuan, shuname, dt, ckid, state, content, optname, adddt, optdt, buydt, price, optid, status, useid, usename, fengmian, comid, address from xinhu_assetm
+    </sql>
+
+    <select id="selectXinhuAssetmList" parameterType="XinhuAssetm" resultMap="XinhuAssetmResult">
+        <include refid="selectXinhuAssetmVo"/>
+        <where>  
+            <if test="typeid != null "> and typeid = #{typeid}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="model != null  and model != ''"> and model = #{model}</if>
+            <if test="laiyuan != null  and laiyuan != ''"> and laiyuan = #{laiyuan}</if>
+            <if test="shuname != null  and shuname != ''"> and shuname like concat('%', #{shuname}, '%')</if>
+            <if test="dt != null "> and dt = #{dt}</if>
+            <if test="ckid != null "> and ckid = #{ckid}</if>
+            <if test="state != null "> and state = #{state}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="adddt != null "> and adddt = #{adddt}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="buydt != null "> and buydt = #{buydt}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="useid != null  and useid != ''"> and useid = #{useid}</if>
+            <if test="usename != null  and usename != ''"> and usename like concat('%', #{usename}, '%')</if>
+            <if test="fengmian != null  and fengmian != ''"> and fengmian = #{fengmian}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuAssetmById" parameterType="Long" resultMap="XinhuAssetmResult">
+        <include refid="selectXinhuAssetmVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuAssetm" parameterType="XinhuAssetm" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_assetm
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="typeid != null">typeid,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="brand != null and brand != ''">brand,</if>
+            <if test="model != null and model != ''">model,</if>
+            <if test="laiyuan != null and laiyuan != ''">laiyuan,</if>
+            <if test="shuname != null and shuname != ''">shuname,</if>
+            <if test="dt != null">dt,</if>
+            <if test="ckid != null">ckid,</if>
+            <if test="state != null">state,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="adddt != null">adddt,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="buydt != null">buydt,</if>
+            <if test="price != null">price,</if>
+            <if test="optid != null">optid,</if>
+            <if test="status != null">status,</if>
+            <if test="useid != null and useid != ''">useid,</if>
+            <if test="usename != null and usename != ''">usename,</if>
+            <if test="fengmian != null and fengmian != ''">fengmian,</if>
+            <if test="comid != null">comid,</if>
+            <if test="address != null and address != ''">address,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="typeid != null">#{typeid},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="brand != null and brand != ''">#{brand},</if>
+            <if test="model != null and model != ''">#{model},</if>
+            <if test="laiyuan != null and laiyuan != ''">#{laiyuan},</if>
+            <if test="shuname != null and shuname != ''">#{shuname},</if>
+            <if test="dt != null">#{dt},</if>
+            <if test="ckid != null">#{ckid},</if>
+            <if test="state != null">#{state},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="adddt != null">#{adddt},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="buydt != null">#{buydt},</if>
+            <if test="price != null">#{price},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="status != null">#{status},</if>
+            <if test="useid != null and useid != ''">#{useid},</if>
+            <if test="usename != null and usename != ''">#{usename},</if>
+            <if test="fengmian != null and fengmian != ''">#{fengmian},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="address != null and address != ''">#{address},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuAssetm" parameterType="XinhuAssetm">
+        update xinhu_assetm
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="typeid != null">typeid = #{typeid},</if>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="brand != null and brand != ''">brand = #{brand},</if>
+            <if test="model != null and model != ''">model = #{model},</if>
+            <if test="laiyuan != null and laiyuan != ''">laiyuan = #{laiyuan},</if>
+            <if test="shuname != null and shuname != ''">shuname = #{shuname},</if>
+            <if test="dt != null">dt = #{dt},</if>
+            <if test="ckid != null">ckid = #{ckid},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="content != null and content != ''">explain = #{content},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="adddt != null">adddt = #{adddt},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="buydt != null">buydt = #{buydt},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="useid != null and useid != ''">useid = #{useid},</if>
+            <if test="usename != null and usename != ''">usename = #{usename},</if>
+            <if test="fengmian != null and fengmian != ''">fengmian = #{fengmian},</if>
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuAssetmById" parameterType="Long">
+        delete from xinhu_assetm where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuAssetmByIds" parameterType="String">
+        delete from xinhu_assetm where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

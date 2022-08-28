@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.police.mapper.XinhuFileMapper">
+    
+    <resultMap type="XinhuFile" id="XinhuFileResult">
+        <result property="id"    column="id"    />
+        <result property="filenum"    column="filenum"    />
+        <result property="valid"    column="valid"    />
+        <result property="filename"    column="filename"    />
+        <result property="filetype"    column="filetype"    />
+        <result property="fileext"    column="fileext"    />
+        <result property="filesize"    column="filesize"    />
+        <result property="filesizecn"    column="filesizecn"    />
+        <result property="filepath"    column="filepath"    />
+        <result property="thumbpath"    column="thumbpath"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="adddt"    column="adddt"    />
+        <result property="ip"    column="ip"    />
+        <result property="web"    column="web"    />
+        <result property="mtype"    column="mtype"    />
+        <result property="mid"    column="mid"    />
+        <result property="downci"    column="downci"    />
+        <result property="keyoi"    column="keyoi"    />
+        <result property="pdfpath"    column="pdfpath"    />
+        <result property="oid"    column="oid"    />
+        <result property="mknum"    column="mknum"    />
+        <result property="comid"    column="comid"    />
+        <result property="thumbplat"    column="thumbplat"    />
+        <result property="onlynum"    column="onlynum"    />
+        <result property="filepathout"    column="filepathout"    />
+        <result property="content"    column="content"    />
+    </resultMap>
+
+    <sql id="selectXinhuFileVo">
+        select id, filenum, valid, filename, filetype, fileext, filesize, filesizecn, filepath, thumbpath, optid, optname, adddt, ip, web, mtype, mid, downci, keyoi, pdfpath, oid, mknum, comid, thumbplat, onlynum, filepathout, content from xinhu_file
+    </sql>
+
+    <select id="selectXinhuFileList" parameterType="XinhuFile" resultMap="XinhuFileResult">
+        <include refid="selectXinhuFileVo"/>
+        <where>  
+            <if test="filenum != null  and filenum != ''"> and filenum = #{filenum}</if>
+            <if test="valid != null "> and valid = #{valid}</if>
+            <if test="filename != null  and filename != ''"> and filename like concat('%', #{filename}, '%')</if>
+            <if test="filetype != null  and filetype != ''"> and filetype = #{filetype}</if>
+            <if test="fileext != null  and fileext != ''"> and fileext = #{fileext}</if>
+            <if test="filesize != null "> and filesize = #{filesize}</if>
+            <if test="filesizecn != null  and filesizecn != ''"> and filesizecn = #{filesizecn}</if>
+            <if test="filepath != null  and filepath != ''"> and filepath = #{filepath}</if>
+            <if test="thumbpath != null  and thumbpath != ''"> and thumbpath = #{thumbpath}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="adddt != null "> and adddt = #{adddt}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+            <if test="web != null  and web != ''"> and web = #{web}</if>
+            <if test="mtype != null  and mtype != ''"> and mtype = #{mtype}</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="downci != null "> and downci = #{downci}</if>
+            <if test="keyoi != null  and keyoi != ''"> and keyoi = #{keyoi}</if>
+            <if test="pdfpath != null  and pdfpath != ''"> and pdfpath = #{pdfpath}</if>
+            <if test="oid != null "> and oid = #{oid}</if>
+            <if test="mknum != null  and mknum != ''"> and mknum = #{mknum}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="thumbplat != null  and thumbplat != ''"> and thumbplat = #{thumbplat}</if>
+            <if test="onlynum != null  and onlynum != ''"> and onlynum = #{onlynum}</if>
+            <if test="filepathout != null  and filepathout != ''"> and filepathout = #{filepathout}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuFileById" parameterType="Long" resultMap="XinhuFileResult">
+        <include refid="selectXinhuFileVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuFile" parameterType="XinhuFile" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="filenum != null and filenum != ''">filenum,</if>
+            <if test="valid != null">valid,</if>
+            <if test="filename != null and filename != ''">filename,</if>
+            <if test="filetype != null and filetype != ''">filetype,</if>
+            <if test="fileext != null and fileext != ''">fileext,</if>
+            <if test="filesize != null">filesize,</if>
+            <if test="filesizecn != null and filesizecn != ''">filesizecn,</if>
+            <if test="filepath != null and filepath != ''">filepath,</if>
+            <if test="thumbpath != null and thumbpath != ''">thumbpath,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="adddt != null">adddt,</if>
+            <if test="ip != null and ip != ''">ip,</if>
+            <if test="web != null and web != ''">web,</if>
+            <if test="mtype != null and mtype != ''">mtype,</if>
+            <if test="mid != null">mid,</if>
+            <if test="downci != null">downci,</if>
+            <if test="keyoi != null and keyoi != ''">keyoi,</if>
+            <if test="pdfpath != null and pdfpath != ''">pdfpath,</if>
+            <if test="oid != null">oid,</if>
+            <if test="mknum != null and mknum != ''">mknum,</if>
+            <if test="comid != null">comid,</if>
+            <if test="thumbplat != null and thumbplat != ''">thumbplat,</if>
+            <if test="onlynum != null and onlynum != ''">onlynum,</if>
+            <if test="filepathout != null and filepathout != ''">filepathout,</if>
+            <if test="content != null and content != ''">content,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="filenum != null and filenum != ''">#{filenum},</if>
+            <if test="valid != null">#{valid},</if>
+            <if test="filename != null and filename != ''">#{filename},</if>
+            <if test="filetype != null and filetype != ''">#{filetype},</if>
+            <if test="fileext != null and fileext != ''">#{fileext},</if>
+            <if test="filesize != null">#{filesize},</if>
+            <if test="filesizecn != null and filesizecn != ''">#{filesizecn},</if>
+            <if test="filepath != null and filepath != ''">#{filepath},</if>
+            <if test="thumbpath != null and thumbpath != ''">#{thumbpath},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="adddt != null">#{adddt},</if>
+            <if test="ip != null and ip != ''">#{ip},</if>
+            <if test="web != null and web != ''">#{web},</if>
+            <if test="mtype != null and mtype != ''">#{mtype},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="downci != null">#{downci},</if>
+            <if test="keyoi != null and keyoi != ''">#{keyoi},</if>
+            <if test="pdfpath != null and pdfpath != ''">#{pdfpath},</if>
+            <if test="oid != null">#{oid},</if>
+            <if test="mknum != null and mknum != ''">#{mknum},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="thumbplat != null and thumbplat != ''">#{thumbplat},</if>
+            <if test="onlynum != null and onlynum != ''">#{onlynum},</if>
+            <if test="filepathout != null and filepathout != ''">#{filepathout},</if>
+            <if test="content != null and content != ''">#{content},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuFile" parameterType="XinhuFile">
+        update xinhu_file
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="filenum != null and filenum != ''">filenum = #{filenum},</if>
+            <if test="valid != null">valid = #{valid},</if>
+            <if test="filename != null and filename != ''">filename = #{filename},</if>
+            <if test="filetype != null and filetype != ''">filetype = #{filetype},</if>
+            <if test="fileext != null and fileext != ''">fileext = #{fileext},</if>
+            <if test="filesize != null">filesize = #{filesize},</if>
+            <if test="filesizecn != null and filesizecn != ''">filesizecn = #{filesizecn},</if>
+            <if test="filepath != null and filepath != ''">filepath = #{filepath},</if>
+            <if test="thumbpath != null and thumbpath != ''">thumbpath = #{thumbpath},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="adddt != null">adddt = #{adddt},</if>
+            <if test="ip != null and ip != ''">ip = #{ip},</if>
+            <if test="web != null and web != ''">web = #{web},</if>
+            <if test="mtype != null and mtype != ''">mtype = #{mtype},</if>
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="downci != null">downci = #{downci},</if>
+            <if test="keyoi != null and keyoi != ''">keyoi = #{keyoi},</if>
+            <if test="pdfpath != null and pdfpath != ''">pdfpath = #{pdfpath},</if>
+            <if test="oid != null">oid = #{oid},</if>
+            <if test="mknum != null and mknum != ''">mknum = #{mknum},</if>
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="thumbplat != null and thumbplat != ''">thumbplat = #{thumbplat},</if>
+            <if test="onlynum != null and onlynum != ''">onlynum = #{onlynum},</if>
+            <if test="filepathout != null and filepathout != ''">filepathout = #{filepathout},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuFileById" parameterType="Long">
+        delete from xinhu_file where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuFileByIds" parameterType="String">
+        delete from xinhu_file where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

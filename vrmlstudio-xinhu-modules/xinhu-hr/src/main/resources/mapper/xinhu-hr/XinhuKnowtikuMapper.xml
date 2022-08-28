@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuKnowtikuMapper">
+    
+    <resultMap type="XinhuKnowtiku" id="XinhuKnowtikuResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="typeid"    column="typeid"    />
+        <result property="types"    column="types"    />
+        <result property="ana"    column="ana"    />
+        <result property="anb"    column="anb"    />
+        <result property="anc"    column="anc"    />
+        <result property="ands"    column="ands"    />
+        <result property="ane"    column="ane"    />
+        <result property="answer"    column="answer"    />
+        <result property="sort"    column="sort"    />
+        <result property="adddt"    column="adddt"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="content"    column="content"    />
+        <result property="status"    column="status"    />
+        <result property="content"    column="content"    />
+        <result property="optid"    column="optid"    />
+        <result property="imgurl"    column="imgurl"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuKnowtikuVo">
+        select id, title, typeid, types, ana, anb, anc, ands, ane, answer, sort, adddt, optdt, contents, status, content, optid, imgurl, comid from xinhu_knowtiku
+    </sql>
+
+    <select id="selectXinhuKnowtikuList" parameterType="XinhuKnowtiku" resultMap="XinhuKnowtikuResult">
+        <include refid="selectXinhuKnowtikuVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="typeid != null "> and typeid = #{typeid}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="ana != null  and ana != ''"> and ana = #{ana}</if>
+            <if test="anb != null  and anb != ''"> and anb = #{anb}</if>
+            <if test="anc != null  and anc != ''"> and anc = #{anc}</if>
+            <if test="ands != null  and ands != ''"> and ands = #{ands}</if>
+            <if test="ane != null  and ane != ''"> and ane = #{ane}</if>
+            <if test="answer != null  and answer != ''"> and answer = #{answer}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="adddt != null "> and adddt = #{adddt}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="contents != null  and contents != ''"> and contents = #{contents}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="imgurl != null  and imgurl != ''"> and imgurl = #{imgurl}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuKnowtikuById" parameterType="Long" resultMap="XinhuKnowtikuResult">
+        <include refid="selectXinhuKnowtikuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuKnowtiku" parameterType="XinhuKnowtiku">
+        insert into xinhu_knowtiku
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="typeid != null">typeid,</if>
+            <if test="types != null">types,</if>
+            <if test="ana != null and ana != ''">ana,</if>
+            <if test="anb != null and anb != ''">anb,</if>
+            <if test="anc != null and anc != ''">anc,</if>
+            <if test="ands != null and ands != ''">ands,</if>
+            <if test="ane != null and ane != ''">ane,</if>
+            <if test="answer != null and answer != ''">answer,</if>
+            <if test="sort != null">sort,</if>
+            <if test="adddt != null">adddt,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="contents != null and contents != ''">contents,</if>
+            <if test="status != null">status,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="optid != null">optid,</if>
+            <if test="imgurl != null and imgurl != ''">imgurl,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="typeid != null">#{typeid},</if>
+            <if test="types != null">#{types},</if>
+            <if test="ana != null and ana != ''">#{ana},</if>
+            <if test="anb != null and anb != ''">#{anb},</if>
+            <if test="anc != null and anc != ''">#{anc},</if>
+            <if test="ands != null and ands != ''">#{ands},</if>
+            <if test="ane != null and ane != ''">#{ane},</if>
+            <if test="answer != null and answer != ''">#{answer},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="adddt != null">#{adddt},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="contents != null and contents != ''">#{contents},</if>
+            <if test="status != null">#{status},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="imgurl != null and imgurl != ''">#{imgurl},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuKnowtiku" parameterType="XinhuKnowtiku">
+        update xinhu_knowtiku
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="typeid != null">typeid = #{typeid},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="ana != null and ana != ''">ana = #{ana},</if>
+            <if test="anb != null and anb != ''">anb = #{anb},</if>
+            <if test="anc != null and anc != ''">anc = #{anc},</if>
+            <if test="ands != null and ands != ''">ands = #{ands},</if>
+            <if test="ane != null and ane != ''">ane = #{ane},</if>
+            <if test="answer != null and answer != ''">answer = #{answer},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="adddt != null">adddt = #{adddt},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="contents != null and contents != ''">contents = #{contents},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="imgurl != null and imgurl != ''">imgurl = #{imgurl},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuKnowtikuById" parameterType="Long">
+        delete from xinhu_knowtiku where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuKnowtikuByIds" parameterType="String">
+        delete from xinhu_knowtiku where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

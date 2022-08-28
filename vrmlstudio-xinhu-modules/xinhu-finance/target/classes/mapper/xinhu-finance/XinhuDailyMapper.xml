@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.finance.mapper.XinhuDailyMapper">
+    
+    <resultMap type="XinhuDaily" id="XinhuDailyResult">
+        <result property="id"    column="id"    />
+        <result property="dt"    column="dt"    />
+        <result property="content"    column="content"    />
+        <result property="adddt"    column="adddt"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="uid"    column="uid"    />
+        <result property="optname"    column="optname"    />
+        <result property="types"    column="types"    />
+        <result property="plan"    column="plan"    />
+        <result property="status"    column="status"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="optid"    column="optid"    />
+        <result property="mark"    column="mark"    />
+        <result property="comid"    column="comid"    />
+        <result property="mtplid"    column="mtplid"    />
+    </resultMap>
+
+    <sql id="selectXinhuDailyVo">
+        select id, dt, content, adddt, optdt, uid, optname, types, plan, status, enddt, optid, mark, comid, mtplid from xinhu_daily
+    </sql>
+
+    <select id="selectXinhuDailyList" parameterType="XinhuDaily" resultMap="XinhuDailyResult">
+        <include refid="selectXinhuDailyVo"/>
+        <where>  
+            <if test="dt != null "> and dt = #{dt}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="adddt != null "> and adddt = #{adddt}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="plan != null  and plan != ''"> and plan = #{plan}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="enddt != null "> and enddt = #{enddt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="mark != null "> and mark = #{mark}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="mtplid != null "> and mtplid = #{mtplid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuDailyById" parameterType="Long" resultMap="XinhuDailyResult">
+        <include refid="selectXinhuDailyVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuDaily" parameterType="XinhuDaily" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_daily
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dt != null">dt,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="adddt != null">adddt,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="uid != null">uid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="types != null">types,</if>
+            <if test="plan != null and plan != ''">plan,</if>
+            <if test="status != null">status,</if>
+            <if test="enddt != null">enddt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="mark != null">mark,</if>
+            <if test="comid != null">comid,</if>
+            <if test="mtplid != null">mtplid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dt != null">#{dt},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="adddt != null">#{adddt},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="types != null">#{types},</if>
+            <if test="plan != null and plan != ''">#{plan},</if>
+            <if test="status != null">#{status},</if>
+            <if test="enddt != null">#{enddt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="mark != null">#{mark},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="mtplid != null">#{mtplid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuDaily" parameterType="XinhuDaily">
+        update xinhu_daily
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dt != null">dt = #{dt},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="adddt != null">adddt = #{adddt},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="plan != null and plan != ''">plan = #{plan},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="enddt != null">enddt = #{enddt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="mark != null">mark = #{mark},</if>
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="mtplid != null">mtplid = #{mtplid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuDailyById" parameterType="Long">
+        delete from xinhu_daily where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuDailyByIds" parameterType="String">
+        delete from xinhu_daily where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

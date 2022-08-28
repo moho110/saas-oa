@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.flow.mapper.XinhuFlowWhereMapper">
+    
+    <resultMap type="XinhuFlowWhere" id="XinhuFlowWhereResult">
+        <result property="id"    column="id"    />
+        <result property="setid"    column="setid"    />
+        <result property="num"    column="num"    />
+        <result property="pnum"    column="pnum"    />
+        <result property="name"    column="name"    />
+        <result property="wheresstr"    column="wheresstr"    />
+        <result property="whereustr"    column="whereustr"    />
+        <result property="wheredstr"    column="wheredstr"    />
+        <result property="sort"    column="sort"    />
+        <result property="content"    column="content"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+        <result property="nreceid"    column="nreceid"    />
+        <result property="nrecename"    column="nrecename"    />
+        <result property="islb"    column="islb"    />
+        <result property="status"    column="status"    />
+        <result property="syrid"    column="syrid"    />
+        <result property="syrname"    column="syrname"    />
+    </resultMap>
+
+    <sql id="selectXinhuFlowWhereVo">
+        select id, setid, num, pnum, name, wheresstr, whereustr, wheredstr, sort, content, receid, recename, nreceid, nrecename, islb, status, syrid, syrname from xinhu_flow_where
+    </sql>
+
+    <select id="selectXinhuFlowWhereList" parameterType="XinhuFlowWhere" resultMap="XinhuFlowWhereResult">
+        <include refid="selectXinhuFlowWhereVo"/>
+        <where>  
+            <if test="setid != null "> and setid = #{setid}</if>
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="pnum != null  and pnum != ''"> and pnum = #{pnum}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="wheresstr != null  and wheresstr != ''"> and wheresstr = #{wheresstr}</if>
+            <if test="whereustr != null  and whereustr != ''"> and whereustr = #{whereustr}</if>
+            <if test="wheredstr != null  and wheredstr != ''"> and wheredstr = #{wheredstr}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="nreceid != null  and nreceid != ''"> and nreceid = #{nreceid}</if>
+            <if test="nrecename != null  and nrecename != ''"> and nrecename like concat('%', #{nrecename}, '%')</if>
+            <if test="islb != null "> and islb = #{islb}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="syrid != null  and syrid != ''"> and syrid = #{syrid}</if>
+            <if test="syrname != null  and syrname != ''"> and syrname like concat('%', #{syrname}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuFlowWhereById" parameterType="Integer" resultMap="XinhuFlowWhereResult">
+        <include refid="selectXinhuFlowWhereVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuFlowWhere" parameterType="XinhuFlowWhere" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_flow_where
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="setid != null">setid,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="pnum != null and pnum != ''">pnum,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="wheresstr != null and wheresstr != ''">wheresstr,</if>
+            <if test="whereustr != null and whereustr != ''">whereustr,</if>
+            <if test="wheredstr != null and wheredstr != ''">wheredstr,</if>
+            <if test="sort != null">sort,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="nreceid != null and nreceid != ''">nreceid,</if>
+            <if test="nrecename != null and nrecename != ''">nrecename,</if>
+            <if test="islb != null">islb,</if>
+            <if test="status != null">status,</if>
+            <if test="syrid != null and syrid != ''">syrid,</if>
+            <if test="syrname != null and syrname != ''">syrname,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="setid != null">#{setid},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="pnum != null and pnum != ''">#{pnum},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="wheresstr != null and wheresstr != ''">#{wheresstr},</if>
+            <if test="whereustr != null and whereustr != ''">#{whereustr},</if>
+            <if test="wheredstr != null and wheredstr != ''">#{wheredstr},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="nreceid != null and nreceid != ''">#{nreceid},</if>
+            <if test="nrecename != null and nrecename != ''">#{nrecename},</if>
+            <if test="islb != null">#{islb},</if>
+            <if test="status != null">#{status},</if>
+            <if test="syrid != null and syrid != ''">#{syrid},</if>
+            <if test="syrname != null and syrname != ''">#{syrname},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuFlowWhere" parameterType="XinhuFlowWhere">
+        update xinhu_flow_where
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="setid != null">setid = #{setid},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="pnum != null and pnum != ''">pnum = #{pnum},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="wheresstr != null and wheresstr != ''">wheresstr = #{wheresstr},</if>
+            <if test="whereustr != null and whereustr != ''">whereustr = #{whereustr},</if>
+            <if test="wheredstr != null and wheredstr != ''">wheredstr = #{wheredstr},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="nreceid != null and nreceid != ''">nreceid = #{nreceid},</if>
+            <if test="nrecename != null and nrecename != ''">nrecename = #{nrecename},</if>
+            <if test="islb != null">islb = #{islb},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="syrid != null and syrid != ''">syrid = #{syrid},</if>
+            <if test="syrname != null and syrname != ''">syrname = #{syrname},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuFlowWhereById" parameterType="Integer">
+        delete from xinhu_flow_where where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuFlowWhereByIds" parameterType="String">
+        delete from xinhu_flow_where where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

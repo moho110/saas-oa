@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.finance.mapper.XinhuReadsMapper">
+    
+    <resultMap type="XinhuReads" id="XinhuReadsResult">
+        <result property="id"    column="id"    />
+        <result property="tables"    column="tables"    />
+        <result property="mid"    column="mid"    />
+        <result property="optid"    column="optid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="ip"    column="ip"    />
+        <result property="web"    column="web"    />
+        <result property="adddt"    column="adddt"    />
+        <result property="stotal"    column="stotal"    />
+    </resultMap>
+
+    <sql id="selectXinhuReadsVo">
+        select id, tables, mid, optid, optdt, ip, web, adddt, stotal from xinhu_reads
+    </sql>
+
+    <select id="selectXinhuReadsList" parameterType="XinhuReads" resultMap="XinhuReadsResult">
+        <include refid="selectXinhuReadsVo"/>
+        <where>  
+            <if test="tables != null  and tables != ''"> and tables = #{tables}</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+            <if test="web != null  and web != ''"> and web = #{web}</if>
+            <if test="adddt != null "> and adddt = #{adddt}</if>
+            <if test="stotal != null "> and stotal = #{stotal}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuReadsById" parameterType="Long" resultMap="XinhuReadsResult">
+        <include refid="selectXinhuReadsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuReads" parameterType="XinhuReads" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_reads
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tables != null and tables != ''">tables,</if>
+            <if test="mid != null">mid,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="ip != null and ip != ''">ip,</if>
+            <if test="web != null and web != ''">web,</if>
+            <if test="adddt != null">adddt,</if>
+            <if test="stotal != null">stotal,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tables != null and tables != ''">#{tables},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="ip != null and ip != ''">#{ip},</if>
+            <if test="web != null and web != ''">#{web},</if>
+            <if test="adddt != null">#{adddt},</if>
+            <if test="stotal != null">#{stotal},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuReads" parameterType="XinhuReads">
+        update xinhu_reads
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tables != null and tables != ''">tables = #{tables},</if>
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="ip != null and ip != ''">ip = #{ip},</if>
+            <if test="web != null and web != ''">web = #{web},</if>
+            <if test="adddt != null">adddt = #{adddt},</if>
+            <if test="stotal != null">stotal = #{stotal},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuReadsById" parameterType="Long">
+        delete from xinhu_reads where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuReadsByIds" parameterType="String">
+        delete from xinhu_reads where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

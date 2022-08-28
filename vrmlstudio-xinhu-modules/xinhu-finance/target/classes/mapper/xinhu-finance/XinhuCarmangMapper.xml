@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.finance.mapper.XinhuCarmangMapper">
+    
+    <resultMap type="XinhuCarmang" id="XinhuCarmangResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="content"    column="content"    />
+        <result property="status"    column="status"    />
+        <result property="isturn"    column="isturn"    />
+        <result property="carid"    column="carid"    />
+        <result property="reason"    column="reason"    />
+        <result property="address"    column="address"    />
+        <result property="jianame"    column="jianame"    />
+        <result property="jiaid"    column="jiaid"    />
+        <result property="bujian"    column="bujian"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="money"    column="money"    />
+        <result property="types"    column="types"    />
+        <result property="nextdt"    column="nextdt"    />
+        <result property="kmshu"    column="kmshu"    />
+        <result property="kmnshu"    column="kmnshu"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuCarmangVo">
+        select id, uid, optdt, optid, optname, applydt, content, status, isturn, carid, reason, address, jianame, jiaid, bujian, startdt, enddt, money, types, nextdt, kmshu, kmnshu, comid from xinhu_carmang
+    </sql>
+
+    <select id="selectXinhuCarmangList" parameterType="XinhuCarmang" resultMap="XinhuCarmangResult">
+        <include refid="selectXinhuCarmangVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+            <if test="carid != null "> and carid = #{carid}</if>
+            <if test="reason != null  and reason != ''"> and reason = #{reason}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="jianame != null  and jianame != ''"> and jianame like concat('%', #{jianame}, '%')</if>
+            <if test="jiaid != null  and jiaid != ''"> and jiaid = #{jiaid}</if>
+            <if test="bujian != null  and bujian != ''"> and bujian = #{bujian}</if>
+            <if test="startdt != null "> and startdt = #{startdt}</if>
+            <if test="enddt != null "> and enddt = #{enddt}</if>
+            <if test="money != null "> and money = #{money}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="nextdt != null "> and nextdt = #{nextdt}</if>
+            <if test="kmshu != null  and kmshu != ''"> and kmshu = #{kmshu}</if>
+            <if test="kmnshu != null  and kmnshu != ''"> and kmnshu = #{kmnshu}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuCarmangById" parameterType="Long" resultMap="XinhuCarmangResult">
+        <include refid="selectXinhuCarmangVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuCarmang" parameterType="XinhuCarmang" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_carmang
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uid != null">uid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="status != null">status,</if>
+            <if test="isturn != null">isturn,</if>
+            <if test="carid != null">carid,</if>
+            <if test="reason != null and reason != ''">reason,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="jianame != null and jianame != ''">jianame,</if>
+            <if test="jiaid != null and jiaid != ''">jiaid,</if>
+            <if test="bujian != null and bujian != ''">bujian,</if>
+            <if test="startdt != null">startdt,</if>
+            <if test="enddt != null">enddt,</if>
+            <if test="money != null">money,</if>
+            <if test="types != null">types,</if>
+            <if test="nextdt != null">nextdt,</if>
+            <if test="kmshu != null and kmshu != ''">kmshu,</if>
+            <if test="kmnshu != null and kmnshu != ''">kmnshu,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">#{uid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isturn != null">#{isturn},</if>
+            <if test="carid != null">#{carid},</if>
+            <if test="reason != null and reason != ''">#{reason},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="jianame != null and jianame != ''">#{jianame},</if>
+            <if test="jiaid != null and jiaid != ''">#{jiaid},</if>
+            <if test="bujian != null and bujian != ''">#{bujian},</if>
+            <if test="startdt != null">#{startdt},</if>
+            <if test="enddt != null">#{enddt},</if>
+            <if test="money != null">#{money},</if>
+            <if test="types != null">#{types},</if>
+            <if test="nextdt != null">#{nextdt},</if>
+            <if test="kmshu != null and kmshu != ''">#{kmshu},</if>
+            <if test="kmnshu != null and kmnshu != ''">#{kmnshu},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuCarmang" parameterType="XinhuCarmang">
+        update xinhu_carmang
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+            <if test="carid != null">carid = #{carid},</if>
+            <if test="reason != null and reason != ''">reason = #{reason},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="jianame != null and jianame != ''">jianame = #{jianame},</if>
+            <if test="jiaid != null and jiaid != ''">jiaid = #{jiaid},</if>
+            <if test="bujian != null and bujian != ''">bujian = #{bujian},</if>
+            <if test="startdt != null">startdt = #{startdt},</if>
+            <if test="enddt != null">enddt = #{enddt},</if>
+            <if test="money != null">money = #{money},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="nextdt != null">nextdt = #{nextdt},</if>
+            <if test="kmshu != null and kmshu != ''">kmshu = #{kmshu},</if>
+            <if test="kmnshu != null and kmnshu != ''">kmnshu = #{kmnshu},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuCarmangById" parameterType="Long">
+        delete from xinhu_carmang where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuCarmangByIds" parameterType="String">
+        delete from xinhu_carmang where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

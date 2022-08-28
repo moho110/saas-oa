@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.police.mapper.XinhuEmailContMapper">
+    
+    <resultMap type="XinhuEmailCont" id="XinhuEmailContResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="body"    column="body"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+        <result property="receemail"    column="receemail"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="status"    column="status"    />
+        <result property="senddt"    column="senddt"    />
+        <result property="ccname"    column="ccname"    />
+        <result property="ccemail"    column="ccemail"    />
+        <result property="attachpath"    column="attachpath"    />
+        <result property="attachname"    column="attachname"    />
+        <result property="mid"    column="mid"    />
+    </resultMap>
+
+    <sql id="selectXinhuEmailContVo">
+        select id, title, body, receid, recename, receemail, optdt, optid, optname, status, senddt, ccname, ccemail, attachpath, attachname, mid from xinhu_email_cont
+    </sql>
+
+    <select id="selectXinhuEmailContList" parameterType="XinhuEmailCont" resultMap="XinhuEmailContResult">
+        <include refid="selectXinhuEmailContVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="body != null  and body != ''"> and body = #{body}</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="receemail != null  and receemail != ''"> and receemail = #{receemail}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="senddt != null "> and senddt = #{senddt}</if>
+            <if test="ccname != null  and ccname != ''"> and ccname like concat('%', #{ccname}, '%')</if>
+            <if test="ccemail != null  and ccemail != ''"> and ccemail = #{ccemail}</if>
+            <if test="attachpath != null  and attachpath != ''"> and attachpath = #{attachpath}</if>
+            <if test="attachname != null  and attachname != ''"> and attachname like concat('%', #{attachname}, '%')</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuEmailContById" parameterType="Long" resultMap="XinhuEmailContResult">
+        <include refid="selectXinhuEmailContVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuEmailCont" parameterType="XinhuEmailCont" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_email_cont
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">title,</if>
+            <if test="body != null and body != ''">body,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="receemail != null and receemail != ''">receemail,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="status != null">status,</if>
+            <if test="senddt != null">senddt,</if>
+            <if test="ccname != null and ccname != ''">ccname,</if>
+            <if test="ccemail != null and ccemail != ''">ccemail,</if>
+            <if test="attachpath != null and attachpath != ''">attachpath,</if>
+            <if test="attachname != null and attachname != ''">attachname,</if>
+            <if test="mid != null">mid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="body != null and body != ''">#{body},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="receemail != null and receemail != ''">#{receemail},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="status != null">#{status},</if>
+            <if test="senddt != null">#{senddt},</if>
+            <if test="ccname != null and ccname != ''">#{ccname},</if>
+            <if test="ccemail != null and ccemail != ''">#{ccemail},</if>
+            <if test="attachpath != null and attachpath != ''">#{attachpath},</if>
+            <if test="attachname != null and attachname != ''">#{attachname},</if>
+            <if test="mid != null">#{mid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuEmailCont" parameterType="XinhuEmailCont">
+        update xinhu_email_cont
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="body != null and body != ''">body = #{body},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="receemail != null and receemail != ''">receemail = #{receemail},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="senddt != null">senddt = #{senddt},</if>
+            <if test="ccname != null and ccname != ''">ccname = #{ccname},</if>
+            <if test="ccemail != null and ccemail != ''">ccemail = #{ccemail},</if>
+            <if test="attachpath != null and attachpath != ''">attachpath = #{attachpath},</if>
+            <if test="attachname != null and attachname != ''">attachname = #{attachname},</if>
+            <if test="mid != null">mid = #{mid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuEmailContById" parameterType="Long">
+        delete from xinhu_email_cont where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuEmailContByIds" parameterType="String">
+        delete from xinhu_email_cont where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

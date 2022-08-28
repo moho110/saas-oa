@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.resources.mapper.XinhuTaskMapper">
+    
+    <resultMap type="XinhuTask" id="XinhuTaskResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="fenlei"    column="fenlei"    />
+        <result property="url"    column="url"    />
+        <result property="type"    column="type"    />
+        <result property="time"    column="time"    />
+        <result property="ratecont"    column="ratecont"    />
+        <result property="status"    column="status"    />
+        <result property="state"    column="state"    />
+        <result property="lastdt"    column="lastdt"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="sort"    column="sort"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="lastcont"    column="lastcont"    />
+        <result property="content"    column="content"    />
+        <result property="todoid"    column="todoid"    />
+        <result property="todoname"    column="todoname"    />
+    </resultMap>
+
+    <sql id="selectXinhuTaskVo">
+        select id, name, fenlei, url, type, time, ratecont, status, state, lastdt, optdt, sort, startdt, lastcont, content, todoid, todoname from xinhu_task
+    </sql>
+
+    <select id="selectXinhuTaskList" parameterType="XinhuTask" resultMap="XinhuTaskResult">
+        <include refid="selectXinhuTaskVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="fenlei != null  and fenlei != ''"> and fenlei = #{fenlei}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="time != null  and time != ''"> and time = #{time}</if>
+            <if test="ratecont != null  and ratecont != ''"> and ratecont = #{ratecont}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="state != null "> and state = #{state}</if>
+            <if test="lastdt != null "> and lastdt = #{lastdt}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="startdt != null "> and startdt = #{startdt}</if>
+            <if test="lastcont != null  and lastcont != ''"> and lastcont = #{lastcont}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="todoid != null  and todoid != ''"> and todoid = #{todoid}</if>
+            <if test="todoname != null  and todoname != ''"> and todoname like concat('%', #{todoname}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuTaskById" parameterType="Integer" resultMap="XinhuTaskResult">
+        <include refid="selectXinhuTaskVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuTask" parameterType="XinhuTask" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_task
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="fenlei != null and fenlei != ''">fenlei,</if>
+            <if test="url != null and url != ''">url,</if>
+            <if test="type != null and type != ''">type,</if>
+            <if test="time != null and time != ''">time,</if>
+            <if test="ratecont != null and ratecont != ''">ratecont,</if>
+            <if test="status != null">status,</if>
+            <if test="state != null">state,</if>
+            <if test="lastdt != null">lastdt,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="sort != null">sort,</if>
+            <if test="startdt != null">startdt,</if>
+            <if test="lastcont != null and lastcont != ''">lastcont,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="todoid != null and todoid != ''">todoid,</if>
+            <if test="todoname != null and todoname != ''">todoname,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="fenlei != null and fenlei != ''">#{fenlei},</if>
+            <if test="url != null and url != ''">#{url},</if>
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="time != null and time != ''">#{time},</if>
+            <if test="ratecont != null and ratecont != ''">#{ratecont},</if>
+            <if test="status != null">#{status},</if>
+            <if test="state != null">#{state},</if>
+            <if test="lastdt != null">#{lastdt},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="startdt != null">#{startdt},</if>
+            <if test="lastcont != null and lastcont != ''">#{lastcont},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="todoid != null and todoid != ''">#{todoid},</if>
+            <if test="todoname != null and todoname != ''">#{todoname},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuTask" parameterType="XinhuTask">
+        update xinhu_task
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="fenlei != null and fenlei != ''">fenlei = #{fenlei},</if>
+            <if test="url != null and url != ''">url = #{url},</if>
+            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="time != null and time != ''">time = #{time},</if>
+            <if test="ratecont != null and ratecont != ''">ratecont = #{ratecont},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="lastdt != null">lastdt = #{lastdt},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="startdt != null">startdt = #{startdt},</if>
+            <if test="lastcont != null and lastcont != ''">lastcont = #{lastcont},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="todoid != null and todoid != ''">todoid = #{todoid},</if>
+            <if test="todoname != null and todoname != ''">todoname = #{todoname},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuTaskById" parameterType="Integer">
+        delete from xinhu_task where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuTaskByIds" parameterType="String">
+        delete from xinhu_task where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.person.mapper.XinhuAreasMapper">
+    
+    <resultMap type="XinhuAreas" id="XinhuAreasResult">
+        <result property="id"    column="id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="areaName"    column="area_name"    />
+        <result property="isShow"    column="is_show"    />
+        <result property="areaSort"    column="area_sort"    />
+        <result property="areaKey"    column="area_key"    />
+        <result property="areaType"    column="area_type"    />
+        <result property="dataFlag"    column="data_flag"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectXinhuAreasVo">
+        select id, parent_id, area_name, is_show, area_sort, area_key, area_type, data_flag, create_time from xinhu_areas
+    </sql>
+
+    <select id="selectXinhuAreasList" parameterType="XinhuAreas" resultMap="XinhuAreasResult">
+        <include refid="selectXinhuAreasVo"/>
+        <where>  
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="areaName != null  and areaName != ''"> and area_name like concat('%', #{areaName}, '%')</if>
+            <if test="isShow != null "> and is_show = #{isShow}</if>
+            <if test="areaSort != null "> and area_sort = #{areaSort}</if>
+            <if test="areaKey != null  and areaKey != ''"> and area_key = #{areaKey}</if>
+            <if test="areaType != null "> and area_type like concat('%', #{areaType}, '%')</if>
+            <if test="dataFlag != null "> and data_flag = #{dataFlag}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuAreasById" parameterType="Integer" resultMap="XinhuAreasResult">
+        <include refid="selectXinhuAreasVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuAreas" parameterType="XinhuAreas" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_areas
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="parentId != null">parent_id,</if>
+            <if test="areaName != null and areaName != ''">area_name,</if>
+            <if test="isShow != null">is_show,</if>
+            <if test="areaSort != null">area_sort,</if>
+            <if test="areaKey != null and areaKey != ''">area_key,</if>
+            <if test="areaType != null">area_type,</if>
+            <if test="dataFlag != null">data_flag,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="parentId != null">#{parentId},</if>
+            <if test="areaName != null and areaName != ''">#{areaName},</if>
+            <if test="isShow != null">#{isShow},</if>
+            <if test="areaSort != null">#{areaSort},</if>
+            <if test="areaKey != null and areaKey != ''">#{areaKey},</if>
+            <if test="areaType != null">#{areaType},</if>
+            <if test="dataFlag != null">#{dataFlag},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuAreas" parameterType="XinhuAreas">
+        update xinhu_areas
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="parentId != null">parent_id = #{parentId},</if>
+            <if test="areaName != null and areaName != ''">area_name = #{areaName},</if>
+            <if test="isShow != null">is_show = #{isShow},</if>
+            <if test="areaSort != null">area_sort = #{areaSort},</if>
+            <if test="areaKey != null and areaKey != ''">area_key = #{areaKey},</if>
+            <if test="areaType != null">area_type = #{areaType},</if>
+            <if test="dataFlag != null">data_flag = #{dataFlag},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuAreasById" parameterType="Integer">
+        delete from xinhu_areas where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuAreasByIds" parameterType="String">
+        delete from xinhu_areas where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

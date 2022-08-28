@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.police.mapper.XinhuFinpiaoMapper">
+    
+    <resultMap type="XinhuFinpiao" id="XinhuFinpiaoResult">
+        <result property="id"    column="id"    />
+        <result property="optname"    column="optname"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="custid"    column="custid"    />
+        <result property="maicustname"    column="maicustname"    />
+        <result property="maicustid"    column="maicustid"    />
+        <result property="types"    column="types"    />
+        <result property="custname"    column="custname"    />
+        <result property="daima"    column="daima"    />
+        <result property="haoma"    column="haoma"    />
+        <result property="money"    column="money"    />
+        <result property="opendt"    column="opendt"    />
+        <result property="ptype"    column="ptype"    />
+        <result property="status"    column="status"    />
+        <result property="kainame"    column="kainame"    />
+        <result property="content"    column="content"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuFinpiaoVo">
+        select id, optname, optdt, optid, custid, maicustname, maicustid, type, custname, daima, haoma, money, opendt, ptype, status, kainame, content, comid from xinhu_finpiao
+    </sql>
+
+    <select id="selectXinhuFinpiaoList" parameterType="XinhuFinpiao" resultMap="XinhuFinpiaoResult">
+        <include refid="selectXinhuFinpiaoVo"/>
+        <where>  
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="custid != null "> and custid = #{custid}</if>
+            <if test="maicustname != null  and maicustname != ''"> and maicustname like concat('%', #{maicustname}, '%')</if>
+            <if test="maicustid != null "> and maicustid = #{maicustid}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="custname != null  and custname != ''"> and custname like concat('%', #{custname}, '%')</if>
+            <if test="daima != null  and daima != ''"> and daima = #{daima}</if>
+            <if test="haoma != null  and haoma != ''"> and haoma = #{haoma}</if>
+            <if test="money != null "> and money = #{money}</if>
+            <if test="opendt != null "> and opendt = #{opendt}</if>
+            <if test="ptype != null  and ptype != ''"> and ptype = #{ptype}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="kainame != null  and kainame != ''"> and kainame like concat('%', #{kainame}, '%')</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuFinpiaoById" parameterType="Long" resultMap="XinhuFinpiaoResult">
+        <include refid="selectXinhuFinpiaoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuFinpiao" parameterType="XinhuFinpiao" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_finpiao
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="custid != null">custid,</if>
+            <if test="maicustname != null and maicustname != ''">maicustname,</if>
+            <if test="maicustid != null">maicustid,</if>
+            <if test="types != null">types,</if>
+            <if test="custname != null and custname != ''">custname,</if>
+            <if test="daima != null and daima != ''">daima,</if>
+            <if test="haoma != null and haoma != ''">haoma,</if>
+            <if test="money != null">money,</if>
+            <if test="opendt != null">opendt,</if>
+            <if test="ptype != null and ptype != ''">ptype,</if>
+            <if test="status != null">status,</if>
+            <if test="kainame != null and kainame != ''">kainame,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="custid != null">#{custid},</if>
+            <if test="maicustname != null and maicustname != ''">#{maicustname},</if>
+            <if test="maicustid != null">#{maicustid},</if>
+            <if test="types != null">#{types},</if>
+            <if test="custname != null and custname != ''">#{custname},</if>
+            <if test="daima != null and daima != ''">#{daima},</if>
+            <if test="haoma != null and haoma != ''">#{haoma},</if>
+            <if test="money != null">#{money},</if>
+            <if test="opendt != null">#{opendt},</if>
+            <if test="ptype != null and ptype != ''">#{ptype},</if>
+            <if test="status != null">#{status},</if>
+            <if test="kainame != null and kainame != ''">#{kainame},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuFinpiao" parameterType="XinhuFinpiao">
+        update xinhu_finpiao
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="custid != null">custid = #{custid},</if>
+            <if test="maicustname != null and maicustname != ''">maicustname = #{maicustname},</if>
+            <if test="maicustid != null">maicustid = #{maicustid},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="custname != null and custname != ''">custname = #{custname},</if>
+            <if test="daima != null and daima != ''">daima = #{daima},</if>
+            <if test="haoma != null and haoma != ''">haoma = #{haoma},</if>
+            <if test="money != null">money = #{money},</if>
+            <if test="opendt != null">opendt = #{opendt},</if>
+            <if test="ptype != null and ptype != ''">ptype = #{ptype},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="kainame != null and kainame != ''">kainame = #{kainame},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuFinpiaoById" parameterType="Long">
+        delete from xinhu_finpiao where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuFinpiaoByIds" parameterType="String">
+        delete from xinhu_finpiao where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

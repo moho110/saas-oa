@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.XinhuChargemsMapper">
+    
+    <resultMap type="XinhuChargems" id="XinhuChargemsResult">
+        <result property="id"    column="id"    />
+        <result property="types"    column="types"    />
+        <result property="mid"    column="mid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="updatedt"    column="updatedt"    />
+        <result property="keyword"    column="keyword"    />
+        <result property="modeid"    column="modeid"    />
+    </resultMap>
+
+    <sql id="selectXinhuChargemsVo">
+        select id, types, mid, optdt, updatedt, keyword, modeid from xinhu_chargems
+    </sql>
+
+    <select id="selectXinhuChargemsList" parameterType="XinhuChargems" resultMap="XinhuChargemsResult">
+        <include refid="selectXinhuChargemsVo"/>
+        <where>  
+            <if test="types != null "> and types = #{types}</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="updatedt != null "> and updatedt = #{updatedt}</if>
+            <if test="keyword != null  and keyword != ''"> and keyword = #{keyword}</if>
+            <if test="modeid != null "> and modeid = #{modeid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuChargemsById" parameterType="Long" resultMap="XinhuChargemsResult">
+        <include refid="selectXinhuChargemsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuChargems" parameterType="XinhuChargems" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_chargems
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="types != null">types,</if>
+            <if test="mid != null">mid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="updatedt != null">updatedt,</if>
+            <if test="keyword != null and keyword != ''">keyword,</if>
+            <if test="modeid != null">modeid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="types != null">#{types},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="updatedt != null">#{updatedt},</if>
+            <if test="keyword != null and keyword != ''">#{keyword},</if>
+            <if test="modeid != null">#{modeid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuChargems" parameterType="XinhuChargems">
+        update xinhu_chargems
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="types != null">types = #{types},</if>
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="updatedt != null">updatedt = #{updatedt},</if>
+            <if test="keyword != null and keyword != ''">keyword = #{keyword},</if>
+            <if test="modeid != null">modeid = #{modeid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuChargemsById" parameterType="Long">
+        delete from xinhu_chargems where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuChargemsByIds" parameterType="String">
+        delete from xinhu_chargems where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

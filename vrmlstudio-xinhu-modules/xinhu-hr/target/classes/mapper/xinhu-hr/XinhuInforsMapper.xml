@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuInforsMapper">
+    
+    <resultMap type="XinhuInfors" id="XinhuInforsResult">
+        <result property="id"    column="id"    />
+        <result property="mid"    column="mid"    />
+        <result property="sort"    column="sort"    />
+        <result property="touitems"    column="touitems"    />
+        <result property="touci"    column="touci"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuInforsVo">
+        select id, mid, sort, touitems, touci, comid from xinhu_infors
+    </sql>
+
+    <select id="selectXinhuInforsList" parameterType="XinhuInfors" resultMap="XinhuInforsResult">
+        <include refid="selectXinhuInforsVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="touitems != null  and touitems != ''"> and touitems = #{touitems}</if>
+            <if test="touci != null "> and touci = #{touci}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuInforsById" parameterType="Long" resultMap="XinhuInforsResult">
+        <include refid="selectXinhuInforsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuInfors" parameterType="XinhuInfors">
+        insert into xinhu_infors
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="mid != null">mid,</if>
+            <if test="sort != null">sort,</if>
+            <if test="touitems != null and touitems != ''">touitems,</if>
+            <if test="touci != null">touci,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="touitems != null and touitems != ''">#{touitems},</if>
+            <if test="touci != null">#{touci},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuInfors" parameterType="XinhuInfors">
+        update xinhu_infors
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="touitems != null and touitems != ''">touitems = #{touitems},</if>
+            <if test="touci != null">touci = #{touci},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuInforsById" parameterType="Long">
+        delete from xinhu_infors where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuInforsByIds" parameterType="String">
+        delete from xinhu_infors where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

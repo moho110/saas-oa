@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.resources.mapper.XinhuUserzhengMapper">
+    
+    <resultMap type="XinhuUserzheng" id="XinhuUserzhengResult">
+        <result property="id"    column="id"    />
+        <result property="comid"    column="comid"    />
+        <result property="uid"    column="uid"    />
+        <result property="uname"    column="uname"    />
+        <result property="mingc"    column="mingc"    />
+        <result property="numc"    column="numc"    />
+        <result property="sdt"    column="sdt"    />
+        <result property="edt"    column="edt"    />
+        <result property="fengmian"    column="fengmian"    />
+        <result property="optid"    column="optid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optname"    column="optname"    />
+        <result property="content"    column="content"    />
+    </resultMap>
+
+    <sql id="selectXinhuUserzhengVo">
+        select id, comid, uid, uname, mingc, numc, sdt, edt, fengmian, optid, optdt, optname, content from xinhu_userzheng
+    </sql>
+
+    <select id="selectXinhuUserzhengList" parameterType="XinhuUserzheng" resultMap="XinhuUserzhengResult">
+        <include refid="selectXinhuUserzhengVo"/>
+        <where>  
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="uname != null  and uname != ''"> and uname like concat('%', #{uname}, '%')</if>
+            <if test="mingc != null  and mingc != ''"> and mingc like concat('%', #{mingc}, '%')</if>
+            <if test="numc != null  and numc != ''"> and numc like concat('%', #{numc}, '%')</if>
+            <if test="sdt != null "> and sdt = #{sdt}</if>
+            <if test="edt != null "> and edt = #{edt}</if>
+            <if test="fengmian != null  and fengmian != ''"> and fengmian = #{fengmian}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuUserzhengById" parameterType="Long" resultMap="XinhuUserzhengResult">
+        <include refid="selectXinhuUserzhengVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuUserzheng" parameterType="XinhuUserzheng">
+        insert into xinhu_userzheng
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="comid != null">comid,</if>
+            <if test="uid != null">uid,</if>
+            <if test="uname != null and uname != ''">uname,</if>
+            <if test="mingc != null and mingc != ''">mingc,</if>
+            <if test="numc != null and numc != ''">numc,</if>
+            <if test="sdt != null">sdt,</if>
+            <if test="edt != null">edt,</if>
+            <if test="fengmian != null and fengmian != ''">fengmian,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="content != null and content != ''">content,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="uname != null and uname != ''">#{uname},</if>
+            <if test="mingc != null and mingc != ''">#{mingc},</if>
+            <if test="numc != null and numc != ''">#{numc},</if>
+            <if test="sdt != null">#{sdt},</if>
+            <if test="edt != null">#{edt},</if>
+            <if test="fengmian != null and fengmian != ''">#{fengmian},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="content != null and content != ''">#{content},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuUserzheng" parameterType="XinhuUserzheng">
+        update xinhu_userzheng
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="uname != null and uname != ''">uname = #{uname},</if>
+            <if test="mingc != null and mingc != ''">mingc = #{mingc},</if>
+            <if test="numc != null and numc != ''">numc = #{numc},</if>
+            <if test="sdt != null">sdt = #{sdt},</if>
+            <if test="edt != null">edt = #{edt},</if>
+            <if test="fengmian != null and fengmian != ''">fengmian = #{fengmian},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuUserzhengById" parameterType="Long">
+        delete from xinhu_userzheng where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuUserzhengByIds" parameterType="String">
+        delete from xinhu_userzheng where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

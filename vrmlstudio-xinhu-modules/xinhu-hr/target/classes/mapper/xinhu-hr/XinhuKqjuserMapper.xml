@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuKqjuserMapper">
+    
+    <resultMap type="XinhuKqjuser" id="XinhuKqjuserResult">
+        <result property="id"    column="id"    />
+        <result property="snid"    column="snid"    />
+        <result property="uid"    column="uid"    />
+        <result property="fingerprint1"    column="fingerprint1"    />
+        <result property="fingerprint2"    column="fingerprint2"    />
+        <result property="headpic"    column="headpic"    />
+    </resultMap>
+
+    <sql id="selectXinhuKqjuserVo">
+        select id, snid, uid, fingerprint1, fingerprint2, headpic from xinhu_kqjuser
+    </sql>
+
+    <select id="selectXinhuKqjuserList" parameterType="XinhuKqjuser" resultMap="XinhuKqjuserResult">
+        <include refid="selectXinhuKqjuserVo"/>
+        <where>  
+            <if test="snid != null "> and snid = #{snid}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="fingerprint1 != null  and fingerprint1 != ''"> and fingerprint1 = #{fingerprint1}</if>
+            <if test="fingerprint2 != null  and fingerprint2 != ''"> and fingerprint2 = #{fingerprint2}</if>
+            <if test="headpic != null  and headpic != ''"> and headpic = #{headpic}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuKqjuserById" parameterType="Long" resultMap="XinhuKqjuserResult">
+        <include refid="selectXinhuKqjuserVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuKqjuser" parameterType="XinhuKqjuser">
+        insert into xinhu_kqjuser
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="snid != null">snid,</if>
+            <if test="uid != null">uid,</if>
+            <if test="fingerprint1 != null and fingerprint1 != ''">fingerprint1,</if>
+            <if test="fingerprint2 != null and fingerprint2 != ''">fingerprint2,</if>
+            <if test="headpic != null and headpic != ''">headpic,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="snid != null">#{snid},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="fingerprint1 != null and fingerprint1 != ''">#{fingerprint1},</if>
+            <if test="fingerprint2 != null and fingerprint2 != ''">#{fingerprint2},</if>
+            <if test="headpic != null and headpic != ''">#{headpic},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuKqjuser" parameterType="XinhuKqjuser">
+        update xinhu_kqjuser
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="snid != null">snid = #{snid},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="fingerprint1 != null and fingerprint1 != ''">fingerprint1 = #{fingerprint1},</if>
+            <if test="fingerprint2 != null and fingerprint2 != ''">fingerprint2 = #{fingerprint2},</if>
+            <if test="headpic != null and headpic != ''">headpic = #{headpic},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuKqjuserById" parameterType="Long">
+        delete from xinhu_kqjuser where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuKqjuserByIds" parameterType="String">
+        delete from xinhu_kqjuser where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

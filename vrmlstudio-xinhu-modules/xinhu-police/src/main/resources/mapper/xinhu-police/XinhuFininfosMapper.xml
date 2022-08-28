@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.police.mapper.XinhuFininfosMapper">
+    
+    <resultMap type="XinhuFininfos" id="XinhuFininfosResult">
+        <result property="id"    column="id"    />
+        <result property="mid"    column="mid"    />
+        <result property="sort"    column="sort"    />
+        <result property="sdt"    column="sdt"    />
+        <result property="name"    column="name"    />
+        <result property="money"    column="money"    />
+        <result property="sm"    column="sm"    />
+        <result property="didian"    column="didian"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuFininfosVo">
+        select id, mid, sort, sdt, name, money, sm, didian, comid from xinhu_fininfos
+    </sql>
+
+    <select id="selectXinhuFininfosList" parameterType="XinhuFininfos" resultMap="XinhuFininfosResult">
+        <include refid="selectXinhuFininfosVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="sdt != null "> and sdt = #{sdt}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="money != null "> and money = #{money}</if>
+            <if test="sm != null  and sm != ''"> and sm = #{sm}</if>
+            <if test="didian != null  and didian != ''"> and didian = #{didian}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuFininfosById" parameterType="Long" resultMap="XinhuFininfosResult">
+        <include refid="selectXinhuFininfosVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuFininfos" parameterType="XinhuFininfos" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_fininfos
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mid != null">mid,</if>
+            <if test="sort != null">sort,</if>
+            <if test="sdt != null">sdt,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="money != null">money,</if>
+            <if test="sm != null and sm != ''">sm,</if>
+            <if test="didian != null and didian != ''">didian,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mid != null">#{mid},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="sdt != null">#{sdt},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="money != null">#{money},</if>
+            <if test="sm != null and sm != ''">#{sm},</if>
+            <if test="didian != null and didian != ''">#{didian},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuFininfos" parameterType="XinhuFininfos">
+        update xinhu_fininfos
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="sdt != null">sdt = #{sdt},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="money != null">money = #{money},</if>
+            <if test="sm != null and sm != ''">sm = #{sm},</if>
+            <if test="didian != null and didian != ''">didian = #{didian},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuFininfosById" parameterType="Long">
+        delete from xinhu_fininfos where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuFininfosByIds" parameterType="String">
+        delete from xinhu_fininfos where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

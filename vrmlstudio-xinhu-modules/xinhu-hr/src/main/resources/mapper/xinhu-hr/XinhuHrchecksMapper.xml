@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuHrchecksMapper">
+    
+    <resultMap type="XinhuHrchecks" id="XinhuHrchecksResult">
+        <result property="id"    column="id"    />
+        <result property="mid"    column="mid"    />
+        <result property="sort"    column="sort"    />
+        <result property="itemname"    column="itemname"    />
+        <result property="weight"    column="weight"    />
+        <result property="fenshu"    column="fenshu"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuHrchecksVo">
+        select id, mid, sort, itemname, weight, fenshu, comid from xinhu_hrchecks
+    </sql>
+
+    <select id="selectXinhuHrchecksList" parameterType="XinhuHrchecks" resultMap="XinhuHrchecksResult">
+        <include refid="selectXinhuHrchecksVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="itemname != null  and itemname != ''"> and itemname like concat('%', #{itemname}, '%')</if>
+            <if test="weight != null "> and weight = #{weight}</if>
+            <if test="fenshu != null "> and fenshu = #{fenshu}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuHrchecksById" parameterType="Long" resultMap="XinhuHrchecksResult">
+        <include refid="selectXinhuHrchecksVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuHrchecks" parameterType="XinhuHrchecks" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_hrchecks
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mid != null">mid,</if>
+            <if test="sort != null">sort,</if>
+            <if test="itemname != null and itemname != ''">itemname,</if>
+            <if test="weight != null">weight,</if>
+            <if test="fenshu != null">fenshu,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mid != null">#{mid},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="itemname != null and itemname != ''">#{itemname},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="fenshu != null">#{fenshu},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuHrchecks" parameterType="XinhuHrchecks">
+        update xinhu_hrchecks
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="itemname != null and itemname != ''">itemname = #{itemname},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="fenshu != null">fenshu = #{fenshu},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuHrchecksById" parameterType="Long">
+        delete from xinhu_hrchecks where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuHrchecksByIds" parameterType="String">
+        delete from xinhu_hrchecks where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.person.mapper.XinhuBookMapper">
+    
+    <resultMap type="XinhuBook" id="XinhuBookResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="typeid"    column="typeid"    />
+        <result property="num"    column="num"    />
+        <result property="author"    column="author"    />
+        <result property="chuban"    column="chuban"    />
+        <result property="cbdt"    column="cbdt"    />
+        <result property="price"    column="price"    />
+        <result property="weizhi"    column="weizhi"    />
+        <result property="shuliang"    column="shuliang"    />
+        <result property="adddt"    column="adddt"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optname"    column="optname"    />
+        <result property="optid"    column="optid"    />
+        <result property="content"    column="content"    />
+        <result property="isbn"    column="isbn"    />
+        <result property="jieshu"    column="jieshu"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuBookVo">
+        select id, title, typeid, num, author, chuban, cbdt, price, weizhi, shuliang, adddt, optdt, optname, optid, content, isbn, jieshu, comid from xinhu_book
+    </sql>
+
+    <select id="selectXinhuBookList" parameterType="XinhuBook" resultMap="XinhuBookResult">
+        <include refid="selectXinhuBookVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
+            <if test="typeid != null "> and typeid = #{typeid}</if>
+            <if test="num != null  and num != ''"> and num like concat('%' #{num}, '%')</if>
+            <if test="author != null  and author != ''"> and author like concat('%', #{author}, '%')</if>
+            <if test="chuban != null  and chuban != ''"> and chuban like concat('%' #{chuban}, '%')</if>
+            <if test="cbdt != null "> and cbdt = #{cbdt}</if>
+            <if test="price != null "> and price like concat('%',#{price}, '%')</if>
+            <if test="weizhi != null  and weizhi != ''"> and weizhi = #{weizhi}</if>
+            <if test="shuliang != null "> and shuliang = #{shuliang}</if>
+            <if test="adddt != null "> and adddt = #{adddt}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="isbn != null  and isbn != ''"> and isbn = #{isbn}</if>
+            <if test="jieshu != null "> and jieshu = #{jieshu}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuBookById" parameterType="Long" resultMap="XinhuBookResult">
+        <include refid="selectXinhuBookVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuBook" parameterType="XinhuBook" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_book
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">title,</if>
+            <if test="typeid != null">typeid,</if>
+            <if test="num != null">num,</if>
+            <if test="author != null">author,</if>
+            <if test="chuban != null">chuban,</if>
+            <if test="cbdt != null">cbdt,</if>
+            <if test="price != null">price,</if>
+            <if test="weizhi != null">weizhi,</if>
+            <if test="shuliang != null">shuliang,</if>
+            <if test="adddt != null">adddt,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optname != null">optname,</if>
+            <if test="optid != null">optid,</if>
+            <if test="content != null">content,</if>
+            <if test="isbn != null">isbn,</if>
+            <if test="jieshu != null">jieshu,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="typeid != null">#{typeid},</if>
+            <if test="num != null">#{num},</if>
+            <if test="author != null">#{author},</if>
+            <if test="chuban != null">#{chuban},</if>
+            <if test="cbdt != null">#{cbdt},</if>
+            <if test="price != null">#{price},</if>
+            <if test="weizhi != null">#{weizhi},</if>
+            <if test="shuliang != null">#{shuliang},</if>
+            <if test="adddt != null">#{adddt},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optname != null">#{optname},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="content != null">#{content},</if>
+            <if test="isbn != null">#{isbn},</if>
+            <if test="jieshu != null">#{jieshu},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuBook" parameterType="XinhuBook">
+        update xinhu_book
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="typeid != null">typeid = #{typeid},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="author != null and author != ''">author = #{author},</if>
+            <if test="chuban != null and chuban != ''">chuban = #{chuban},</if>
+            <if test="cbdt != null">cbdt = #{cbdt},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="weizhi != null and weizhi != ''">weizhi = #{weizhi},</if>
+            <if test="shuliang != null">shuliang = #{shuliang},</if>
+            <if test="adddt != null">adddt = #{adddt},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="isbn != null and isbn != ''">isbn = #{isbn},</if>
+            <if test="jieshu != null">jieshu = #{jieshu},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuBookById" parameterType="Long">
+        delete from xinhu_book where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuBookByIds" parameterType="String">
+        delete from xinhu_book where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

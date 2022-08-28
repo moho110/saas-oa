@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.resources.mapper.XinhuSubscribeMapper">
+    
+    <resultMap type="XinhuSubscribe" id="XinhuSubscribeResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="cont"    column="cont"    />
+        <result property="content"    column="content"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="status"    column="status"    />
+        <result property="suburl"    column="suburl"    />
+        <result property="suburlpost"    column="suburlpost"    />
+        <result property="lastdt"    column="lastdt"    />
+        <result property="shateid"    column="shateid"    />
+        <result property="shatename"    column="shatename"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuSubscribeVo">
+        select id, title, cont, content, optid, optname, optdt, status, suburl, suburlpost, lastdt, shateid, shatename, comid from xinhu_subscribe
+    </sql>
+
+    <select id="selectXinhuSubscribeList" parameterType="XinhuSubscribe" resultMap="XinhuSubscribeResult">
+        <include refid="selectXinhuSubscribeVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
+            <if test="cont != null  and cont != ''"> and cont = #{cont}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="suburl != null  and suburl != ''"> and suburl = #{suburl}</if>
+            <if test="suburlpost != null  and suburlpost != ''"> and suburlpost = #{suburlpost}</if>
+            <if test="lastdt != null "> and lastdt = #{lastdt}</if>
+            <if test="shateid != null  and shateid != ''"> and shateid = #{shateid}</if>
+            <if test="shatename != null  and shatename != ''"> and shatename like concat('%', #{shatename}, '%')</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuSubscribeById" parameterType="Long" resultMap="XinhuSubscribeResult">
+        <include refid="selectXinhuSubscribeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuSubscribe" parameterType="XinhuSubscribe" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_subscribe
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">title,</if>
+            <if test="cont != null and cont != ''">cont,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="status != null">status,</if>
+            <if test="suburl != null and suburl != ''">suburl,</if>
+            <if test="suburlpost != null and suburlpost != ''">suburlpost,</if>
+            <if test="lastdt != null">lastdt,</if>
+            <if test="shateid != null and shateid != ''">shateid,</if>
+            <if test="shatename != null and shatename != ''">shatename,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="cont != null and cont != ''">#{cont},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="status != null">#{status},</if>
+            <if test="suburl != null and suburl != ''">#{suburl},</if>
+            <if test="suburlpost != null and suburlpost != ''">#{suburlpost},</if>
+            <if test="lastdt != null">#{lastdt},</if>
+            <if test="shateid != null and shateid != ''">#{shateid},</if>
+            <if test="shatename != null and shatename != ''">#{shatename},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuSubscribe" parameterType="XinhuSubscribe">
+        update xinhu_subscribe
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="cont != null and cont != ''">cont = #{cont},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="suburl != null and suburl != ''">suburl = #{suburl},</if>
+            <if test="suburlpost != null and suburlpost != ''">suburlpost = #{suburlpost},</if>
+            <if test="lastdt != null">lastdt = #{lastdt},</if>
+            <if test="shateid != null and shateid != ''">shateid = #{shateid},</if>
+            <if test="shatename != null and shatename != ''">shatename = #{shatename},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuSubscribeById" parameterType="Long">
+        delete from xinhu_subscribe where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuSubscribeByIds" parameterType="String">
+        delete from xinhu_subscribe where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

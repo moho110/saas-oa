@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.person.mapper.XinhuMenuMapper">
+    
+    <resultMap type="XinhuMenu" id="XinhuMenuResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="pid"    column="pid"    />
+        <result property="sorts"    column="sorts"    />
+        <result property="url"    column="url"    />
+        <result property="icons"    column="icons"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="num"    column="num"    />
+        <result property="ispir"    column="ispir"    />
+        <result property="status"    column="status"    />
+        <result property="color"    column="color"    />
+        <result property="ishs"    column="ishs"    />
+        <result property="iszm"    column="iszm"    />
+        <result property="ctype"    column="ctype"    />
+        <result property="types"    column="types"    />
+    </resultMap>
+
+    <sql id="selectXinhuMenuVo">
+        select id, name, pid, sorts, url, icons, optdt, num, ispir, status, color, ishs, iszm, ctype, types from xinhu_menu
+    </sql>
+
+    <select id="selectXinhuMenuList" parameterType="XinhuMenu" resultMap="XinhuMenuResult">
+        <include refid="selectXinhuMenuVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="pid != null "> and pid = #{pid}</if>
+            <if test="sorts != null "> and sorts = #{sorts}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="icons != null  and icons != ''"> and icons = #{icons}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="num != null  and num != ''"> and num like concat('%', #{num}, '%')</if>
+            <if test="ispir != null "> and ispir = #{ispir}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="color != null  and color != ''"> and color = #{color}</if>
+            <if test="ishs != null "> and ishs = #{ishs}</if>
+            <if test="iszm != null "> and iszm = #{iszm}</if>
+            <if test="ctype != null "> and ctype = #{ctype}</if>
+            <if test="types != null "> and types = #{types}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuMenuById" parameterType="Integer" resultMap="XinhuMenuResult">
+        <include refid="selectXinhuMenuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuMenu" parameterType="XinhuMenu">
+        insert into xinhu_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="pid != null">pid,</if>
+            <if test="sorts != null">sorts,</if>
+            <if test="url != null and url != ''">url,</if>
+            <if test="icons != null and icons != ''">icons,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="ispir != null">ispir,</if>
+            <if test="status != null">status,</if>
+            <if test="color != null and color != ''">color,</if>
+            <if test="ishs != null">ishs,</if>
+            <if test="iszm != null">iszm,</if>
+            <if test="ctype != null">ctype,</if>
+            <if test="types != null">types,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="pid != null">#{pid},</if>
+            <if test="sorts != null">#{sorts},</if>
+            <if test="url != null and url != ''">#{url},</if>
+            <if test="icons != null and icons != ''">#{icons},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="ispir != null">#{ispir},</if>
+            <if test="status != null">#{status},</if>
+            <if test="color != null and color != ''">#{color},</if>
+            <if test="ishs != null">#{ishs},</if>
+            <if test="iszm != null">#{iszm},</if>
+            <if test="ctype != null">#{ctype},</if>
+            <if test="types != null">#{types},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuMenu" parameterType="XinhuMenu">
+        update xinhu_menu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="sorts != null">sorts = #{sorts},</if>
+            <if test="url != null and url != ''">url = #{url},</if>
+            <if test="icons != null and icons != ''">icons = #{icons},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="ispir != null">ispir = #{ispir},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="color != null and color != ''">color = #{color},</if>
+            <if test="ishs != null">ishs = #{ishs},</if>
+            <if test="iszm != null">iszm = #{iszm},</if>
+            <if test="ctype != null">ctype = #{ctype},</if>
+            <if test="types != null">types = #{types},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuMenuById" parameterType="Integer">
+        delete from xinhu_menu where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuMenuByIds" parameterType="String">
+        delete from xinhu_menu where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

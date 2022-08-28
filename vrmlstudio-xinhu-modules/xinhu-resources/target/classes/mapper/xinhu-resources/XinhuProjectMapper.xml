@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.resources.mapper.XinhuProjectMapper">
+    
+    <resultMap type="XinhuProject" id="XinhuProjectResult">
+        <result property="id"    column="id"    />
+        <result property="pid"    column="pid"    />
+        <result property="types"    column="types"    />
+        <result property="num"    column="num"    />
+        <result property="status"    column="status"    />
+        <result property="title"    column="title"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="fuze"    column="fuze"    />
+        <result property="fuzeid"    column="fuzeid"    />
+        <result property="runuser"    column="runuser"    />
+        <result property="runuserid"    column="runuserid"    />
+        <result property="progress"    column="progress"    />
+        <result property="viewuser"    column="viewuser"    />
+        <result property="viewuserid"    column="viewuserid"    />
+        <result property="content"    column="content"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="adddt"    column="adddt"    />
+        <result property="sort"    column="sort"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuProjectVo">
+        select id, pid, types, num, status, title, startdt, enddt, fuze, fuzeid, runuser, runuserid, progress, viewuser, viewuserid, content, optid, optname, optdt, adddt, sort, comid from xinhu_project
+    </sql>
+
+    <select id="selectXinhuProjectList" parameterType="XinhuProject" resultMap="XinhuProjectResult">
+        <include refid="selectXinhuProjectVo"/>
+        <where>  
+            <if test="pid != null "> and pid = #{pid}</if>
+            <if test="types != null  and types != ''"> and types = #{types}</if>
+            <if test="num != null  and num != ''"> and num like concat('%', #{num}, '%')</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
+            <if test="startdt != null "> and startdt = #{startdt}</if>
+            <if test="enddt != null "> and enddt = #{enddt}</if>
+            <if test="fuze != null  and fuze != ''"> and fuze like concat('%', #{fuze}, '%')</if>
+            <if test="fuzeid != null  and fuzeid != ''"> and fuzeid = #{fuzeid}</if>
+            <if test="runuser != null  and runuser != ''"> and runuser like concat('%', #{runuser}, '%')</if>
+            <if test="runuserid != null  and runuserid != ''"> and runuserid = #{runuserid}</if>
+            <if test="progress != null "> and progress like concat('%', #{progress}, '%')</if>
+            <if test="viewuser != null  and viewuser != ''"> and viewuser = #{viewuser}</if>
+            <if test="viewuserid != null  and viewuserid != ''"> and viewuserid = #{viewuserid}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="adddt != null "> and adddt = #{adddt}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuProjectById" parameterType="Long" resultMap="XinhuProjectResult">
+        <include refid="selectXinhuProjectVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuProject" parameterType="XinhuProject">
+        insert into xinhu_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="pid != null">pid,</if>
+            <if test="types != null and types != ''">types,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="status != null">status,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="startdt != null">startdt,</if>
+            <if test="enddt != null">enddt,</if>
+            <if test="fuze != null and fuze != ''">fuze,</if>
+            <if test="fuzeid != null and fuzeid != ''">fuzeid,</if>
+            <if test="runuser != null and runuser != ''">runuser,</if>
+            <if test="runuserid != null and runuserid != ''">runuserid,</if>
+            <if test="progress != null">progress,</if>
+            <if test="viewuser != null and viewuser != ''">viewuser,</if>
+            <if test="viewuserid != null and viewuserid != ''">viewuserid,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="adddt != null">adddt,</if>
+            <if test="sort != null">sort,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="pid != null">#{pid},</if>
+            <if test="types != null and types != ''">#{types},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="status != null">#{status},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="startdt != null">#{startdt},</if>
+            <if test="enddt != null">#{enddt},</if>
+            <if test="fuze != null and fuze != ''">#{fuze},</if>
+            <if test="fuzeid != null and fuzeid != ''">#{fuzeid},</if>
+            <if test="runuser != null and runuser != ''">#{runuser},</if>
+            <if test="runuserid != null and runuserid != ''">#{runuserid},</if>
+            <if test="progress != null">#{progress},</if>
+            <if test="viewuser != null and viewuser != ''">#{viewuser},</if>
+            <if test="viewuserid != null and viewuserid != ''">#{viewuserid},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="adddt != null">#{adddt},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuProject" parameterType="XinhuProject">
+        update xinhu_project
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="types != null and types != ''">types = #{types},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="startdt != null">startdt = #{startdt},</if>
+            <if test="enddt != null">enddt = #{enddt},</if>
+            <if test="fuze != null and fuze != ''">fuze = #{fuze},</if>
+            <if test="fuzeid != null and fuzeid != ''">fuzeid = #{fuzeid},</if>
+            <if test="runuser != null and runuser != ''">runuser = #{runuser},</if>
+            <if test="runuserid != null and runuserid != ''">runuserid = #{runuserid},</if>
+            <if test="progress != null">progress = #{progress},</if>
+            <if test="viewuser != null and viewuser != ''">viewuser = #{viewuser},</if>
+            <if test="viewuserid != null and viewuserid != ''">viewuserid = #{viewuserid},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="adddt != null">adddt = #{adddt},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuProjectById" parameterType="Long">
+        delete from xinhu_project where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuProjectByIds" parameterType="String">
+        delete from xinhu_project where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

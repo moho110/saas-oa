@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.police.mapper.XinhuFininfomMapper">
+    
+    <resultMap type="XinhuFininfom" id="XinhuFininfomResult">
+        <result property="id"    column="id"    />
+        <result property="types"    column="types"    />
+        <result property="uid"    column="uid"    />
+        <result property="money"    column="money"    />
+        <result property="moneycn"    column="moneycn"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="content"    column="content"    />
+        <result property="status"    column="status"    />
+        <result property="isturn"    column="isturn"    />
+        <result property="bills"    column="bills"    />
+        <result property="paytype"    column="paytype"    />
+        <result property="fullname"    column="fullname"    />
+        <result property="cardid"    column="cardid"    />
+        <result property="openbank"    column="openbank"    />
+        <result property="purpose"    column="purpose"    />
+        <result property="purresult"    column="purresult"    />
+        <result property="paydt"    column="paydt"    />
+        <result property="num"    column="num"    />
+        <result property="name"    column="name"    />
+        <result property="shibieid"    column="shibieid"    />
+        <result property="address"    column="address"    />
+        <result property="tel"    column="tel"    />
+        <result property="custid"    column="custid"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuFininfomVo">
+        select id, types, uid, money, moneycn, optdt, optid, optname, applydt, content, status, isturn, bills, paytype, fullname, cardid, openbank, purpose, purresult, paydt, num, name, shibieid, address, tel, custid, comid from xinhu_fininfom
+    </sql>
+
+    <select id="selectXinhuFininfomList" parameterType="XinhuFininfom" resultMap="XinhuFininfomResult">
+        <include refid="selectXinhuFininfomVo"/>
+        <where>  
+            <if test="types != null "> and types = #{types}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="money != null "> and money = #{money}</if>
+            <if test="moneycn != null  and moneycn != ''"> and moneycn = #{moneycn}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+            <if test="bills != null "> and bills = #{bills}</if>
+            <if test="paytype != null  and paytype != ''"> and paytype = #{paytype}</if>
+            <if test="fullname != null  and fullname != ''"> and fullname like concat('%', #{fullname}, '%')</if>
+            <if test="cardid != null  and cardid != ''"> and cardid = #{cardid}</if>
+            <if test="openbank != null  and openbank != ''"> and openbank = #{openbank}</if>
+            <if test="purpose != null  and purpose != ''"> and purpose = #{purpose}</if>
+            <if test="purresult != null  and purresult != ''"> and purresult = #{purresult}</if>
+            <if test="paydt != null "> and paydt = #{paydt}</if>
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="shibieid != null  and shibieid != ''"> and shibieid = #{shibieid}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="tel != null  and tel != ''"> and tel = #{tel}</if>
+            <if test="custid != null "> and custid = #{custid}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuFininfomById" parameterType="Long" resultMap="XinhuFininfomResult">
+        <include refid="selectXinhuFininfomVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuFininfom" parameterType="XinhuFininfom" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_fininfom
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="types != null">types,</if>
+            <if test="uid != null">uid,</if>
+            <if test="money != null">money,</if>
+            <if test="moneycn != null and moneycn != ''">moneycn,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="status != null">status,</if>
+            <if test="isturn != null">isturn,</if>
+            <if test="bills != null">bills,</if>
+            <if test="paytype != null and paytype != ''">paytype,</if>
+            <if test="fullname != null and fullname != ''">fullname,</if>
+            <if test="cardid != null and cardid != ''">cardid,</if>
+            <if test="openbank != null and openbank != ''">openbank,</if>
+            <if test="purpose != null and purpose != ''">purpose,</if>
+            <if test="purresult != null and purresult != ''">purresult,</if>
+            <if test="paydt != null">paydt,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="shibieid != null and shibieid != ''">shibieid,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="tel != null and tel != ''">tel,</if>
+            <if test="custid != null">custid,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="types != null">#{types},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="money != null">#{money},</if>
+            <if test="moneycn != null and moneycn != ''">#{moneycn},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isturn != null">#{isturn},</if>
+            <if test="bills != null">#{bills},</if>
+            <if test="paytype != null and paytype != ''">#{paytype},</if>
+            <if test="fullname != null and fullname != ''">#{fullname},</if>
+            <if test="cardid != null and cardid != ''">#{cardid},</if>
+            <if test="openbank != null and openbank != ''">#{openbank},</if>
+            <if test="purpose != null and purpose != ''">#{purpose},</if>
+            <if test="purresult != null and purresult != ''">#{purresult},</if>
+            <if test="paydt != null">#{paydt},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="shibieid != null and shibieid != ''">#{shibieid},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="tel != null and tel != ''">#{tel},</if>
+            <if test="custid != null">#{custid},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuFininfom" parameterType="XinhuFininfom">
+        update xinhu_fininfom
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="types != null">types = #{types},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="money != null">money = #{money},</if>
+            <if test="moneycn != null and moneycn != ''">moneycn = #{moneycn},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+            <if test="bills != null">bills = #{bills},</if>
+            <if test="paytype != null and paytype != ''">paytype = #{paytype},</if>
+            <if test="fullname != null and fullname != ''">fullname = #{fullname},</if>
+            <if test="cardid != null and cardid != ''">cardid = #{cardid},</if>
+            <if test="openbank != null and openbank != ''">openbank = #{openbank},</if>
+            <if test="purpose != null and purpose != ''">purpose = #{purpose},</if>
+            <if test="purresult != null and purresult != ''">purresult = #{purresult},</if>
+            <if test="paydt != null">paydt = #{paydt},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="shibieid != null and shibieid != ''">shibieid = #{shibieid},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="tel != null and tel != ''">tel = #{tel},</if>
+            <if test="custid != null">custid = #{custid},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuFininfomById" parameterType="Long">
+        delete from xinhu_fininfom where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuFininfomByIds" parameterType="String">
+        delete from xinhu_fininfom where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

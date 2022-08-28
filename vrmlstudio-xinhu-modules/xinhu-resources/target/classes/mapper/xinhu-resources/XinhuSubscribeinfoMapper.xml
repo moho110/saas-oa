@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.resources.mapper.XinhuSubscribeinfoMapper">
+    
+    <resultMap type="XinhuSubscribeinfo" id="XinhuSubscribeinfoResult">
+        <result property="id"    column="id"    />
+        <result property="mid"    column="mid"    />
+        <result property="title"    column="title"    />
+        <result property="cont"    column="cont"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="filepath"    column="filepath"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuSubscribeinfoVo">
+        select id, mid, title, cont, optdt, filepath, receid, recename, comid from xinhu_subscribeinfo
+    </sql>
+
+    <select id="selectXinhuSubscribeinfoList" parameterType="XinhuSubscribeinfo" resultMap="XinhuSubscribeinfoResult">
+        <include refid="selectXinhuSubscribeinfoVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="cont != null  and cont != ''"> and cont = #{cont}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="filepath != null  and filepath != ''"> and filepath = #{filepath}</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuSubscribeinfoById" parameterType="Long" resultMap="XinhuSubscribeinfoResult">
+        <include refid="selectXinhuSubscribeinfoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuSubscribeinfo" parameterType="XinhuSubscribeinfo" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_subscribeinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mid != null">mid,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="cont != null and cont != ''">cont,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="filepath != null and filepath != ''">filepath,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mid != null">#{mid},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="cont != null and cont != ''">#{cont},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="filepath != null and filepath != ''">#{filepath},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuSubscribeinfo" parameterType="XinhuSubscribeinfo">
+        update xinhu_subscribeinfo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="cont != null and cont != ''">cont = #{cont},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="filepath != null and filepath != ''">filepath = #{filepath},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuSubscribeinfoById" parameterType="Long">
+        delete from xinhu_subscribeinfo where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuSubscribeinfoByIds" parameterType="String">
+        delete from xinhu_subscribeinfo where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

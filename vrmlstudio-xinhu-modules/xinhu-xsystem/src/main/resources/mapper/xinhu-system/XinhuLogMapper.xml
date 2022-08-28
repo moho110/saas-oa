@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.XinhuLogMapper">
+    
+    <resultMap type="XinhuLog" id="XinhuLogResult">
+        <result property="id"    column="id"    />
+        <result property="types"    column="types"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="remark"    column="remark"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="ip"    column="ip"    />
+        <result property="web"    column="web"    />
+        <result property="device"    column="device"    />
+        <result property="level"    column="level"    />
+        <result property="url"    column="url"    />
+    </resultMap>
+
+    <sql id="selectXinhuLogVo">
+        select id, types, optid, optname, remark, optdt, ip, web, device, level, url from xinhu_log
+    </sql>
+
+    <select id="selectXinhuLogList" parameterType="XinhuLog" resultMap="XinhuLogResult">
+        <include refid="selectXinhuLogVo"/>
+        <where>  
+            <if test="types != null  and types != ''"> and types = #{types}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+            <if test="web != null  and web != ''"> and web = #{web}</if>
+            <if test="device != null  and device != ''"> and device = #{device}</if>
+            <if test="level != null "> and level = #{level}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuLogById" parameterType="Long" resultMap="XinhuLogResult">
+        <include refid="selectXinhuLogVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuLog" parameterType="XinhuLog">
+        insert into xinhu_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="types != null and types != ''">types,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="ip != null and ip != ''">ip,</if>
+            <if test="web != null and web != ''">web,</if>
+            <if test="device != null and device != ''">device,</if>
+            <if test="level != null">level,</if>
+            <if test="url != null and url != ''">url,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="types != null and types != ''">#{types},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="ip != null and ip != ''">#{ip},</if>
+            <if test="web != null and web != ''">#{web},</if>
+            <if test="device != null and device != ''">#{device},</if>
+            <if test="level != null">#{level},</if>
+            <if test="url != null and url != ''">#{url},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuLog" parameterType="XinhuLog">
+        update xinhu_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="types != null and types != ''">types = #{types},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="ip != null and ip != ''">ip = #{ip},</if>
+            <if test="web != null and web != ''">web = #{web},</if>
+            <if test="device != null and device != ''">device = #{device},</if>
+            <if test="level != null">level = #{level},</if>
+            <if test="url != null and url != ''">url = #{url},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuLogById" parameterType="Long">
+        delete from xinhu_log where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuLogByIds" parameterType="String">
+        delete from xinhu_log where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

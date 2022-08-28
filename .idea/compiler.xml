@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="xinhu-xsystem" />
+        <module name="xinhu-resources" />
+        <module name="xinhu-flow" />
+        <module name="xinhu-person" />
+        <module name="xinhu-hr" />
+        <module name="vrmlstudio-admin" />
+        <module name="vrmlstudio-system" />
+        <module name="xinhu-finance" />
+        <module name="vrmlstudio-tenant" />
+        <module name="vrmlstudio-framework" />
+        <module name="xinhu-document" />
+        <module name="vrmlstudio-common" />
+        <module name="xinhu-police" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="vrmlstudio" target="1.8" />
+      <module name="vrmlstudio-admin" target="1.8" />
+      <module name="vrmlstudio-common" target="1.8" />
+      <module name="vrmlstudio-crm" target="1.8" />
+      <module name="vrmlstudio-framework" target="1.8" />
+      <module name="vrmlstudio-mis" target="1.8" />
+      <module name="vrmlstudio-system" target="1.8" />
+      <module name="vrmlstudio-tenant" target="1.8" />
+      <module name="vrmlstudio-xinhu-modules" target="1.8" />
+      <module name="xinhu-document" target="1.8" />
+      <module name="xinhu-finance" target="1.8" />
+      <module name="xinhu-flow" target="1.8" />
+      <module name="xinhu-hr" target="1.8" />
+      <module name="xinhu-person" target="1.8" />
+      <module name="xinhu-police" target="1.8" />
+      <module name="xinhu-resources" target="1.8" />
+      <module name="xinhu-xsystem" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

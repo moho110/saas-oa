@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.finance.mapper.XinhuTovoidMapper">
+    
+    <resultMap type="XinhuTovoid" id="XinhuTovoidResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="content"    column="content"    />
+        <result property="status"    column="status"    />
+        <result property="isturn"    column="isturn"    />
+        <result property="types"    column="types"    />
+        <result property="modename"    column="modename"    />
+        <result property="modeid"    column="modeid"    />
+        <result property="tonum"    column="tonum"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuTovoidVo">
+        select id, uid, optdt, optid, optname, applydt, content, status, isturn, types, modename, modeid, tonum, comid from xinhu_tovoid
+    </sql>
+
+    <select id="selectXinhuTovoidList" parameterType="XinhuTovoid" resultMap="XinhuTovoidResult">
+        <include refid="selectXinhuTovoidVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="modename != null  and modename != ''"> and modename like concat('%', #{modename}, '%')</if>
+            <if test="modeid != null "> and modeid = #{modeid}</if>
+            <if test="tonum != null  and tonum != ''"> and tonum = #{tonum}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuTovoidById" parameterType="Long" resultMap="XinhuTovoidResult">
+        <include refid="selectXinhuTovoidVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuTovoid" parameterType="XinhuTovoid">
+        insert into xinhu_tovoid
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uid != null">uid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="status != null">status,</if>
+            <if test="isturn != null">isturn,</if>
+            <if test="types != null">types,</if>
+            <if test="modename != null and modename != ''">modename,</if>
+            <if test="modeid != null">modeid,</if>
+            <if test="tonum != null and tonum != ''">tonum,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isturn != null">#{isturn},</if>
+            <if test="types != null">#{types},</if>
+            <if test="modename != null and modename != ''">#{modename},</if>
+            <if test="modeid != null">#{modeid},</if>
+            <if test="tonum != null and tonum != ''">#{tonum},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuTovoid" parameterType="XinhuTovoid">
+        update xinhu_tovoid
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="modename != null and modename != ''">modename = #{modename},</if>
+            <if test="modeid != null">modeid = #{modeid},</if>
+            <if test="tonum != null and tonum != ''">tonum = #{tonum},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuTovoidById" parameterType="Long">
+        delete from xinhu_tovoid where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuTovoidByIds" parameterType="String">
+        delete from xinhu_tovoid where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

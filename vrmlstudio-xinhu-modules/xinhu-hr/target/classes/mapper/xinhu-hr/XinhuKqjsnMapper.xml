@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuKqjsnMapper">
+    
+    <resultMap type="XinhuKqjsn" id="XinhuKqjsnResult">
+        <result property="id"    column="id"    />
+        <result property="num"    column="num"    />
+        <result property="name"    column="name"    />
+        <result property="company"    column="company"    />
+        <result property="sort"    column="sort"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="status"    column="status"    />
+        <result property="deptids"    column="deptids"    />
+        <result property="userids"    column="userids"    />
+        <result property="lastdt"    column="lastdt"    />
+        <result property="space"    column="space"    />
+        <result property="memory"    column="memory"    />
+        <result property="usershu"    column="usershu"    />
+        <result property="fingerprintshu"    column="fingerprintshu"    />
+        <result property="headpicshu"    column="headpicshu"    />
+        <result property="clockinshu"    column="clockinshu"    />
+        <result property="picshu"    column="picshu"    />
+        <result property="romver"    column="romver"    />
+        <result property="appver"    column="appver"    />
+        <result property="model"    column="model"    />
+        <result property="pinpai"    column="pinpai"    />
+        <result property="snip"    column="snip"    />
+        <result property="snport"    column="snport"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuKqjsnVo">
+        select id, num, name, company, sort, optdt, status, deptids, userids, lastdt, space, memory, usershu, fingerprintshu, headpicshu, clockinshu, picshu, romver, appver, model, pinpai, snip, snport, comid from xinhu_kqjsn
+    </sql>
+
+    <select id="selectXinhuKqjsnList" parameterType="XinhuKqjsn" resultMap="XinhuKqjsnResult">
+        <include refid="selectXinhuKqjsnVo"/>
+        <where>  
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="company != null  and company != ''"> and company = #{company}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="deptids != null  and deptids != ''"> and deptids = #{deptids}</if>
+            <if test="userids != null  and userids != ''"> and userids = #{userids}</if>
+            <if test="lastdt != null "> and lastdt = #{lastdt}</if>
+            <if test="space != null "> and space = #{space}</if>
+            <if test="memory != null "> and memory = #{memory}</if>
+            <if test="usershu != null "> and usershu = #{usershu}</if>
+            <if test="fingerprintshu != null "> and fingerprintshu = #{fingerprintshu}</if>
+            <if test="headpicshu != null "> and headpicshu = #{headpicshu}</if>
+            <if test="clockinshu != null "> and clockinshu = #{clockinshu}</if>
+            <if test="picshu != null "> and picshu = #{picshu}</if>
+            <if test="romver != null  and romver != ''"> and romver = #{romver}</if>
+            <if test="appver != null  and appver != ''"> and appver = #{appver}</if>
+            <if test="model != null  and model != ''"> and model = #{model}</if>
+            <if test="pinpai != null "> and pinpai = #{pinpai}</if>
+            <if test="snip != null  and snip != ''"> and snip = #{snip}</if>
+            <if test="snport != null  and snport != ''"> and snport = #{snport}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuKqjsnById" parameterType="Long" resultMap="XinhuKqjsnResult">
+        <include refid="selectXinhuKqjsnVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuKqjsn" parameterType="XinhuKqjsn">
+        insert into xinhu_kqjsn
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="company != null and company != ''">company,</if>
+            <if test="sort != null">sort,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="status != null">status,</if>
+            <if test="deptids != null and deptids != ''">deptids,</if>
+            <if test="userids != null and userids != ''">userids,</if>
+            <if test="lastdt != null">lastdt,</if>
+            <if test="space != null">space,</if>
+            <if test="memory != null">memory,</if>
+            <if test="usershu != null">usershu,</if>
+            <if test="fingerprintshu != null">fingerprintshu,</if>
+            <if test="headpicshu != null">headpicshu,</if>
+            <if test="clockinshu != null">clockinshu,</if>
+            <if test="picshu != null">picshu,</if>
+            <if test="romver != null and romver != ''">romver,</if>
+            <if test="appver != null and appver != ''">appver,</if>
+            <if test="model != null and model != ''">model,</if>
+            <if test="pinpai != null">pinpai,</if>
+            <if test="snip != null and snip != ''">snip,</if>
+            <if test="snport != null and snport != ''">snport,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="company != null and company != ''">#{company},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="status != null">#{status},</if>
+            <if test="deptids != null and deptids != ''">#{deptids},</if>
+            <if test="userids != null and userids != ''">#{userids},</if>
+            <if test="lastdt != null">#{lastdt},</if>
+            <if test="space != null">#{space},</if>
+            <if test="memory != null">#{memory},</if>
+            <if test="usershu != null">#{usershu},</if>
+            <if test="fingerprintshu != null">#{fingerprintshu},</if>
+            <if test="headpicshu != null">#{headpicshu},</if>
+            <if test="clockinshu != null">#{clockinshu},</if>
+            <if test="picshu != null">#{picshu},</if>
+            <if test="romver != null and romver != ''">#{romver},</if>
+            <if test="appver != null and appver != ''">#{appver},</if>
+            <if test="model != null and model != ''">#{model},</if>
+            <if test="pinpai != null">#{pinpai},</if>
+            <if test="snip != null and snip != ''">#{snip},</if>
+            <if test="snport != null and snport != ''">#{snport},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuKqjsn" parameterType="XinhuKqjsn">
+        update xinhu_kqjsn
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="company != null and company != ''">company = #{company},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="deptids != null and deptids != ''">deptids = #{deptids},</if>
+            <if test="userids != null and userids != ''">userids = #{userids},</if>
+            <if test="lastdt != null">lastdt = #{lastdt},</if>
+            <if test="space != null">space = #{space},</if>
+            <if test="memory != null">memory = #{memory},</if>
+            <if test="usershu != null">usershu = #{usershu},</if>
+            <if test="fingerprintshu != null">fingerprintshu = #{fingerprintshu},</if>
+            <if test="headpicshu != null">headpicshu = #{headpicshu},</if>
+            <if test="clockinshu != null">clockinshu = #{clockinshu},</if>
+            <if test="picshu != null">picshu = #{picshu},</if>
+            <if test="romver != null and romver != ''">romver = #{romver},</if>
+            <if test="appver != null and appver != ''">appver = #{appver},</if>
+            <if test="model != null and model != ''">model = #{model},</if>
+            <if test="pinpai != null">pinpai = #{pinpai},</if>
+            <if test="snip != null and snip != ''">snip = #{snip},</if>
+            <if test="snport != null and snport != ''">snport = #{snport},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuKqjsnById" parameterType="Long">
+        delete from xinhu_kqjsn where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuKqjsnByIds" parameterType="String">
+        delete from xinhu_kqjsn where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

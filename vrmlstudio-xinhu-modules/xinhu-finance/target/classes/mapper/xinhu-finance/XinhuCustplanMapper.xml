@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.finance.mapper.XinhuCustplanMapper">
+    
+    <resultMap type="XinhuCustplan" id="XinhuCustplanResult">
+        <result property="id"    column="id"    />
+        <result property="comid"    column="comid"    />
+        <result property="custid"    column="custid"    />
+        <result property="custname"    column="custname"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="plandt"    column="plandt"    />
+        <result property="status"    column="status"    />
+        <result property="content"    column="content"    />
+        <result property="gentype"    column="gentype"    />
+        <result property="uid"    column="uid"    />
+        <result property="findt"    column="findt"    />
+    </resultMap>
+
+    <sql id="selectXinhuCustplanVo">
+        select id, comid, custid, custname, optid, optname, optdt, plandt, status, content, gentype, uid, findt from xinhu_custplan
+    </sql>
+
+    <select id="selectXinhuCustplanList" parameterType="XinhuCustplan" resultMap="XinhuCustplanResult">
+        <include refid="selectXinhuCustplanVo"/>
+        <where>  
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="custid != null "> and custid = #{custid}</if>
+            <if test="custname != null  and custname != ''"> and custname like concat('%', #{custname}, '%')</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="plandt != null "> and plandt = #{plandt}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="gentype != null  and gentype != ''"> and gentype = #{gentype}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="findt != null "> and findt = #{findt}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuCustplanById" parameterType="Long" resultMap="XinhuCustplanResult">
+        <include refid="selectXinhuCustplanVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuCustplan" parameterType="XinhuCustplan" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_custplan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="comid != null">comid,</if>
+            <if test="custid != null">custid,</if>
+            <if test="custname != null and custname != ''">custname,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="plandt != null">plandt,</if>
+            <if test="status != null">status,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="gentype != null and gentype != ''">gentype,</if>
+            <if test="uid != null">uid,</if>
+            <if test="findt != null">findt,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="comid != null">#{comid},</if>
+            <if test="custid != null">#{custid},</if>
+            <if test="custname != null and custname != ''">#{custname},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="plandt != null">#{plandt},</if>
+            <if test="status != null">#{status},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="gentype != null and gentype != ''">#{gentype},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="findt != null">#{findt},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuCustplan" parameterType="XinhuCustplan">
+        update xinhu_custplan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="custid != null">custid = #{custid},</if>
+            <if test="custname != null and custname != ''">custname = #{custname},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="plandt != null">plandt = #{plandt},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="gentype != null and gentype != ''">gentype = #{gentype},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="findt != null">findt = #{findt},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuCustplanById" parameterType="Long">
+        delete from xinhu_custplan where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuCustplanByIds" parameterType="String">
+        delete from xinhu_custplan where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

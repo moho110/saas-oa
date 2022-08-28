@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuHrkaohenMapper">
+    
+    <resultMap type="XinhuHrkaohen" id="XinhuHrkaohenResult">
+        <result property="id"    column="id"    />
+        <result property="mid"    column="mid"    />
+        <result property="sort"    column="sort"    />
+        <result property="pfname"    column="pfname"    />
+        <result property="pftype"    column="pftype"    />
+        <result property="pfren"    column="pfren"    />
+        <result property="pfrenid"    column="pfrenid"    />
+        <result property="pfweight"    column="pfweight"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuHrkaohenVo">
+        select id, mid, sort, pfname, pftype, pfren, pfrenid, pfweight, comid from xinhu_hrkaohen
+    </sql>
+
+    <select id="selectXinhuHrkaohenList" parameterType="XinhuHrkaohen" resultMap="XinhuHrkaohenResult">
+        <include refid="selectXinhuHrkaohenVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="pfname != null  and pfname != ''"> and pfname like concat('%', #{pfname}, '%')</if>
+            <if test="pftype != null  and pftype != ''"> and pftype = #{pftype}</if>
+            <if test="pfren != null  and pfren != ''"> and pfren = #{pfren}</if>
+            <if test="pfrenid != null  and pfrenid != ''"> and pfrenid = #{pfrenid}</if>
+            <if test="pfweight != null "> and pfweight = #{pfweight}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuHrkaohenById" parameterType="Long" resultMap="XinhuHrkaohenResult">
+        <include refid="selectXinhuHrkaohenVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuHrkaohen" parameterType="XinhuHrkaohen" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_hrkaohen
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mid != null">mid,</if>
+            <if test="sort != null">sort,</if>
+            <if test="pfname != null and pfname != ''">pfname,</if>
+            <if test="pftype != null and pftype != ''">pftype,</if>
+            <if test="pfren != null and pfren != ''">pfren,</if>
+            <if test="pfrenid != null and pfrenid != ''">pfrenid,</if>
+            <if test="pfweight != null">pfweight,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mid != null">#{mid},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="pfname != null and pfname != ''">#{pfname},</if>
+            <if test="pftype != null and pftype != ''">#{pftype},</if>
+            <if test="pfren != null and pfren != ''">#{pfren},</if>
+            <if test="pfrenid != null and pfrenid != ''">#{pfrenid},</if>
+            <if test="pfweight != null">#{pfweight},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuHrkaohen" parameterType="XinhuHrkaohen">
+        update xinhu_hrkaohen
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="pfname != null and pfname != ''">pfname = #{pfname},</if>
+            <if test="pftype != null and pftype != ''">pftype = #{pftype},</if>
+            <if test="pfren != null and pfren != ''">pfren = #{pfren},</if>
+            <if test="pfrenid != null and pfrenid != ''">pfrenid = #{pfrenid},</if>
+            <if test="pfweight != null">pfweight = #{pfweight},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuHrkaohenById" parameterType="Long">
+        delete from xinhu_hrkaohen where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuHrkaohenByIds" parameterType="String">
+        delete from xinhu_hrkaohen where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

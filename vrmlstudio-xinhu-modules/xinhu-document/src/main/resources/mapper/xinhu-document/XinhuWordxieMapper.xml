@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.document.mapper.XinhuWordxieMapper">
+    
+    <resultMap type="XinhuWordxie" id="XinhuWordxieResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="fenlei"    column="fenlei"    />
+        <result property="wtype"    column="wtype"    />
+        <result property="optname"    column="optname"    />
+        <result property="optid"    column="optid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="xiename"    column="xiename"    />
+        <result property="xienameid"    column="xienameid"    />
+        <result property="recename"    column="recename"    />
+        <result property="receid"    column="receid"    />
+        <result property="status"    column="status"    />
+        <result property="fileid"    column="fileid"    />
+        <result property="content"    column="content"    />
+        <result property="comid"    column="comid"    />
+        <result property="isgk"    column="isgk"    />
+        <result property="tplvar"    column="tplvar"    />
+    </resultMap>
+
+    <sql id="selectXinhuWordxieVo">
+        select id, name, fenlei, wtype, optname, optid, optdt, xiename, xienameid, recename, receid, status, fileid, content, comid, isgk, tplvar from xinhu_wordxie
+    </sql>
+
+    <select id="selectXinhuWordxieList" parameterType="XinhuWordxie" resultMap="XinhuWordxieResult">
+        <include refid="selectXinhuWordxieVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="fenlei != null  and fenlei != ''"> and fenlei = #{fenlei}</if>
+            <if test="wtype != null  and wtype != ''"> and wtype = #{wtype}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="xiename != null  and xiename != ''"> and xiename like concat('%', #{xiename}, '%')</if>
+            <if test="xienameid != null  and xienameid != ''"> and xienameid = #{xienameid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="fileid != null "> and fileid = #{fileid}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="isgk != null "> and isgk = #{isgk}</if>
+            <if test="tplvar != null  and tplvar != ''"> and tplvar = #{tplvar}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuWordxieById" parameterType="Long" resultMap="XinhuWordxieResult">
+        <include refid="selectXinhuWordxieVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuWordxie" parameterType="XinhuWordxie">
+        insert into xinhu_wordxie
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="fenlei != null and fenlei != ''">fenlei,</if>
+            <if test="wtype != null and wtype != ''">wtype,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="xiename != null and xiename != ''">xiename,</if>
+            <if test="xienameid != null and xienameid != ''">xienameid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="status != null">status,</if>
+            <if test="fileid != null">fileid,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="comid != null">comid,</if>
+            <if test="isgk != null">isgk,</if>
+            <if test="tplvar != null and tplvar != ''">tplvar,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="fenlei != null and fenlei != ''">#{fenlei},</if>
+            <if test="wtype != null and wtype != ''">#{wtype},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="xiename != null and xiename != ''">#{xiename},</if>
+            <if test="xienameid != null and xienameid != ''">#{xienameid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="status != null">#{status},</if>
+            <if test="fileid != null">#{fileid},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="isgk != null">#{isgk},</if>
+            <if test="tplvar != null and tplvar != ''">#{tplvar},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuWordxie" parameterType="XinhuWordxie">
+        update xinhu_wordxie
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="fenlei != null and fenlei != ''">fenlei = #{fenlei},</if>
+            <if test="wtype != null and wtype != ''">wtype = #{wtype},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="xiename != null and xiename != ''">xiename = #{xiename},</if>
+            <if test="xienameid != null and xienameid != ''">xienameid = #{xienameid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="fileid != null">fileid = #{fileid},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="isgk != null">isgk = #{isgk},</if>
+            <if test="tplvar != null and tplvar != ''">tplvar = #{tplvar},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuWordxieById" parameterType="Long">
+        delete from xinhu_wordxie where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuWordxieByIds" parameterType="String">
+        delete from xinhu_wordxie where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

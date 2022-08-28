@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.person.mapper.XinhuMeetMapper">
+    
+    <resultMap type="XinhuMeet" id="XinhuMeetResult">
+        <result property="id"    column="id"    />
+        <result property="hyname"    column="hyname"    />
+        <result property="title"    column="title"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="state"    column="state"    />
+        <result property="status"    column="status"    />
+        <result property="types"    column="types"    />
+        <result property="joinid"    column="joinid"    />
+        <result property="joinname"    column="joinname"    />
+        <result property="mid"    column="mid"    />
+        <result property="optname"    column="optname"    />
+        <result property="rate"    column="rate"    />
+        <result property="uid"    column="uid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="contents"    column="contents"    />
+        <result property="cancelreason"    column="cancelreason"    />
+        <result property="jyid"    column="jyid"    />
+        <result property="jyname"    column="jyname"    />
+        <result property="content"    column="content"    />
+        <result property="issms"    column="issms"    />
+        <result property="comid"    column="comid"    />
+        <result property="zcrenid"    column="zcrenid"    />
+        <result property="zcren"    column="zcren"    />
+    </resultMap>
+
+    <sql id="selectXinhuMeetVo">
+        select id, hyname, title, startdt, enddt, state, status, types, joinid, joinname, mid, optname, rate, uid, optdt, optid, contents, cancelreason, jyid, jyname, content, issms, comid, zcrenid, zcren from xinhu_meet
+    </sql>
+
+    <select id="selectXinhuMeetList" parameterType="XinhuMeet" resultMap="XinhuMeetResult">
+        <include refid="selectXinhuMeetVo"/>
+        <where>  
+            <if test="hyname != null  and hyname != ''"> and hyname like concat('%', #{hyname}, '%')</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="startdt != null  and startdt != ''"> and startdt = #{startdt}</if>
+            <if test="enddt != null  and enddt != ''"> and enddt = #{enddt}</if>
+            <if test="state != null "> and state = #{state}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="joinid != null  and joinid != ''"> and joinid = #{joinid}</if>
+            <if test="joinname != null  and joinname != ''"> and joinname like concat('%', #{joinname}, '%')</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="rate != null  and rate != ''"> and rate = #{rate}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="contents != null  and contents != ''"> and contents = #{contents}</if>
+            <if test="cancelreason != null  and cancelreason != ''"> and cancelreason = #{cancelreason}</if>
+            <if test="jyid != null  and jyid != ''"> and jyid = #{jyid}</if>
+            <if test="jyname != null  and jyname != ''"> and jyname like concat('%', #{jyname}, '%')</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="issms != null "> and issms = #{issms}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="zcrenid != null  and zcrenid != ''"> and zcrenid = #{zcrenid}</if>
+            <if test="zcren != null  and zcren != ''"> and zcren = #{zcren}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuMeetById" parameterType="Long" resultMap="XinhuMeetResult">
+        <include refid="selectXinhuMeetVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuMeet" parameterType="XinhuMeet">
+        insert into xinhu_meet
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="hyname != null and hyname != ''">hyname,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="startdt != null and startdt != ''">startdt,</if>
+            <if test="enddt != null and enddt != ''">enddt,</if>
+            <if test="state != null">state,</if>
+            <if test="status != null">status,</if>
+            <if test="types != null">types,</if>
+            <if test="joinid != null and joinid != ''">joinid,</if>
+            <if test="joinname != null and joinname != ''">joinname,</if>
+            <if test="mid != null">mid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="rate != null and rate != ''">rate,</if>
+            <if test="uid != null">uid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="contents != null and contents != ''">contents,</if>
+            <if test="cancelreason != null and cancelreason != ''">cancelreason,</if>
+            <if test="jyid != null and jyid != ''">jyid,</if>
+            <if test="jyname != null and jyname != ''">jyname,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="issms != null">issms,</if>
+            <if test="comid != null">comid,</if>
+            <if test="zcrenid != null and zcrenid != ''">zcrenid,</if>
+            <if test="zcren != null and zcren != ''">zcren,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="hyname != null and hyname != ''">#{hyname},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="startdt != null and startdt != ''">#{startdt},</if>
+            <if test="enddt != null and enddt != ''">#{enddt},</if>
+            <if test="state != null">#{state},</if>
+            <if test="status != null">#{status},</if>
+            <if test="types != null">#{types},</if>
+            <if test="joinid != null and joinid != ''">#{joinid},</if>
+            <if test="joinname != null and joinname != ''">#{joinname},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="rate != null and rate != ''">#{rate},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="contents != null and contents != ''">#{contents},</if>
+            <if test="cancelreason != null and cancelreason != ''">#{cancelreason},</if>
+            <if test="jyid != null and jyid != ''">#{jyid},</if>
+            <if test="jyname != null and jyname != ''">#{jyname},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="issms != null">#{issms},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="zcrenid != null and zcrenid != ''">#{zcrenid},</if>
+            <if test="zcren != null and zcren != ''">#{zcren},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuMeet" parameterType="XinhuMeet">
+        update xinhu_meet
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hyname != null and hyname != ''">hyname = #{hyname},</if>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="startdt != null and startdt != ''">startdt = #{startdt},</if>
+            <if test="enddt != null and enddt != ''">enddt = #{enddt},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="joinid != null and joinid != ''">joinid = #{joinid},</if>
+            <if test="joinname != null and joinname != ''">joinname = #{joinname},</if>
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="rate != null and rate != ''">rate = #{rate},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="contents != null and contents != ''">contents = #{contents},</if>
+            <if test="cancelreason != null and cancelreason != ''">cancelreason = #{cancelreason},</if>
+            <if test="jyid != null and jyid != ''">jyid = #{jyid},</if>
+            <if test="jyname != null and jyname != ''">jyname = #{jyname},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="issms != null">issms = #{issms},</if>
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="zcrenid != null and zcrenid != ''">zcrenid = #{zcrenid},</if>
+            <if test="zcren != null and zcren != ''">zcren = #{zcren},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuMeetById" parameterType="Long">
+        delete from xinhu_meet where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuMeetByIds" parameterType="String">
+        delete from xinhu_meet where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

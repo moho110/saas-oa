@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.police.mapper.XinhuGodepotMapper">
+    
+    <resultMap type="XinhuGodepot" id="XinhuGodepotResult">
+        <result property="id"    column="id"    />
+        <result property="depotname"    column="depotname"    />
+        <result property="depotaddress"    column="depotaddress"    />
+        <result property="cgname"    column="cgname"    />
+        <result property="cgid"    column="cgid"    />
+        <result property="depotcontent"    column="depotcontent"    />
+        <result property="sort"    column="sort"    />
+        <result property="depotnum"    column="depotnum"    />
+        <result property="wpshu"    column="wpshu"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuGodepotVo">
+        select id, depotname, depotaddress, cgname, cgid, depotcontent, sort, depotnum, wpshu, comid from xinhu_godepot
+    </sql>
+
+    <select id="selectXinhuGodepotList" parameterType="XinhuGodepot" resultMap="XinhuGodepotResult">
+        <include refid="selectXinhuGodepotVo"/>
+        <where>  
+            <if test="depotname != null  and depotname != ''"> and depotname like concat('%', #{depotname}, '%')</if>
+            <if test="depotaddress != null  and depotaddress != ''"> and depotaddress = #{depotaddress}</if>
+            <if test="cgname != null  and cgname != ''"> and cgname like concat('%', #{cgname}, '%')</if>
+            <if test="cgid != null  and cgid != ''"> and cgid = #{cgid}</if>
+            <if test="depotcontent != null  and depotcontent != ''"> and depotcontent = #{depotcontent}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="depotnum != null  and depotnum != ''"> and depotnum = #{depotnum}</if>
+            <if test="wpshu != null "> and wpshu = #{wpshu}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuGodepotById" parameterType="Long" resultMap="XinhuGodepotResult">
+        <include refid="selectXinhuGodepotVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuGodepot" parameterType="XinhuGodepot" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_godepot
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="depotname != null and depotname != ''">depotname,</if>
+            <if test="depotaddress != null and depotaddress != ''">depotaddress,</if>
+            <if test="cgname != null and cgname != ''">cgname,</if>
+            <if test="cgid != null and cgid != ''">cgid,</if>
+            <if test="depotcontent != null and depotcontent != ''">depotcontent,</if>
+            <if test="sort != null">sort,</if>
+            <if test="depotnum != null and depotnum != ''">depotnum,</if>
+            <if test="wpshu != null">wpshu,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="depotname != null and depotname != ''">#{depotname},</if>
+            <if test="depotaddress != null and depotaddress != ''">#{depotaddress},</if>
+            <if test="cgname != null and cgname != ''">#{cgname},</if>
+            <if test="cgid != null and cgid != ''">#{cgid},</if>
+            <if test="depotcontent != null and depotcontent != ''">#{depotcontent},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="depotnum != null and depotnum != ''">#{depotnum},</if>
+            <if test="wpshu != null">#{wpshu},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuGodepot" parameterType="XinhuGodepot">
+        update xinhu_godepot
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="depotname != null and depotname != ''">depotname = #{depotname},</if>
+            <if test="depotaddress != null and depotaddress != ''">depotaddress = #{depotaddress},</if>
+            <if test="cgname != null and cgname != ''">cgname = #{cgname},</if>
+            <if test="cgid != null and cgid != ''">cgid = #{cgid},</if>
+            <if test="depotcontent != null and depotcontent != ''">depotcontent = #{depotcontent},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="depotnum != null and depotnum != ''">depotnum = #{depotnum},</if>
+            <if test="wpshu != null">wpshu = #{wpshu},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuGodepotById" parameterType="Long">
+        delete from xinhu_godepot where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuGodepotByIds" parameterType="String">
+        delete from xinhu_godepot where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

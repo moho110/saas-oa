@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.finance.mapper.XinhuCarmreseMapper">
+    
+    <resultMap type="XinhuCarmrese" id="XinhuCarmreseResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="content"    column="content"    />
+        <result property="status"    column="status"    />
+        <result property="isturn"    column="isturn"    />
+        <result property="useid"    column="useid"    />
+        <result property="usename"    column="usename"    />
+        <result property="useren"    column="useren"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="address"    column="address"    />
+        <result property="carid"    column="carid"    />
+        <result property="carnum"    column="carnum"    />
+        <result property="xianlines"    column="xianlines"    />
+        <result property="jiaid"    column="jiaid"    />
+        <result property="jianame"    column="jianame"    />
+        <result property="kmstart"    column="kmstart"    />
+        <result property="kmend"    column="kmend"    />
+        <result property="returndt"    column="returndt"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuCarmreseVo">
+        select id, uid, optdt, optid, optname, applydt, content, status, isturn, useid, usename, useren, startdt, enddt, address, carid, carnum, xianlines, jiaid, jianame, kmstart, kmend, returndt, comid from xinhu_carmrese
+    </sql>
+
+    <select id="selectXinhuCarmreseList" parameterType="XinhuCarmrese" resultMap="XinhuCarmreseResult">
+        <include refid="selectXinhuCarmreseVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+            <if test="useid != null  and useid != ''"> and useid = #{useid}</if>
+            <if test="usename != null  and usename != ''"> and usename like concat('%', #{usename}, '%')</if>
+            <if test="useren != null "> and useren = #{useren}</if>
+            <if test="startdt != null "> and startdt = #{startdt}</if>
+            <if test="enddt != null "> and enddt = #{enddt}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="carid != null "> and carid = #{carid}</if>
+            <if test="carnum != null  and carnum != ''"> and carnum = #{carnum}</if>
+            <if test="xianlines != null  and xianlines != ''"> and xianlines = #{xianlines}</if>
+            <if test="jiaid != null  and jiaid != ''"> and jiaid = #{jiaid}</if>
+            <if test="jianame != null  and jianame != ''"> and jianame like concat('%', #{jianame}, '%')</if>
+            <if test="kmstart != null  and kmstart != ''"> and kmstart = #{kmstart}</if>
+            <if test="kmend != null  and kmend != ''"> and kmend = #{kmend}</if>
+            <if test="returndt != null "> and returndt = #{returndt}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuCarmreseById" parameterType="Long" resultMap="XinhuCarmreseResult">
+        <include refid="selectXinhuCarmreseVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuCarmrese" parameterType="XinhuCarmrese" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_carmrese
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uid != null">uid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="status != null">status,</if>
+            <if test="isturn != null">isturn,</if>
+            <if test="useid != null and useid != ''">useid,</if>
+            <if test="usename != null and usename != ''">usename,</if>
+            <if test="useren != null">useren,</if>
+            <if test="startdt != null">startdt,</if>
+            <if test="enddt != null">enddt,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="carid != null">carid,</if>
+            <if test="carnum != null and carnum != ''">carnum,</if>
+            <if test="xianlines != null and xianlines != ''">xianlines,</if>
+            <if test="jiaid != null and jiaid != ''">jiaid,</if>
+            <if test="jianame != null and jianame != ''">jianame,</if>
+            <if test="kmstart != null and kmstart != ''">kmstart,</if>
+            <if test="kmend != null and kmend != ''">kmend,</if>
+            <if test="returndt != null">returndt,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">#{uid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isturn != null">#{isturn},</if>
+            <if test="useid != null and useid != ''">#{useid},</if>
+            <if test="usename != null and usename != ''">#{usename},</if>
+            <if test="useren != null">#{useren},</if>
+            <if test="startdt != null">#{startdt},</if>
+            <if test="enddt != null">#{enddt},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="carid != null">#{carid},</if>
+            <if test="carnum != null and carnum != ''">#{carnum},</if>
+            <if test="xianlines != null and xianlines != ''">#{xianlines},</if>
+            <if test="jiaid != null and jiaid != ''">#{jiaid},</if>
+            <if test="jianame != null and jianame != ''">#{jianame},</if>
+            <if test="kmstart != null and kmstart != ''">#{kmstart},</if>
+            <if test="kmend != null and kmend != ''">#{kmend},</if>
+            <if test="returndt != null">#{returndt},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuCarmrese" parameterType="XinhuCarmrese">
+        update xinhu_carmrese
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+            <if test="useid != null and useid != ''">useid = #{useid},</if>
+            <if test="usename != null and usename != ''">usename = #{usename},</if>
+            <if test="useren != null">useren = #{useren},</if>
+            <if test="startdt != null">startdt = #{startdt},</if>
+            <if test="enddt != null">enddt = #{enddt},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="carid != null">carid = #{carid},</if>
+            <if test="carnum != null and carnum != ''">carnum = #{carnum},</if>
+            <if test="xianlines != null and xianlines != ''">xianlines = #{xianlines},</if>
+            <if test="jiaid != null and jiaid != ''">jiaid = #{jiaid},</if>
+            <if test="jianame != null and jianame != ''">jianame = #{jianame},</if>
+            <if test="kmstart != null and kmstart != ''">kmstart = #{kmstart},</if>
+            <if test="kmend != null and kmend != ''">kmend = #{kmend},</if>
+            <if test="returndt != null">returndt = #{returndt},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuCarmreseById" parameterType="Long">
+        delete from xinhu_carmrese where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuCarmreseByIds" parameterType="String">
+        delete from xinhu_carmrese where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

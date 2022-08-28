@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.XinhuSjoinMapper">
+    
+    <resultMap type="XinhuSjoin" id="XinhuSjoinResult">
+        <result property="id"    column="id"    />
+        <result property="types"    column="types"    />
+        <result property="mid"    column="mid"    />
+        <result property="sid"    column="sid"    />
+        <result property="indate"    column="indate"    />
+    </resultMap>
+
+    <sql id="selectXinhuSjoinVo">
+        select id, type, mid, sid, indate from xinhu_sjoin
+    </sql>
+
+    <select id="selectXinhuSjoinList" parameterType="XinhuSjoin" resultMap="XinhuSjoinResult">
+        <include refid="selectXinhuSjoinVo"/>
+        <where>  
+            <if test="types != null  and types != ''"> and types = #{types}</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="sid != null "> and sid = #{sid}</if>
+            <if test="indate != null "> and indate = #{indate}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuSjoinById" parameterType="Long" resultMap="XinhuSjoinResult">
+        <include refid="selectXinhuSjoinVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuSjoin" parameterType="XinhuSjoin" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_sjoin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="types != null and types != ''">types,</if>
+            <if test="mid != null">mid,</if>
+            <if test="sid != null">sid,</if>
+            <if test="indate != null">indate,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="types != null and types != ''">#{types},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="sid != null">#{sid},</if>
+            <if test="indate != null">#{indate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuSjoin" parameterType="XinhuSjoin">
+        update xinhu_sjoin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="types != null and types != ''">types = #{types},</if>
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="sid != null">sid = #{sid},</if>
+            <if test="indate != null">indate = #{indate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuSjoinById" parameterType="Long">
+        delete from xinhu_sjoin where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuSjoinByIds" parameterType="String">
+        delete from xinhu_sjoin where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

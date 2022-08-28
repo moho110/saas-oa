@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.document.mapper.XinhuOfficialMapper">
+    
+    <resultMap type="XinhuOfficial" id="XinhuOfficialResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="title"    column="title"    />
+        <result property="titles"    column="titles"    />
+        <result property="types"    column="types"    />
+        <result property="type"    column="type"    />
+        <result property="grade"    column="grade"    />
+        <result property="optname"    column="optname"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="status"    column="status"    />
+        <result property="contents"    column="contents"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="num"    column="num"    />
+        <result property="optid"    column="optid"    />
+        <result property="content"    column="content"    />
+        <result property="isturn"    column="isturn"    />
+        <result property="filecontid"    column="filecontid"    />
+        <result property="zinum"    column="zinum"    />
+        <result property="unitname"    column="unitname"    />
+        <result property="unitsame"    column="unitsame"    />
+        <result property="miji"    column="miji"    />
+        <result property="laidt"    column="laidt"    />
+        <result property="chaoname"    column="chaoname"    />
+        <result property="zuncheng"    column="zuncheng"    />
+        <result property="thid"    column="thid"    />
+        <result property="yzid"    column="yzid"    />
+        <result property="ffid"    column="ffid"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="comid"    column="comid"    />
+        <result property="ffdt"    column="ffdt"    />
+        <result property="pdfid"    column="pdfid"    />
+    </resultMap>
+
+    <sql id="selectXinhuOfficialVo">
+        select id, uid, title, titles, types, type, grade, optname, optdt, status, contents, receid, recename, applydt, num, optid, content, isturn, filecontid, zinum, unitname, unitsame, miji, laidt, chaoname, zuncheng, thid, yzid, ffid, enddt, startdt, comid, ffdt, pdfid from xinhu_official
+    </sql>
+
+    <select id="selectXinhuOfficialList" parameterType="XinhuOfficial" resultMap="XinhuOfficialResult">
+        <include refid="selectXinhuOfficialVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="titles != null  and titles != ''"> and titles = #{titles}</if>
+            <if test="types != null  and types != ''"> and types = #{types}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="grade != null  and grade != ''"> and grade = #{grade}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="contents != null  and contents != ''"> and contents = #{contents}</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+            <if test="filecontid != null  and filecontid != ''"> and filecontid = #{filecontid}</if>
+            <if test="zinum != null  and zinum != ''"> and zinum = #{zinum}</if>
+            <if test="unitname != null  and unitname != ''"> and unitname like concat('%', #{unitname}, '%')</if>
+            <if test="unitsame != null  and unitsame != ''"> and unitsame = #{unitsame}</if>
+            <if test="miji != null  and miji != ''"> and miji = #{miji}</if>
+            <if test="laidt != null "> and laidt = #{laidt}</if>
+            <if test="chaoname != null  and chaoname != ''"> and chaoname like concat('%', #{chaoname}, '%')</if>
+            <if test="zuncheng != null  and zuncheng != ''"> and zuncheng = #{zuncheng}</if>
+            <if test="thid != null "> and thid = #{thid}</if>
+            <if test="yzid != null "> and yzid = #{yzid}</if>
+            <if test="ffid != null "> and ffid = #{ffid}</if>
+            <if test="enddt != null "> and enddt = #{enddt}</if>
+            <if test="startdt != null "> and startdt = #{startdt}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="ffdt != null "> and ffdt = #{ffdt}</if>
+            <if test="pdfid != null "> and pdfid = #{pdfid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuOfficialById" parameterType="Long" resultMap="XinhuOfficialResult">
+        <include refid="selectXinhuOfficialVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuOfficial" parameterType="XinhuOfficial">
+        insert into xinhu_official
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uid != null">uid,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="titles != null and titles != ''">titles,</if>
+            <if test="types != null and types != ''">types,</if>
+            <if test="type != null">type,</if>
+            <if test="grade != null and grade != ''">grade,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="status != null">status,</if>
+            <if test="contents != null and contents != ''">contents,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="optid != null">optid,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="isturn != null">isturn,</if>
+            <if test="filecontid != null and filecontid != ''">filecontid,</if>
+            <if test="zinum != null and zinum != ''">zinum,</if>
+            <if test="unitname != null and unitname != ''">unitname,</if>
+            <if test="unitsame != null and unitsame != ''">unitsame,</if>
+            <if test="miji != null and miji != ''">miji,</if>
+            <if test="laidt != null">laidt,</if>
+            <if test="chaoname != null and chaoname != ''">chaoname,</if>
+            <if test="zuncheng != null and zuncheng != ''">zuncheng,</if>
+            <if test="thid != null">thid,</if>
+            <if test="yzid != null">yzid,</if>
+            <if test="ffid != null">ffid,</if>
+            <if test="enddt != null">enddt,</if>
+            <if test="startdt != null">startdt,</if>
+            <if test="comid != null">comid,</if>
+            <if test="ffdt != null">ffdt,</if>
+            <if test="pdfid != null">pdfid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="titles != null and titles != ''">#{titles},</if>
+            <if test="types != null and types != ''">#{types},</if>
+            <if test="type != null">#{type},</if>
+            <if test="grade != null and grade != ''">#{grade},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="status != null">#{status},</if>
+            <if test="contents != null and contents != ''">#{contents},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="isturn != null">#{isturn},</if>
+            <if test="filecontid != null and filecontid != ''">#{filecontid},</if>
+            <if test="zinum != null and zinum != ''">#{zinum},</if>
+            <if test="unitname != null and unitname != ''">#{unitname},</if>
+            <if test="unitsame != null and unitsame != ''">#{unitsame},</if>
+            <if test="miji != null and miji != ''">#{miji},</if>
+            <if test="laidt != null">#{laidt},</if>
+            <if test="chaoname != null and chaoname != ''">#{chaoname},</if>
+            <if test="zuncheng != null and zuncheng != ''">#{zuncheng},</if>
+            <if test="thid != null">#{thid},</if>
+            <if test="yzid != null">#{yzid},</if>
+            <if test="ffid != null">#{ffid},</if>
+            <if test="enddt != null">#{enddt},</if>
+            <if test="startdt != null">#{startdt},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="ffdt != null">#{ffdt},</if>
+            <if test="pdfid != null">#{pdfid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuOfficial" parameterType="XinhuOfficial">
+        update xinhu_official
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="titles != null and titles != ''">titles = #{titles},</if>
+            <if test="types != null and types != ''">types = #{types},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="grade != null and grade != ''">grade = #{grade},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="contents != null and contents != ''">contents = #{contents},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+            <if test="filecontid != null and filecontid != ''">filecontid = #{filecontid},</if>
+            <if test="zinum != null and zinum != ''">zinum = #{zinum},</if>
+            <if test="unitname != null and unitname != ''">unitname = #{unitname},</if>
+            <if test="unitsame != null and unitsame != ''">unitsame = #{unitsame},</if>
+            <if test="miji != null and miji != ''">miji = #{miji},</if>
+            <if test="laidt != null">laidt = #{laidt},</if>
+            <if test="chaoname != null and chaoname != ''">chaoname = #{chaoname},</if>
+            <if test="zuncheng != null and zuncheng != ''">zuncheng = #{zuncheng},</if>
+            <if test="thid != null">thid = #{thid},</if>
+            <if test="yzid != null">yzid = #{yzid},</if>
+            <if test="ffid != null">ffid = #{ffid},</if>
+            <if test="enddt != null">enddt = #{enddt},</if>
+            <if test="startdt != null">startdt = #{startdt},</if>
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="ffdt != null">ffdt = #{ffdt},</if>
+            <if test="pdfid != null">pdfid = #{pdfid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuOfficialById" parameterType="Long">
+        delete from xinhu_official where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuOfficialByIds" parameterType="String">
+        delete from xinhu_official where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

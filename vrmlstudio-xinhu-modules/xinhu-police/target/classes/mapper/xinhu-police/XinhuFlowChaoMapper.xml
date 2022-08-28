@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.police.mapper.XinhuFlowChaoMapper">
+    
+    <resultMap type="XinhuFlowChao" id="XinhuFlowChaoResult">
+        <result property="id"    column="id"    />
+        <result property="modeid"    column="modeid"    />
+        <result property="tables"    column="tables"    />
+        <result property="mid"    column="mid"    />
+        <result property="uid"    column="uid"    />
+        <result property="csname"    column="csname"    />
+        <result property="csnameid"    column="csnameid"    />
+        <result property="types"    column="types"    />
+    </resultMap>
+
+    <sql id="selectXinhuFlowChaoVo">
+        select id, modeid, tables, mid, uid, csname, csnameid, types from xinhu_flow_chao
+    </sql>
+
+    <select id="selectXinhuFlowChaoList" parameterType="XinhuFlowChao" resultMap="XinhuFlowChaoResult">
+        <include refid="selectXinhuFlowChaoVo"/>
+        <where>  
+            <if test="modeid != null "> and modeid = #{modeid}</if>
+            <if test="tables != null  and tables != ''"> and tables = #{tables}</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="csname != null  and csname != ''"> and csname like concat('%', #{csname}, '%')</if>
+            <if test="csnameid != null  and csnameid != ''"> and csnameid = #{csnameid}</if>
+            <if test="types != null "> and types = #{types}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuFlowChaoById" parameterType="Long" resultMap="XinhuFlowChaoResult">
+        <include refid="selectXinhuFlowChaoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuFlowChao" parameterType="XinhuFlowChao" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_flow_chao
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="modeid != null">modeid,</if>
+            <if test="tables != null and tables != ''">tables,</if>
+            <if test="mid != null">mid,</if>
+            <if test="uid != null">uid,</if>
+            <if test="csname != null and csname != ''">csname,</if>
+            <if test="csnameid != null and csnameid != ''">csnameid,</if>
+            <if test="types != null">types,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="modeid != null">#{modeid},</if>
+            <if test="tables != null and tables != ''">#{tables},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="csname != null and csname != ''">#{csname},</if>
+            <if test="csnameid != null and csnameid != ''">#{csnameid},</if>
+            <if test="types != null">#{types},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuFlowChao" parameterType="XinhuFlowChao">
+        update xinhu_flow_chao
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="modeid != null">modeid = #{modeid},</if>
+            <if test="tables != null and tables != ''">tables = #{tables},</if>
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="csname != null and csname != ''">csname = #{csname},</if>
+            <if test="csnameid != null and csnameid != ''">csnameid = #{csnameid},</if>
+            <if test="types != null">types = #{types},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuFlowChaoById" parameterType="Long">
+        delete from xinhu_flow_chao where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuFlowChaoByIds" parameterType="String">
+        delete from xinhu_flow_chao where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

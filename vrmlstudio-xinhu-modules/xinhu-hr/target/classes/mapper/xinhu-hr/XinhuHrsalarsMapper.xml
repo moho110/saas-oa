@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuHrsalarsMapper">
+    
+    <resultMap type="XinhuHrsalars" id="XinhuHrsalarsResult">
+        <result property="id"    column="id"    />
+        <result property="mid"    column="mid"    />
+        <result property="sort"    column="sort"    />
+        <result property="name"    column="name"    />
+        <result property="fields"    column="fields"    />
+        <result property="gongsi"    column="gongsi"    />
+        <result property="types"    column="types"    />
+        <result property="beizhu"    column="beizhu"    />
+        <result property="devzhi"    column="devzhi"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuHrsalarsVo">
+        select id, mid, sort, name, fields, gongsi, types, beizhu, devzhi, comid from xinhu_hrsalars
+    </sql>
+
+    <select id="selectXinhuHrsalarsList" parameterType="XinhuHrsalars" resultMap="XinhuHrsalarsResult">
+        <include refid="selectXinhuHrsalarsVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="fields != null  and fields != ''"> and fields = #{fields}</if>
+            <if test="gongsi != null  and gongsi != ''"> and gongsi = #{gongsi}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="beizhu != null  and beizhu != ''"> and beizhu = #{beizhu}</if>
+            <if test="devzhi != null  and devzhi != ''"> and devzhi = #{devzhi}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuHrsalarsById" parameterType="Long" resultMap="XinhuHrsalarsResult">
+        <include refid="selectXinhuHrsalarsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuHrsalars" parameterType="XinhuHrsalars">
+        insert into xinhu_hrsalars
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="mid != null">mid,</if>
+            <if test="sort != null">sort,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="fields != null and fields != ''">fields,</if>
+            <if test="gongsi != null and gongsi != ''">gongsi,</if>
+            <if test="types != null">types,</if>
+            <if test="beizhu != null and beizhu != ''">beizhu,</if>
+            <if test="devzhi != null and devzhi != ''">devzhi,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="fields != null and fields != ''">#{fields},</if>
+            <if test="gongsi != null and gongsi != ''">#{gongsi},</if>
+            <if test="types != null">#{types},</if>
+            <if test="beizhu != null and beizhu != ''">#{beizhu},</if>
+            <if test="devzhi != null and devzhi != ''">#{devzhi},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuHrsalars" parameterType="XinhuHrsalars">
+        update xinhu_hrsalars
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="fields != null and fields != ''">fields = #{fields},</if>
+            <if test="gongsi != null and gongsi != ''">gongsi = #{gongsi},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="beizhu != null and beizhu != ''">beizhu = #{beizhu},</if>
+            <if test="devzhi != null and devzhi != ''">devzhi = #{devzhi},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuHrsalarsById" parameterType="Long">
+        delete from xinhu_hrsalars where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuHrsalarsByIds" parameterType="String">
+        delete from xinhu_hrsalars where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

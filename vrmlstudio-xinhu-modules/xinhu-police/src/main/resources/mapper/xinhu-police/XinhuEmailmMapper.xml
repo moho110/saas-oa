@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.police.mapper.XinhuEmailmMapper">
+    
+    <resultMap type="XinhuEmailm" id="XinhuEmailmResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="title"    column="title"    />
+        <result property="content"    column="content"    />
+        <result property="sendid"    column="sendid"    />
+        <result property="sendname"    column="sendname"    />
+        <result property="senddt"    column="senddt"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+        <result property="isturn"    column="isturn"    />
+        <result property="hid"    column="hid"    />
+        <result property="isfile"    column="isfile"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="messageId"    column="message_id"    />
+        <result property="fromemail"    column="fromemail"    />
+        <result property="toemail"    column="toemail"    />
+        <result property="replyToemail"    column="reply_toemail"    />
+        <result property="ccemail"    column="ccemail"    />
+        <result property="size"    column="size"    />
+        <result property="ccname"    column="ccname"    />
+        <result property="ccid"    column="ccid"    />
+        <result property="type"    column="type"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="numoi"    column="numoi"    />
+        <result property="comid"    column="comid"    />
+        <result property="outzt"    column="outzt"    />
+    </resultMap>
+
+    <sql id="selectXinhuEmailmVo">
+        select id, uid, title, content, sendid, sendname, senddt, receid, recename, isturn, hid, isfile, applydt, message_id, fromemail, toemail, reply_toemail, ccemail, size, ccname, ccid, type, optdt, numoi, comid, outzt from xinhu_emailm
+    </sql>
+
+    <select id="selectXinhuEmailmList" parameterType="XinhuEmailm" resultMap="XinhuEmailmResult">
+        <include refid="selectXinhuEmailmVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="sendid != null "> and sendid = #{sendid}</if>
+            <if test="sendname != null  and sendname != ''"> and sendname like concat('%', #{sendname}, '%')</if>
+            <if test="senddt != null "> and senddt = #{senddt}</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+            <if test="hid != null "> and hid = #{hid}</if>
+            <if test="isfile != null "> and isfile = #{isfile}</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="messageId != null  and messageId != ''"> and message_id = #{messageId}</if>
+            <if test="fromemail != null  and fromemail != ''"> and fromemail = #{fromemail}</if>
+            <if test="toemail != null  and toemail != ''"> and toemail = #{toemail}</if>
+            <if test="replyToemail != null  and replyToemail != ''"> and reply_toemail = #{replyToemail}</if>
+            <if test="ccemail != null  and ccemail != ''"> and ccemail = #{ccemail}</if>
+            <if test="size != null "> and size = #{size}</if>
+            <if test="ccname != null  and ccname != ''"> and ccname like concat('%', #{ccname}, '%')</if>
+            <if test="ccid != null  and ccid != ''"> and ccid = #{ccid}</if>
+            <if test="type != null "> and type = #{type}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="numoi != null "> and numoi = #{numoi}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="outzt != null "> and outzt = #{outzt}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuEmailmById" parameterType="Long" resultMap="XinhuEmailmResult">
+        <include refid="selectXinhuEmailmVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuEmailm" parameterType="XinhuEmailm" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_emailm
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uid != null">uid,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="sendid != null">sendid,</if>
+            <if test="sendname != null and sendname != ''">sendname,</if>
+            <if test="senddt != null">senddt,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="isturn != null">isturn,</if>
+            <if test="hid != null">hid,</if>
+            <if test="isfile != null">isfile,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="messageId != null and messageId != ''">message_id,</if>
+            <if test="fromemail != null and fromemail != ''">fromemail,</if>
+            <if test="toemail != null and toemail != ''">toemail,</if>
+            <if test="replyToemail != null and replyToemail != ''">reply_toemail,</if>
+            <if test="ccemail != null and ccemail != ''">ccemail,</if>
+            <if test="size != null">size,</if>
+            <if test="ccname != null and ccname != ''">ccname,</if>
+            <if test="ccid != null and ccid != ''">ccid,</if>
+            <if test="type != null">type,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="numoi != null">numoi,</if>
+            <if test="comid != null">comid,</if>
+            <if test="outzt != null">outzt,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">#{uid},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="sendid != null">#{sendid},</if>
+            <if test="sendname != null and sendname != ''">#{sendname},</if>
+            <if test="senddt != null">#{senddt},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="isturn != null">#{isturn},</if>
+            <if test="hid != null">#{hid},</if>
+            <if test="isfile != null">#{isfile},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="messageId != null and messageId != ''">#{messageId},</if>
+            <if test="fromemail != null and fromemail != ''">#{fromemail},</if>
+            <if test="toemail != null and toemail != ''">#{toemail},</if>
+            <if test="replyToemail != null and replyToemail != ''">#{replyToemail},</if>
+            <if test="ccemail != null and ccemail != ''">#{ccemail},</if>
+            <if test="size != null">#{size},</if>
+            <if test="ccname != null and ccname != ''">#{ccname},</if>
+            <if test="ccid != null and ccid != ''">#{ccid},</if>
+            <if test="type != null">#{type},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="numoi != null">#{numoi},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="outzt != null">#{outzt},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuEmailm" parameterType="XinhuEmailm">
+        update xinhu_emailm
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="sendid != null">sendid = #{sendid},</if>
+            <if test="sendname != null and sendname != ''">sendname = #{sendname},</if>
+            <if test="senddt != null">senddt = #{senddt},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+            <if test="hid != null">hid = #{hid},</if>
+            <if test="isfile != null">isfile = #{isfile},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="messageId != null and messageId != ''">message_id = #{messageId},</if>
+            <if test="fromemail != null and fromemail != ''">fromemail = #{fromemail},</if>
+            <if test="toemail != null and toemail != ''">toemail = #{toemail},</if>
+            <if test="replyToemail != null and replyToemail != ''">reply_toemail = #{replyToemail},</if>
+            <if test="ccemail != null and ccemail != ''">ccemail = #{ccemail},</if>
+            <if test="size != null">size = #{size},</if>
+            <if test="ccname != null and ccname != ''">ccname = #{ccname},</if>
+            <if test="ccid != null and ccid != ''">ccid = #{ccid},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="numoi != null">numoi = #{numoi},</if>
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="outzt != null">outzt = #{outzt},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuEmailmById" parameterType="Long">
+        delete from xinhu_emailm where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuEmailmByIds" parameterType="String">
+        delete from xinhu_emailm where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

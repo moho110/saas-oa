@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.document.mapper.XinhuWenjuatMapper">
+    
+    <resultMap type="XinhuWenjuat" id="XinhuWenjuatResult">
+        <result property="id"    column="id"    />
+        <result property="mid"    column="mid"    />
+        <result property="sort"    column="sort"    />
+        <result property="comid"    column="comid"    />
+        <result property="itemname"    column="itemname"    />
+        <result property="itemcont"    column="itemcont"    />
+        <result property="itemtype"    column="itemtype"    />
+        <result property="itema"    column="itema"    />
+        <result property="itemb"    column="itemb"    />
+        <result property="itemc"    column="itemc"    />
+        <result property="itemd"    column="itemd"    />
+    </resultMap>
+
+    <sql id="selectXinhuWenjuatVo">
+        select id, mid, sort, comid, itemname, itemcont, itemtype, itema, itemb, itemc, itemd from xinhu_wenjuat
+    </sql>
+
+    <select id="selectXinhuWenjuatList" parameterType="XinhuWenjuat" resultMap="XinhuWenjuatResult">
+        <include refid="selectXinhuWenjuatVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="itemname != null  and itemname != ''"> and itemname like concat('%', #{itemname}, '%')</if>
+            <if test="itemcont != null  and itemcont != ''"> and itemcont = #{itemcont}</if>
+            <if test="itemtype != null "> and itemtype = #{itemtype}</if>
+            <if test="itema != null  and itema != ''"> and itema = #{itema}</if>
+            <if test="itemb != null  and itemb != ''"> and itemb = #{itemb}</if>
+            <if test="itemc != null  and itemc != ''"> and itemc = #{itemc}</if>
+            <if test="itemd != null  and itemd != ''"> and itemd = #{itemd}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuWenjuatById" parameterType="Long" resultMap="XinhuWenjuatResult">
+        <include refid="selectXinhuWenjuatVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuWenjuat" parameterType="XinhuWenjuat">
+        insert into xinhu_wenjuat
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="mid != null">mid,</if>
+            <if test="sort != null">sort,</if>
+            <if test="comid != null">comid,</if>
+            <if test="itemname != null and itemname != ''">itemname,</if>
+            <if test="itemcont != null and itemcont != ''">itemcont,</if>
+            <if test="itemtype != null">itemtype,</if>
+            <if test="itema != null and itema != ''">itema,</if>
+            <if test="itemb != null and itemb != ''">itemb,</if>
+            <if test="itemc != null and itemc != ''">itemc,</if>
+            <if test="itemd != null and itemd != ''">itemd,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="itemname != null and itemname != ''">#{itemname},</if>
+            <if test="itemcont != null and itemcont != ''">#{itemcont},</if>
+            <if test="itemtype != null">#{itemtype},</if>
+            <if test="itema != null and itema != ''">#{itema},</if>
+            <if test="itemb != null and itemb != ''">#{itemb},</if>
+            <if test="itemc != null and itemc != ''">#{itemc},</if>
+            <if test="itemd != null and itemd != ''">#{itemd},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuWenjuat" parameterType="XinhuWenjuat">
+        update xinhu_wenjuat
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="itemname != null and itemname != ''">itemname = #{itemname},</if>
+            <if test="itemcont != null and itemcont != ''">itemcont = #{itemcont},</if>
+            <if test="itemtype != null">itemtype = #{itemtype},</if>
+            <if test="itema != null and itema != ''">itema = #{itema},</if>
+            <if test="itemb != null and itemb != ''">itemb = #{itemb},</if>
+            <if test="itemc != null and itemc != ''">itemc = #{itemc},</if>
+            <if test="itemd != null and itemd != ''">itemd = #{itemd},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuWenjuatById" parameterType="Long">
+        delete from xinhu_wenjuat where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuWenjuatByIds" parameterType="String">
+        delete from xinhu_wenjuat where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

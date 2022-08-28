@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuLocationMapper">
+    
+    <resultMap type="XinhuLocation" id="XinhuLocationResult">
+        <result property="id"    column="id"    />
+        <result property="user"    column="user"    />
+        <result property="uid"    column="uid"    />
+        <result property="agentid"    column="agentid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="locationX"    column="location_x"    />
+        <result property="locationY"    column="location_y"    />
+        <result property="scale"    column="scale"    />
+        <result property="label"    column="label"    />
+        <result property="msgid"    column="msgid"    />
+        <result property="precisions"    column="precisions"    />
+        <result property="types"    column="types"    />
+        <result property="content"    column="content"    />
+        <result property="imgpath"    column="imgpath"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuLocationVo">
+        select id, user, uid, agentid, optdt, location_x, location_y, scale, label, msgid, precisions, types, content, imgpath, comid from xinhu_location
+    </sql>
+
+    <select id="selectXinhuLocationList" parameterType="XinhuLocation" resultMap="XinhuLocationResult">
+        <include refid="selectXinhuLocationVo"/>
+        <where>  
+            <if test="user != null  and user != ''"> and user = #{user}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="agentid != null  and agentid != ''"> and agentid = #{agentid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="locationX != null  and locationX != ''"> and location_x = #{locationX}</if>
+            <if test="locationY != null  and locationY != ''"> and location_y = #{locationY}</if>
+            <if test="scale != null "> and scale = #{scale}</if>
+            <if test="label != null  and label != ''"> and label = #{label}</if>
+            <if test="msgid != null  and msgid != ''"> and msgid = #{msgid}</if>
+            <if test="precisions != null "> and precisions = #{precisions}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="imgpath != null  and imgpath != ''"> and imgpath = #{imgpath}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuLocationById" parameterType="Long" resultMap="XinhuLocationResult">
+        <include refid="selectXinhuLocationVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuLocation" parameterType="XinhuLocation">
+        insert into xinhu_location
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="user != null and user != ''">user,</if>
+            <if test="uid != null">uid,</if>
+            <if test="agentid != null and agentid != ''">agentid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="locationX != null and locationX != ''">location_x,</if>
+            <if test="locationY != null and locationY != ''">location_y,</if>
+            <if test="scale != null">scale,</if>
+            <if test="label != null and label != ''">label,</if>
+            <if test="msgid != null and msgid != ''">msgid,</if>
+            <if test="precisions != null">precisions,</if>
+            <if test="types != null">types,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="imgpath != null and imgpath != ''">imgpath,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="user != null and user != ''">#{user},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="agentid != null and agentid != ''">#{agentid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="locationX != null and locationX != ''">#{locationX},</if>
+            <if test="locationY != null and locationY != ''">#{locationY},</if>
+            <if test="scale != null">#{scale},</if>
+            <if test="label != null and label != ''">#{label},</if>
+            <if test="msgid != null and msgid != ''">#{msgid},</if>
+            <if test="precisions != null">#{precisions},</if>
+            <if test="types != null">#{types},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="imgpath != null and imgpath != ''">#{imgpath},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuLocation" parameterType="XinhuLocation">
+        update xinhu_location
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="user != null and user != ''">user = #{user},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="agentid != null and agentid != ''">agentid = #{agentid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="locationX != null and locationX != ''">location_x = #{locationX},</if>
+            <if test="locationY != null and locationY != ''">location_y = #{locationY},</if>
+            <if test="scale != null">scale = #{scale},</if>
+            <if test="label != null and label != ''">label = #{label},</if>
+            <if test="msgid != null and msgid != ''">msgid = #{msgid},</if>
+            <if test="precisions != null">precisions = #{precisions},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="imgpath != null and imgpath != ''">imgpath = #{imgpath},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuLocationById" parameterType="Long">
+        delete from xinhu_location where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuLocationByIds" parameterType="String">
+        delete from xinhu_location where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

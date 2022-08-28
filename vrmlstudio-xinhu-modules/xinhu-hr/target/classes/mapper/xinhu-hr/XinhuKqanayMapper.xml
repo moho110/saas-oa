@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuKqanayMapper">
+    
+    <resultMap type="XinhuKqanay" id="XinhuKqanayResult">
+        <result property="id"    column="id"    />
+        <result property="dt"    column="dt"    />
+        <result property="uid"    column="uid"    />
+        <result property="ztname"    column="ztname"    />
+        <result property="time"    column="time"    />
+        <result property="state"    column="state"    />
+        <result property="states"    column="states"    />
+        <result property="sort"    column="sort"    />
+        <result property="iswork"    column="iswork"    />
+        <result property="emiao"    column="emiao"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="remark"    column="remark"    />
+        <result property="timesb"    column="timesb"    />
+        <result property="timeys"    column="timeys"    />
+    </resultMap>
+
+    <sql id="selectXinhuKqanayVo">
+        select id, dt, uid, ztname, time, state, states, sort, iswork, emiao, optdt, remark, timesb, timeys from xinhu_kqanay
+    </sql>
+
+    <select id="selectXinhuKqanayList" parameterType="XinhuKqanay" resultMap="XinhuKqanayResult">
+        <include refid="selectXinhuKqanayVo"/>
+        <where>  
+            <if test="dt != null "> and dt = #{dt}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="ztname != null  and ztname != ''"> and ztname like concat('%', #{ztname}, '%')</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="states != null  and states != ''"> and states = #{states}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="iswork != null "> and iswork = #{iswork}</if>
+            <if test="emiao != null "> and emiao = #{emiao}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="timesb != null "> and timesb = #{timesb}</if>
+            <if test="timeys != null "> and timeys = #{timeys}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuKqanayById" parameterType="Long" resultMap="XinhuKqanayResult">
+        <include refid="selectXinhuKqanayVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuKqanay" parameterType="XinhuKqanay">
+        insert into xinhu_kqanay
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="dt != null">dt,</if>
+            <if test="uid != null">uid,</if>
+            <if test="ztname != null and ztname != ''">ztname,</if>
+            <if test="time != null">time,</if>
+            <if test="state != null and state != ''">state,</if>
+            <if test="states != null and states != ''">states,</if>
+            <if test="sort != null">sort,</if>
+            <if test="iswork != null">iswork,</if>
+            <if test="emiao != null">emiao,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+            <if test="timesb != null">timesb,</if>
+            <if test="timeys != null">timeys,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="dt != null">#{dt},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="ztname != null and ztname != ''">#{ztname},</if>
+            <if test="time != null">#{time},</if>
+            <if test="state != null and state != ''">#{state},</if>
+            <if test="states != null and states != ''">#{states},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="iswork != null">#{iswork},</if>
+            <if test="emiao != null">#{emiao},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+            <if test="timesb != null">#{timesb},</if>
+            <if test="timeys != null">#{timeys},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuKqanay" parameterType="XinhuKqanay">
+        update xinhu_kqanay
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dt != null">dt = #{dt},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="ztname != null and ztname != ''">ztname = #{ztname},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="state != null and state != ''">state = #{state},</if>
+            <if test="states != null and states != ''">states = #{states},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="iswork != null">iswork = #{iswork},</if>
+            <if test="emiao != null">emiao = #{emiao},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+            <if test="timesb != null">timesb = #{timesb},</if>
+            <if test="timeys != null">timeys = #{timeys},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuKqanayById" parameterType="Long">
+        delete from xinhu_kqanay where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuKqanayByIds" parameterType="String">
+        delete from xinhu_kqanay where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

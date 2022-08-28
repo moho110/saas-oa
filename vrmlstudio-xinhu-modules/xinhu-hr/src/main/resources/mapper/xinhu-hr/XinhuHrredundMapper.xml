@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuHrredundMapper">
+    
+    <resultMap type="XinhuHrredund" id="XinhuHrredundResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="applyname"    column="applyname"    />
+        <result property="ranking"    column="ranking"    />
+        <result property="entrydt"    column="entrydt"    />
+        <result property="quitdt"    column="quitdt"    />
+        <result property="redundtype"    column="redundtype"    />
+        <result property="redundreson"    column="redundreson"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="content"    column="content"    />
+        <result property="status"    column="status"    />
+        <result property="isturn"    column="isturn"    />
+        <result property="isover"    column="isover"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuHrredundVo">
+        select id, uid, applyname, ranking, entrydt, quitdt, redundtype, redundreson, optdt, content, status, isturn, isover, optid, optname, applydt, comid from xinhu_hrredund
+    </sql>
+
+    <select id="selectXinhuHrredundList" parameterType="XinhuHrredund" resultMap="XinhuHrredundResult">
+        <include refid="selectXinhuHrredundVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="applyname != null  and applyname != ''"> and applyname like concat('%', #{applyname}, '%')</if>
+            <if test="ranking != null  and ranking != ''"> and ranking = #{ranking}</if>
+            <if test="entrydt != null "> and entrydt = #{entrydt}</if>
+            <if test="quitdt != null "> and quitdt = #{quitdt}</if>
+            <if test="redundtype != null  and redundtype != ''"> and redundtype = #{redundtype}</if>
+            <if test="redundreson != null  and redundreson != ''"> and redundreson = #{redundreson}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+            <if test="isover != null "> and isover = #{isover}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuHrredundById" parameterType="Long" resultMap="XinhuHrredundResult">
+        <include refid="selectXinhuHrredundVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuHrredund" parameterType="XinhuHrredund">
+        insert into xinhu_hrredund
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uid != null">uid,</if>
+            <if test="applyname != null and applyname != ''">applyname,</if>
+            <if test="ranking != null and ranking != ''">ranking,</if>
+            <if test="entrydt != null">entrydt,</if>
+            <if test="quitdt != null">quitdt,</if>
+            <if test="redundtype != null and redundtype != ''">redundtype,</if>
+            <if test="redundreson != null and redundreson != ''">redundreson,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="status != null">status,</if>
+            <if test="isturn != null">isturn,</if>
+            <if test="isover != null">isover,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="applyname != null and applyname != ''">#{applyname},</if>
+            <if test="ranking != null and ranking != ''">#{ranking},</if>
+            <if test="entrydt != null">#{entrydt},</if>
+            <if test="quitdt != null">#{quitdt},</if>
+            <if test="redundtype != null and redundtype != ''">#{redundtype},</if>
+            <if test="redundreson != null and redundreson != ''">#{redundreson},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isturn != null">#{isturn},</if>
+            <if test="isover != null">#{isover},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuHrredund" parameterType="XinhuHrredund">
+        update xinhu_hrredund
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="applyname != null and applyname != ''">applyname = #{applyname},</if>
+            <if test="ranking != null and ranking != ''">ranking = #{ranking},</if>
+            <if test="entrydt != null">entrydt = #{entrydt},</if>
+            <if test="quitdt != null">quitdt = #{quitdt},</if>
+            <if test="redundtype != null and redundtype != ''">redundtype = #{redundtype},</if>
+            <if test="redundreson != null and redundreson != ''">redundreson = #{redundreson},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+            <if test="isover != null">isover = #{isover},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuHrredundById" parameterType="Long">
+        delete from xinhu_hrredund where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuHrredundByIds" parameterType="String">
+        delete from xinhu_hrredund where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

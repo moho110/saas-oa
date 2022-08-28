@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuRewardMapper">
+    
+    <resultMap type="XinhuReward" id="XinhuRewardResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="content"    column="content"    />
+        <result property="status"    column="status"    />
+        <result property="isturn"    column="isturn"    />
+        <result property="object"    column="object"    />
+        <result property="objectid"    column="objectid"    />
+        <result property="types"    column="types"    />
+        <result property="result"    column="result"    />
+        <result property="money"    column="money"    />
+        <result property="happendt"    column="happendt"    />
+        <result property="hapaddress"    column="hapaddress"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuRewardVo">
+        select id, uid, optdt, optid, optname, applydt, content, status, isturn, object, objectid, types, result, money, happendt, hapaddress, comid from xinhu_reward
+    </sql>
+
+    <select id="selectXinhuRewardList" parameterType="XinhuReward" resultMap="XinhuRewardResult">
+        <include refid="selectXinhuRewardVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+            <if test="object != null  and object != ''"> and object = #{object}</if>
+            <if test="objectid != null "> and objectid = #{objectid}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="result != null  and result != ''"> and result = #{result}</if>
+            <if test="money != null "> and money = #{money}</if>
+            <if test="happendt != null "> and happendt = #{happendt}</if>
+            <if test="hapaddress != null  and hapaddress != ''"> and hapaddress = #{hapaddress}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuRewardById" parameterType="Long" resultMap="XinhuRewardResult">
+        <include refid="selectXinhuRewardVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuReward" parameterType="XinhuReward" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_reward
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uid != null">uid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="status != null">status,</if>
+            <if test="isturn != null">isturn,</if>
+            <if test="object != null and object != ''">object,</if>
+            <if test="objectid != null">objectid,</if>
+            <if test="types != null">types,</if>
+            <if test="result != null and result != ''">result,</if>
+            <if test="money != null">money,</if>
+            <if test="happendt != null">happendt,</if>
+            <if test="hapaddress != null and hapaddress != ''">hapaddress,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">#{uid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isturn != null">#{isturn},</if>
+            <if test="object != null and object != ''">#{object},</if>
+            <if test="objectid != null">#{objectid},</if>
+            <if test="types != null">#{types},</if>
+            <if test="result != null and result != ''">#{result},</if>
+            <if test="money != null">#{money},</if>
+            <if test="happendt != null">#{happendt},</if>
+            <if test="hapaddress != null and hapaddress != ''">#{hapaddress},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuReward" parameterType="XinhuReward">
+        update xinhu_reward
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+            <if test="object != null and object != ''">object = #{object},</if>
+            <if test="objectid != null">objectid = #{objectid},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="result != null and result != ''">result = #{result},</if>
+            <if test="money != null">money = #{money},</if>
+            <if test="happendt != null">happendt = #{happendt},</if>
+            <if test="hapaddress != null and hapaddress != ''">hapaddress = #{hapaddress},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuRewardById" parameterType="Long">
+        delete from xinhu_reward where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuRewardByIds" parameterType="String">
+        delete from xinhu_reward where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

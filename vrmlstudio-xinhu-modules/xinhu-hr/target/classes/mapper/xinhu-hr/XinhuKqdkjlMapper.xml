@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuKqdkjlMapper">
+    
+    <resultMap type="XinhuKqdkjl" id="XinhuKqdkjlResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="dkdt"    column="dkdt"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="types"    column="types"    />
+        <result property="address"    column="address"    />
+        <result property="lat"    column="lat"    />
+        <result property="lng"    column="lng"    />
+        <result property="accuracy"    column="accuracy"    />
+        <result property="ip"    column="ip"    />
+        <result property="mac"    column="mac"    />
+        <result property="content"    column="content"    />
+        <result property="imgpath"    column="imgpath"    />
+        <result property="snid"    column="snid"    />
+        <result property="sntype"    column="sntype"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuKqdkjlVo">
+        select id, uid, dkdt, optdt, types, address, lat, lng, accuracy, ip, mac, content, imgpath, snid, sntype, comid from xinhu_kqdkjl
+    </sql>
+
+    <select id="selectXinhuKqdkjlList" parameterType="XinhuKqdkjl" resultMap="XinhuKqdkjlResult">
+        <include refid="selectXinhuKqdkjlVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="dkdt != null "> and dkdt = #{dkdt}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="lat != null  and lat != ''"> and lat = #{lat}</if>
+            <if test="lng != null  and lng != ''"> and lng = #{lng}</if>
+            <if test="accuracy != null "> and accuracy = #{accuracy}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+            <if test="mac != null  and mac != ''"> and mac = #{mac}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="imgpath != null  and imgpath != ''"> and imgpath = #{imgpath}</if>
+            <if test="snid != null "> and snid = #{snid}</if>
+            <if test="sntype != null "> and sntype = #{sntype}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuKqdkjlById" parameterType="Long" resultMap="XinhuKqdkjlResult">
+        <include refid="selectXinhuKqdkjlVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuKqdkjl" parameterType="XinhuKqdkjl">
+        insert into xinhu_kqdkjl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uid != null">uid,</if>
+            <if test="dkdt != null">dkdt,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="types != null">types,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="lat != null and lat != ''">lat,</if>
+            <if test="lng != null and lng != ''">lng,</if>
+            <if test="accuracy != null">accuracy,</if>
+            <if test="ip != null and ip != ''">ip,</if>
+            <if test="mac != null and mac != ''">mac,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="imgpath != null and imgpath != ''">imgpath,</if>
+            <if test="snid != null">snid,</if>
+            <if test="sntype != null">sntype,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="dkdt != null">#{dkdt},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="types != null">#{types},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="lat != null and lat != ''">#{lat},</if>
+            <if test="lng != null and lng != ''">#{lng},</if>
+            <if test="accuracy != null">#{accuracy},</if>
+            <if test="ip != null and ip != ''">#{ip},</if>
+            <if test="mac != null and mac != ''">#{mac},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="imgpath != null and imgpath != ''">#{imgpath},</if>
+            <if test="snid != null">#{snid},</if>
+            <if test="sntype != null">#{sntype},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuKqdkjl" parameterType="XinhuKqdkjl">
+        update xinhu_kqdkjl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="dkdt != null">dkdt = #{dkdt},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="lat != null and lat != ''">lat = #{lat},</if>
+            <if test="lng != null and lng != ''">lng = #{lng},</if>
+            <if test="accuracy != null">accuracy = #{accuracy},</if>
+            <if test="ip != null and ip != ''">ip = #{ip},</if>
+            <if test="mac != null and mac != ''">mac = #{mac},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="imgpath != null and imgpath != ''">imgpath = #{imgpath},</if>
+            <if test="snid != null">snid = #{snid},</if>
+            <if test="sntype != null">sntype = #{sntype},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuKqdkjlById" parameterType="Long">
+        delete from xinhu_kqdkjl where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuKqdkjlByIds" parameterType="String">
+        delete from xinhu_kqdkjl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

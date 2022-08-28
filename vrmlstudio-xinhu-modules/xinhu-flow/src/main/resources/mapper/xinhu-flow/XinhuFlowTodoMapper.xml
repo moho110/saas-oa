@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.flow.mapper.XinhuFlowTodoMapper">
+    
+    <resultMap type="XinhuFlowTodo" id="XinhuFlowTodoResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="num"    column="num"    />
+        <result property="setid"    column="setid"    />
+        <result property="content"    column="content"    />
+        <result property="whereid"    column="whereid"    />
+        <result property="status"    column="status"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+        <result property="changefields"    column="changefields"    />
+        <result property="changecourse"    column="changecourse"    />
+        <result property="boturn"    column="boturn"    />
+        <result property="boedit"    column="boedit"    />
+        <result property="bochang"    column="bochang"    />
+        <result property="bodel"    column="bodel"    />
+        <result property="bozuofei"    column="bozuofei"    />
+        <result property="botong"    column="botong"    />
+        <result property="bobutong"    column="bobutong"    />
+        <result property="bofinish"    column="bofinish"    />
+        <result property="bozhui"    column="bozhui"    />
+        <result property="bozhuan"    column="bozhuan"    />
+        <result property="toturn"    column="toturn"    />
+        <result property="tocourse"    column="tocourse"    />
+        <result property="todofields"    column="todofields"    />
+        <result property="summary"    column="summary"    />
+        <result property="botask"    column="botask"    />
+        <result property="boping"    column="boping"    />
+        <result property="bohuiz"    column="bohuiz"    />
+        <result property="tosuper"    column="tosuper"    />
+    </resultMap>
+
+    <sql id="selectXinhuFlowTodoVo">
+        select id, name, num, setid, content, whereid, status, receid, recename, changefields, changecourse, boturn, boedit, bochang, bodel, bozuofei, botong, bobutong, bofinish, bozhui, bozhuan, toturn, tocourse, todofields, summary, botask, boping, bohuiz, tosuper from xinhu_flow_todo
+    </sql>
+
+    <select id="selectXinhuFlowTodoList" parameterType="XinhuFlowTodo" resultMap="XinhuFlowTodoResult">
+        <include refid="selectXinhuFlowTodoVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="setid != null "> and setid = #{setid}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="whereid != null "> and whereid = #{whereid}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="changefields != null  and changefields != ''"> and changefields = #{changefields}</if>
+            <if test="changecourse != null  and changecourse != ''"> and changecourse = #{changecourse}</if>
+            <if test="boturn != null "> and boturn = #{boturn}</if>
+            <if test="boedit != null "> and boedit = #{boedit}</if>
+            <if test="bochang != null "> and bochang = #{bochang}</if>
+            <if test="bodel != null "> and bodel = #{bodel}</if>
+            <if test="bozuofei != null "> and bozuofei = #{bozuofei}</if>
+            <if test="botong != null "> and botong = #{botong}</if>
+            <if test="bobutong != null "> and bobutong = #{bobutong}</if>
+            <if test="bofinish != null "> and bofinish = #{bofinish}</if>
+            <if test="bozhui != null "> and bozhui = #{bozhui}</if>
+            <if test="bozhuan != null "> and bozhuan = #{bozhuan}</if>
+            <if test="toturn != null "> and toturn = #{toturn}</if>
+            <if test="tocourse != null "> and tocourse = #{tocourse}</if>
+            <if test="todofields != null  and todofields != ''"> and todofields = #{todofields}</if>
+            <if test="summary != null  and summary != ''"> and summary = #{summary}</if>
+            <if test="botask != null "> and botask = #{botask}</if>
+            <if test="boping != null "> and boping = #{boping}</if>
+            <if test="bohuiz != null "> and bohuiz = #{bohuiz}</if>
+            <if test="tosuper != null "> and tosuper = #{tosuper}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuFlowTodoById" parameterType="Long" resultMap="XinhuFlowTodoResult">
+        <include refid="selectXinhuFlowTodoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuFlowTodo" parameterType="XinhuFlowTodo" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_flow_todo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="setid != null">setid,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="whereid != null">whereid,</if>
+            <if test="status != null">status,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="changefields != null and changefields != ''">changefields,</if>
+            <if test="changecourse != null and changecourse != ''">changecourse,</if>
+            <if test="boturn != null">boturn,</if>
+            <if test="boedit != null">boedit,</if>
+            <if test="bochang != null">bochang,</if>
+            <if test="bodel != null">bodel,</if>
+            <if test="bozuofei != null">bozuofei,</if>
+            <if test="botong != null">botong,</if>
+            <if test="bobutong != null">bobutong,</if>
+            <if test="bofinish != null">bofinish,</if>
+            <if test="bozhui != null">bozhui,</if>
+            <if test="bozhuan != null">bozhuan,</if>
+            <if test="toturn != null">toturn,</if>
+            <if test="tocourse != null">tocourse,</if>
+            <if test="todofields != null and todofields != ''">todofields,</if>
+            <if test="summary != null and summary != ''">summary,</if>
+            <if test="botask != null">botask,</if>
+            <if test="boping != null">boping,</if>
+            <if test="bohuiz != null">bohuiz,</if>
+            <if test="tosuper != null">tosuper,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="setid != null">#{setid},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="whereid != null">#{whereid},</if>
+            <if test="status != null">#{status},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="changefields != null and changefields != ''">#{changefields},</if>
+            <if test="changecourse != null and changecourse != ''">#{changecourse},</if>
+            <if test="boturn != null">#{boturn},</if>
+            <if test="boedit != null">#{boedit},</if>
+            <if test="bochang != null">#{bochang},</if>
+            <if test="bodel != null">#{bodel},</if>
+            <if test="bozuofei != null">#{bozuofei},</if>
+            <if test="botong != null">#{botong},</if>
+            <if test="bobutong != null">#{bobutong},</if>
+            <if test="bofinish != null">#{bofinish},</if>
+            <if test="bozhui != null">#{bozhui},</if>
+            <if test="bozhuan != null">#{bozhuan},</if>
+            <if test="toturn != null">#{toturn},</if>
+            <if test="tocourse != null">#{tocourse},</if>
+            <if test="todofields != null and todofields != ''">#{todofields},</if>
+            <if test="summary != null and summary != ''">#{summary},</if>
+            <if test="botask != null">#{botask},</if>
+            <if test="boping != null">#{boping},</if>
+            <if test="bohuiz != null">#{bohuiz},</if>
+            <if test="tosuper != null">#{tosuper},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuFlowTodo" parameterType="XinhuFlowTodo">
+        update xinhu_flow_todo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="setid != null">setid = #{setid},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="whereid != null">whereid = #{whereid},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="changefields != null and changefields != ''">changefields = #{changefields},</if>
+            <if test="changecourse != null and changecourse != ''">changecourse = #{changecourse},</if>
+            <if test="boturn != null">boturn = #{boturn},</if>
+            <if test="boedit != null">boedit = #{boedit},</if>
+            <if test="bochang != null">bochang = #{bochang},</if>
+            <if test="bodel != null">bodel = #{bodel},</if>
+            <if test="bozuofei != null">bozuofei = #{bozuofei},</if>
+            <if test="botong != null">botong = #{botong},</if>
+            <if test="bobutong != null">bobutong = #{bobutong},</if>
+            <if test="bofinish != null">bofinish = #{bofinish},</if>
+            <if test="bozhui != null">bozhui = #{bozhui},</if>
+            <if test="bozhuan != null">bozhuan = #{bozhuan},</if>
+            <if test="toturn != null">toturn = #{toturn},</if>
+            <if test="tocourse != null">tocourse = #{tocourse},</if>
+            <if test="todofields != null and todofields != ''">todofields = #{todofields},</if>
+            <if test="summary != null and summary != ''">summary = #{summary},</if>
+            <if test="botask != null">botask = #{botask},</if>
+            <if test="boping != null">boping = #{boping},</if>
+            <if test="bohuiz != null">bohuiz = #{bohuiz},</if>
+            <if test="tosuper != null">tosuper = #{tosuper},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuFlowTodoById" parameterType="Long">
+        delete from xinhu_flow_todo where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuFlowTodoByIds" parameterType="String">
+        delete from xinhu_flow_todo where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuHrtransferMapper">
+    
+    <resultMap type="XinhuHrtransfer" id="XinhuHrtransferResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="content"    column="content"    />
+        <result property="status"    column="status"    />
+        <result property="isturn"    column="isturn"    />
+        <result property="tranuid"    column="tranuid"    />
+        <result property="tranname"    column="tranname"    />
+        <result property="trantype"    column="trantype"    />
+        <result property="olddeptname"    column="olddeptname"    />
+        <result property="oldranking"    column="oldranking"    />
+        <result property="effectivedt"    column="effectivedt"    />
+        <result property="newdeptname"    column="newdeptname"    />
+        <result property="newdeptid"    column="newdeptid"    />
+        <result property="newranking"    column="newranking"    />
+        <result property="isover"    column="isover"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuHrtransferVo">
+        select id, uid, optdt, optid, optname, applydt, content, status, isturn, tranuid, tranname, trantype, olddeptname, oldranking, effectivedt, newdeptname, newdeptid, newranking, isover, comid from xinhu_hrtransfer
+    </sql>
+
+    <select id="selectXinhuHrtransferList" parameterType="XinhuHrtransfer" resultMap="XinhuHrtransferResult">
+        <include refid="selectXinhuHrtransferVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+            <if test="tranuid != null "> and tranuid = #{tranuid}</if>
+            <if test="tranname != null  and tranname != ''"> and tranname like concat('%', #{tranname}, '%')</if>
+            <if test="trantype != null  and trantype != ''"> and trantype = #{trantype}</if>
+            <if test="olddeptname != null  and olddeptname != ''"> and olddeptname like concat('%', #{olddeptname}, '%')</if>
+            <if test="oldranking != null  and oldranking != ''"> and oldranking = #{oldranking}</if>
+            <if test="effectivedt != null "> and effectivedt = #{effectivedt}</if>
+            <if test="newdeptname != null  and newdeptname != ''"> and newdeptname like concat('%', #{newdeptname}, '%')</if>
+            <if test="newdeptid != null "> and newdeptid = #{newdeptid}</if>
+            <if test="newranking != null  and newranking != ''"> and newranking = #{newranking}</if>
+            <if test="isover != null "> and isover = #{isover}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuHrtransferById" parameterType="Long" resultMap="XinhuHrtransferResult">
+        <include refid="selectXinhuHrtransferVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuHrtransfer" parameterType="XinhuHrtransfer">
+        insert into xinhu_hrtransfer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uid != null">uid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="status != null">status,</if>
+            <if test="isturn != null">isturn,</if>
+            <if test="tranuid != null">tranuid,</if>
+            <if test="tranname != null and tranname != ''">tranname,</if>
+            <if test="trantype != null and trantype != ''">trantype,</if>
+            <if test="olddeptname != null and olddeptname != ''">olddeptname,</if>
+            <if test="oldranking != null and oldranking != ''">oldranking,</if>
+            <if test="effectivedt != null">effectivedt,</if>
+            <if test="newdeptname != null and newdeptname != ''">newdeptname,</if>
+            <if test="newdeptid != null">newdeptid,</if>
+            <if test="newranking != null and newranking != ''">newranking,</if>
+            <if test="isover != null">isover,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isturn != null">#{isturn},</if>
+            <if test="tranuid != null">#{tranuid},</if>
+            <if test="tranname != null and tranname != ''">#{tranname},</if>
+            <if test="trantype != null and trantype != ''">#{trantype},</if>
+            <if test="olddeptname != null and olddeptname != ''">#{olddeptname},</if>
+            <if test="oldranking != null and oldranking != ''">#{oldranking},</if>
+            <if test="effectivedt != null">#{effectivedt},</if>
+            <if test="newdeptname != null and newdeptname != ''">#{newdeptname},</if>
+            <if test="newdeptid != null">#{newdeptid},</if>
+            <if test="newranking != null and newranking != ''">#{newranking},</if>
+            <if test="isover != null">#{isover},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuHrtransfer" parameterType="XinhuHrtransfer">
+        update xinhu_hrtransfer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+            <if test="tranuid != null">tranuid = #{tranuid},</if>
+            <if test="tranname != null and tranname != ''">tranname = #{tranname},</if>
+            <if test="trantype != null and trantype != ''">trantype = #{trantype},</if>
+            <if test="olddeptname != null and olddeptname != ''">olddeptname = #{olddeptname},</if>
+            <if test="oldranking != null and oldranking != ''">oldranking = #{oldranking},</if>
+            <if test="effectivedt != null">effectivedt = #{effectivedt},</if>
+            <if test="newdeptname != null and newdeptname != ''">newdeptname = #{newdeptname},</if>
+            <if test="newdeptid != null">newdeptid = #{newdeptid},</if>
+            <if test="newranking != null and newranking != ''">newranking = #{newranking},</if>
+            <if test="isover != null">isover = #{isover},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuHrtransferById" parameterType="Long">
+        delete from xinhu_hrtransfer where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuHrtransferByIds" parameterType="String">
+        delete from xinhu_hrtransfer where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

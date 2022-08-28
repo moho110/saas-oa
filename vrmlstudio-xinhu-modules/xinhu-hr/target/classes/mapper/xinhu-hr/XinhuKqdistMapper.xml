@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuKqdistMapper">
+    
+    <resultMap type="XinhuKqdist" id="XinhuKqdistResult">
+        <result property="id"    column="id"    />
+        <result property="recename"    column="recename"    />
+        <result property="receid"    column="receid"    />
+        <result property="mid"    column="mid"    />
+        <result property="types"    column="types"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="status"    column="status"    />
+        <result property="sort"    column="sort"    />
+    </resultMap>
+
+    <sql id="selectXinhuKqdistVo">
+        select id, recename, receid, mid, types, startdt, enddt, status, sort from xinhu_kqdist
+    </sql>
+
+    <select id="selectXinhuKqdistList" parameterType="XinhuKqdist" resultMap="XinhuKqdistResult">
+        <include refid="selectXinhuKqdistVo"/>
+        <where>  
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="startdt != null "> and startdt = #{startdt}</if>
+            <if test="enddt != null "> and enddt = #{enddt}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuKqdistById" parameterType="Long" resultMap="XinhuKqdistResult">
+        <include refid="selectXinhuKqdistVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuKqdist" parameterType="XinhuKqdist">
+        insert into xinhu_kqdist
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="mid != null">mid,</if>
+            <if test="types != null">types,</if>
+            <if test="startdt != null">startdt,</if>
+            <if test="enddt != null">enddt,</if>
+            <if test="status != null">status,</if>
+            <if test="sort != null">sort,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="types != null">#{types},</if>
+            <if test="startdt != null">#{startdt},</if>
+            <if test="enddt != null">#{enddt},</if>
+            <if test="status != null">#{status},</if>
+            <if test="sort != null">#{sort},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuKqdist" parameterType="XinhuKqdist">
+        update xinhu_kqdist
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="types != null">type = #{types},</if>
+            <if test="startdt != null">startdt = #{startdt},</if>
+            <if test="enddt != null">enddt = #{enddt},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="sort != null">sort = #{sort},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuKqdistById" parameterType="Long">
+        delete from xinhu_kqdist where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuKqdistByIds" parameterType="String">
+        delete from xinhu_kqdist where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

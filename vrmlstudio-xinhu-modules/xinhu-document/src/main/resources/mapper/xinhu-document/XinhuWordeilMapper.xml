@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.document.mapper.XinhuWordeilMapper">
+    
+    <resultMap type="XinhuWordeil" id="XinhuWordeilResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="content"    column="content"    />
+        <result property="status"    column="status"    />
+        <result property="isturn"    column="isturn"    />
+        <result property="title"    column="title"    />
+        <result property="filecontid"    column="filecontid"    />
+        <result property="qianname"    column="qianname"    />
+        <result property="qiannameid"    column="qiannameid"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuWordeilVo">
+        select id, uid, optdt, optid, optname, applydt, content, status, isturn, title, filecontid, qianname, qiannameid, comid from xinhu_wordeil
+    </sql>
+
+    <select id="selectXinhuWordeilList" parameterType="XinhuWordeil" resultMap="XinhuWordeilResult">
+        <include refid="selectXinhuWordeilVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="filecontid != null  and filecontid != ''"> and filecontid = #{filecontid}</if>
+            <if test="qianname != null  and qianname != ''"> and qianname like concat('%', #{qianname}, '%')</if>
+            <if test="qiannameid != null  and qiannameid != ''"> and qiannameid = #{qiannameid}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuWordeilById" parameterType="Long" resultMap="XinhuWordeilResult">
+        <include refid="selectXinhuWordeilVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuWordeil" parameterType="XinhuWordeil">
+        insert into xinhu_wordeil
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uid != null">uid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="status != null">status,</if>
+            <if test="isturn != null">isturn,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="filecontid != null and filecontid != ''">filecontid,</if>
+            <if test="qianname != null and qianname != ''">qianname,</if>
+            <if test="qiannameid != null and qiannameid != ''">qiannameid,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isturn != null">#{isturn},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="filecontid != null and filecontid != ''">#{filecontid},</if>
+            <if test="qianname != null and qianname != ''">#{qianname},</if>
+            <if test="qiannameid != null and qiannameid != ''">#{qiannameid},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuWordeil" parameterType="XinhuWordeil">
+        update xinhu_wordeil
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="filecontid != null and filecontid != ''">filecontid = #{filecontid},</if>
+            <if test="qianname != null and qianname != ''">qianname = #{qianname},</if>
+            <if test="qiannameid != null and qiannameid != ''">qiannameid = #{qiannameid},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuWordeilById" parameterType="Long">
+        delete from xinhu_wordeil where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuWordeilByIds" parameterType="String">
+        delete from xinhu_wordeil where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

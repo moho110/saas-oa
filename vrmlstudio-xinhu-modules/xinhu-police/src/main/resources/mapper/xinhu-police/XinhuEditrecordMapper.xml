@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.police.mapper.XinhuEditrecordMapper">
+    
+    <resultMap type="XinhuEditrecord" id="XinhuEditrecordResult">
+        <result property="id"    column="id"    />
+        <result property="fieldsname"    column="fieldsname"    />
+        <result property="oldval"    column="oldval"    />
+        <result property="newval"    column="newval"    />
+        <result property="tables"    column="tables"    />
+        <result property="mid"    column="mid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="editci"    column="editci"    />
+    </resultMap>
+
+    <sql id="selectXinhuEditrecordVo">
+        select id, fieldsname, oldval, newval, tables, mid, optdt, optid, optname, editci from xinhu_editrecord
+    </sql>
+
+    <select id="selectXinhuEditrecordList" parameterType="XinhuEditrecord" resultMap="XinhuEditrecordResult">
+        <include refid="selectXinhuEditrecordVo"/>
+        <where>  
+            <if test="fieldsname != null  and fieldsname != ''"> and fieldsname like concat('%', #{fieldsname}, '%')</if>
+            <if test="oldval != null  and oldval != ''"> and oldval = #{oldval}</if>
+            <if test="newval != null  and newval != ''"> and newval = #{newval}</if>
+            <if test="tables != null  and tables != ''"> and tables = #{tables}</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="editci != null "> and editci = #{editci}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuEditrecordById" parameterType="Long" resultMap="XinhuEditrecordResult">
+        <include refid="selectXinhuEditrecordVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuEditrecord" parameterType="XinhuEditrecord" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_editrecord
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fieldsname != null and fieldsname != ''">fieldsname,</if>
+            <if test="oldval != null and oldval != ''">oldval,</if>
+            <if test="newval != null and newval != ''">newval,</if>
+            <if test="tables != null and tables != ''">tables,</if>
+            <if test="mid != null">mid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="editci != null">editci,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fieldsname != null and fieldsname != ''">#{fieldsname},</if>
+            <if test="oldval != null and oldval != ''">#{oldval},</if>
+            <if test="newval != null and newval != ''">#{newval},</if>
+            <if test="tables != null and tables != ''">#{tables},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="editci != null">#{editci},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuEditrecord" parameterType="XinhuEditrecord">
+        update xinhu_editrecord
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fieldsname != null and fieldsname != ''">fieldsname = #{fieldsname},</if>
+            <if test="oldval != null and oldval != ''">oldval = #{oldval},</if>
+            <if test="newval != null and newval != ''">newval = #{newval},</if>
+            <if test="tables != null and tables != ''">tables = #{tables},</if>
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="editci != null">editci = #{editci},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuEditrecordById" parameterType="Long">
+        delete from xinhu_editrecord where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuEditrecordByIds" parameterType="String">
+        delete from xinhu_editrecord where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

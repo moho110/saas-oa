@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuVcardMapper">
+    
+    <resultMap type="XinhuVcard" id="XinhuVcardResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="mobile"    column="mobile"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="uid"    column="uid"    />
+        <result property="tel"    column="tel"    />
+        <result property="email"    column="email"    />
+        <result property="gname"    column="gname"    />
+        <result property="optname"    column="optname"    />
+        <result property="address"    column="address"    />
+        <result property="sort"    column="sort"    />
+        <result property="unitname"    column="unitname"    />
+        <result property="sex"    column="sex"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuVcardVo">
+        select id, name, mobile, optdt, uid, tel, email, gname, optname, address, sort, unitname, sex, comid from xinhu_vcard
+    </sql>
+
+    <select id="selectXinhuVcardList" parameterType="XinhuVcard" resultMap="XinhuVcardResult">
+        <include refid="selectXinhuVcardVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="mobile != null  and mobile != ''"> and mobile = #{mobile}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="tel != null  and tel != ''"> and tel = #{tel}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="gname != null  and gname != ''"> and gname like concat('%', #{gname}, '%')</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="unitname != null  and unitname != ''"> and unitname like concat('%', #{unitname}, '%')</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuVcardById" parameterType="Long" resultMap="XinhuVcardResult">
+        <include refid="selectXinhuVcardVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuVcard" parameterType="XinhuVcard">
+        insert into xinhu_vcard
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="mobile != null and mobile != ''">mobile,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="uid != null">uid,</if>
+            <if test="tel != null and tel != ''">tel,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="gname != null and gname != ''">gname,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="sort != null">sort,</if>
+            <if test="unitname != null and unitname != ''">unitname,</if>
+            <if test="sex != null and sex != ''">sex,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="mobile != null and mobile != ''">#{mobile},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="tel != null and tel != ''">#{tel},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="gname != null and gname != ''">#{gname},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="unitname != null and unitname != ''">#{unitname},</if>
+            <if test="sex != null and sex != ''">#{sex},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuVcard" parameterType="XinhuVcard">
+        update xinhu_vcard
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="mobile != null and mobile != ''">mobile = #{mobile},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="tel != null and tel != ''">tel = #{tel},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="gname != null and gname != ''">gname = #{gname},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="unitname != null and unitname != ''">unitname = #{unitname},</if>
+            <if test="sex != null and sex != ''">sex = #{sex},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuVcardById" parameterType="Long">
+        delete from xinhu_vcard where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuVcardByIds" parameterType="String">
+        delete from xinhu_vcard where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

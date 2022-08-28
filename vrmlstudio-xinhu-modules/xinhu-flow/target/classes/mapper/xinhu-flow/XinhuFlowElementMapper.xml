@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.flow.mapper.XinhuFlowElementMapper">
+    
+    <resultMap type="XinhuFlowElement" id="XinhuFlowElementResult">
+        <result property="id"    column="id"    />
+        <result property="mid"    column="mid"    />
+        <result property="name"    column="name"    />
+        <result property="fields"    column="fields"    />
+        <result property="fieldstype"    column="fieldstype"    />
+        <result property="sort"    column="sort"    />
+        <result property="dev"    column="dev"    />
+        <result property="isbt"    column="isbt"    />
+        <result property="data"    column="data"    />
+        <result property="islu"    column="islu"    />
+        <result property="iszs"    column="iszs"    />
+        <result property="attr"    column="attr"    />
+        <result property="iszb"    column="iszb"    />
+        <result property="isss"    column="isss"    />
+        <result property="lattr"    column="lattr"    />
+        <result property="width"    column="width"    />
+        <result property="lens"    column="lens"    />
+        <result property="savewhere"    column="savewhere"    />
+        <result property="islb"    column="islb"    />
+        <result property="ispx"    column="ispx"    />
+        <result property="isalign"    column="isalign"    />
+        <result property="issou"    column="issou"    />
+        <result property="istj"    column="istj"    />
+        <result property="gongsi"    column="gongsi"    />
+        <result property="placeholder"    column="placeholder"    />
+        <result property="isonly"    column="isonly"    />
+        <result property="isdr"    column="isdr"    />
+    </resultMap>
+
+    <sql id="selectXinhuFlowElementVo">
+        select id, mid, name, fields, fieldstype, sort, dev, isbt, data, islu, iszs, attr, iszb, isss, lattr, width, lens, savewhere, islb, ispx, isalign, issou, istj, gongsi, placeholder, isonly, isdr from xinhu_flow_element
+    </sql>
+
+    <select id="selectXinhuFlowElementList" parameterType="XinhuFlowElement" resultMap="XinhuFlowElementResult">
+        <include refid="selectXinhuFlowElementVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="fields != null  and fields != ''"> and like concat('%', #{fields}, '%')</if>
+            <if test="fieldstype != null  and fieldstype != ''"> and fieldstype = #{fieldstype}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="dev != null  and dev != ''"> and dev = #{dev}</if>
+            <if test="isbt != null "> and isbt = #{isbt}</if>
+            <if test="data != null  and data != ''"> and data = #{data}</if>
+            <if test="islu != null "> and islu = #{islu}</if>
+            <if test="iszs != null "> and iszs = #{iszs}</if>
+            <if test="attr != null  and attr != ''"> and attr = #{attr}</if>
+            <if test="iszb != null "> and iszb = #{iszb}</if>
+            <if test="isss != null "> and isss = #{isss}</if>
+            <if test="lattr != null  and lattr != ''"> and lattr = #{lattr}</if>
+            <if test="width != null  and width != ''"> and width = #{width}</if>
+            <if test="lens != null "> and lens like concat('%', #{lens}, '%')</if>
+            <if test="savewhere != null  and savewhere != ''"> and like concat('%', #{savewhere}, '%')</if>
+            <if test="islb != null "> and islb = #{islb}</if>
+            <if test="ispx != null "> and ispx = #{ispx}</if>
+            <if test="isalign != null "> and isalign = #{isalign}</if>
+            <if test="issou != null "> and issou = #{issou}</if>
+            <if test="istj != null "> and istj = #{istj}</if>
+            <if test="gongsi != null  and gongsi != ''"> and gongsi = #{gongsi}</if>
+            <if test="placeholder != null  and placeholder != ''"> and placeholder = #{placeholder}</if>
+            <if test="isonly != null "> and isonly = #{isonly}</if>
+            <if test="isdr != null "> and isdr = #{isdr}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuFlowElementById" parameterType="Long" resultMap="XinhuFlowElementResult">
+        <include refid="selectXinhuFlowElementVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuFlowElement" parameterType="XinhuFlowElement" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_flow_element
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mid != null">mid,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="fields != null and fields != ''">fields,</if>
+            <if test="fieldstype != null and fieldstype != ''">fieldstype,</if>
+            <if test="sort != null">sort,</if>
+            <if test="dev != null and dev != ''">dev,</if>
+            <if test="isbt != null">isbt,</if>
+            <if test="data != null and data != ''">data,</if>
+            <if test="islu != null">islu,</if>
+            <if test="iszs != null">iszs,</if>
+            <if test="attr != null and attr != ''">attr,</if>
+            <if test="iszb != null">iszb,</if>
+            <if test="isss != null">isss,</if>
+            <if test="lattr != null and lattr != ''">lattr,</if>
+            <if test="width != null and width != ''">width,</if>
+            <if test="lens != null">lens,</if>
+            <if test="savewhere != null and savewhere != ''">savewhere,</if>
+            <if test="islb != null">islb,</if>
+            <if test="ispx != null">ispx,</if>
+            <if test="isalign != null">isalign,</if>
+            <if test="issou != null">issou,</if>
+            <if test="istj != null">istj,</if>
+            <if test="gongsi != null and gongsi != ''">gongsi,</if>
+            <if test="placeholder != null and placeholder != ''">placeholder,</if>
+            <if test="isonly != null">isonly,</if>
+            <if test="isdr != null">isdr,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mid != null">#{mid},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="fields != null and fields != ''">#{fields},</if>
+            <if test="fieldstype != null and fieldstype != ''">#{fieldstype},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="dev != null and dev != ''">#{dev},</if>
+            <if test="isbt != null">#{isbt},</if>
+            <if test="data != null and data != ''">#{data},</if>
+            <if test="islu != null">#{islu},</if>
+            <if test="iszs != null">#{iszs},</if>
+            <if test="attr != null and attr != ''">#{attr},</if>
+            <if test="iszb != null">#{iszb},</if>
+            <if test="isss != null">#{isss},</if>
+            <if test="lattr != null and lattr != ''">#{lattr},</if>
+            <if test="width != null and width != ''">#{width},</if>
+            <if test="lens != null">#{lens},</if>
+            <if test="savewhere != null and savewhere != ''">#{savewhere},</if>
+            <if test="islb != null">#{islb},</if>
+            <if test="ispx != null">#{ispx},</if>
+            <if test="isalign != null">#{isalign},</if>
+            <if test="issou != null">#{issou},</if>
+            <if test="istj != null">#{istj},</if>
+            <if test="gongsi != null and gongsi != ''">#{gongsi},</if>
+            <if test="placeholder != null and placeholder != ''">#{placeholder},</if>
+            <if test="isonly != null">#{isonly},</if>
+            <if test="isdr != null">#{isdr},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuFlowElement" parameterType="XinhuFlowElement">
+        update xinhu_flow_element
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="fields != null and fields != ''">fields = #{fields},</if>
+            <if test="fieldstype != null and fieldstype != ''">fieldstype = #{fieldstype},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="dev != null and dev != ''">dev = #{dev},</if>
+            <if test="isbt != null">isbt = #{isbt},</if>
+            <if test="data != null and data != ''">data = #{data},</if>
+            <if test="islu != null">islu = #{islu},</if>
+            <if test="iszs != null">iszs = #{iszs},</if>
+            <if test="attr != null and attr != ''">attr = #{attr},</if>
+            <if test="iszb != null">iszb = #{iszb},</if>
+            <if test="isss != null">isss = #{isss},</if>
+            <if test="lattr != null and lattr != ''">lattr = #{lattr},</if>
+            <if test="width != null and width != ''">width = #{width},</if>
+            <if test="lens != null">lens = #{lens},</if>
+            <if test="savewhere != null and savewhere != ''">savewhere = #{savewhere},</if>
+            <if test="islb != null">islb = #{islb},</if>
+            <if test="ispx != null">ispx = #{ispx},</if>
+            <if test="isalign != null">isalign = #{isalign},</if>
+            <if test="issou != null">issou = #{issou},</if>
+            <if test="istj != null">istj = #{istj},</if>
+            <if test="gongsi != null and gongsi != ''">gongsi = #{gongsi},</if>
+            <if test="placeholder != null and placeholder != ''">placeholder = #{placeholder},</if>
+            <if test="isonly != null">isonly = #{isonly},</if>
+            <if test="isdr != null">isdr = #{isdr},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuFlowElementById" parameterType="Long">
+        delete from xinhu_flow_element where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuFlowElementByIds" parameterType="String">
+        delete from xinhu_flow_element where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

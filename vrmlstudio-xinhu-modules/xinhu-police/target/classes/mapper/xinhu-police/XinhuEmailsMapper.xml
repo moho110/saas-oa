@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.police.mapper.XinhuEmailsMapper">
+    
+    <resultMap type="XinhuEmails" id="XinhuEmailsResult">
+        <result property="id"    column="id"    />
+        <result property="mid"    column="mid"    />
+        <result property="uid"    column="uid"    />
+        <result property="zt"    column="zt"    />
+        <result property="types"    column="types"    />
+        <result property="ishui"    column="ishui"    />
+        <result property="isdel"    column="isdel"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="email"    column="email"    />
+        <result property="personal"    column="personal"    />
+    </resultMap>
+
+    <sql id="selectXinhuEmailsVo">
+        select id, mid, uid, zt, types, ishui, isdel, optdt, email, personal from xinhu_emails
+    </sql>
+
+    <select id="selectXinhuEmailsList" parameterType="XinhuEmails" resultMap="XinhuEmailsResult">
+        <include refid="selectXinhuEmailsVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="zt != null "> and zt = #{zt}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="ishui != null "> and ishui = #{ishui}</if>
+            <if test="isdel != null "> and isdel = #{isdel}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="personal != null  and personal != ''"> and personal = #{personal}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuEmailsById" parameterType="Long" resultMap="XinhuEmailsResult">
+        <include refid="selectXinhuEmailsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuEmails" parameterType="XinhuEmails" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_emails
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mid != null">mid,</if>
+            <if test="uid != null">uid,</if>
+            <if test="zt != null">zt,</if>
+            <if test="types != null">types,</if>
+            <if test="ishui != null">ishui,</if>
+            <if test="isdel != null">isdel,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="personal != null and personal != ''">personal,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mid != null">#{mid},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="zt != null">#{zt},</if>
+            <if test="types != null">#{types},</if>
+            <if test="ishui != null">#{ishui},</if>
+            <if test="isdel != null">#{isdel},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="personal != null and personal != ''">#{personal},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuEmails" parameterType="XinhuEmails">
+        update xinhu_emails
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="zt != null">zt = #{zt},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="ishui != null">ishui = #{ishui},</if>
+            <if test="isdel != null">isdel = #{isdel},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="personal != null and personal != ''">personal = #{personal},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuEmailsById" parameterType="Long">
+        delete from xinhu_emails where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuEmailsByIds" parameterType="String">
+        delete from xinhu_emails where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

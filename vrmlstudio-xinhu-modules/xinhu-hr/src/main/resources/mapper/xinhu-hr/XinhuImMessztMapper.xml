@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuImMessztMapper">
+    
+    <resultMap type="XinhuImMesszt" id="XinhuImMessztResult">
+        <result property="id"    column="id"    />
+        <result property="mid"    column="mid"    />
+        <result property="uid"    column="uid"    />
+        <result property="gid"    column="gid"    />
+    </resultMap>
+
+    <sql id="selectXinhuImMessztVo">
+        select id, mid, uid, gid from xinhu_im_messzt
+    </sql>
+
+    <select id="selectXinhuImMessztList" parameterType="XinhuImMesszt" resultMap="XinhuImMessztResult">
+        <include refid="selectXinhuImMessztVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="gid != null "> and gid = #{gid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuImMessztById" parameterType="Long" resultMap="XinhuImMessztResult">
+        <include refid="selectXinhuImMessztVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuImMesszt" parameterType="XinhuImMesszt">
+        insert into xinhu_im_messzt
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="mid != null">mid,</if>
+            <if test="uid != null">uid,</if>
+            <if test="gid != null">gid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="gid != null">#{gid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuImMesszt" parameterType="XinhuImMesszt">
+        update xinhu_im_messzt
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="gid != null">gid = #{gid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuImMessztById" parameterType="Long">
+        delete from xinhu_im_messzt where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuImMessztByIds" parameterType="String">
+        delete from xinhu_im_messzt where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

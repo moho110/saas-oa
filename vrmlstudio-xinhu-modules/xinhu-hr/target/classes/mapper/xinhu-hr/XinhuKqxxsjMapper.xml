@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuKqxxsjMapper">
+    
+    <resultMap type="XinhuKqxxsj" id="XinhuKqxxsjResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="dt"    column="dt"    />
+        <result property="pid"    column="pid"    />
+        <result property="types"    column="types"    />
+        <result property="uid"    column="uid"    />
+    </resultMap>
+
+    <sql id="selectXinhuKqxxsjVo">
+        select id, name, dt, pid, types, uid from xinhu_kqxxsj
+    </sql>
+
+    <select id="selectXinhuKqxxsjList" parameterType="XinhuKqxxsj" resultMap="XinhuKqxxsjResult">
+        <include refid="selectXinhuKqxxsjVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="dt != null "> and dt = #{dt}</if>
+            <if test="pid != null "> and pid = #{pid}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuKqxxsjById" parameterType="Long" resultMap="XinhuKqxxsjResult">
+        <include refid="selectXinhuKqxxsjVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuKqxxsj" parameterType="XinhuKqxxsj">
+        insert into xinhu_kqxxsj
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="dt != null">dt,</if>
+            <if test="pid != null">pid,</if>
+            <if test="types != null">types,</if>
+            <if test="uid != null">uid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="dt != null">#{dt},</if>
+            <if test="pid != null">#{pid},</if>
+            <if test="type != null">#{type},</if>
+            <if test="uid != null">#{uid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuKqxxsj" parameterType="XinhuKqxxsj">
+        update xinhu_kqxxsj
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="dt != null">dt = #{dt},</if>
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="uid != null">uid = #{uid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuKqxxsjById" parameterType="Long">
+        delete from xinhu_kqxxsj where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuKqxxsjByIds" parameterType="String">
+        delete from xinhu_kqxxsj where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

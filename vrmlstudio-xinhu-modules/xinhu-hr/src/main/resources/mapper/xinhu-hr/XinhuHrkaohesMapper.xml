@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuHrkaohesMapper">
+    
+    <resultMap type="XinhuHrkaohes" id="XinhuHrkaohesResult">
+        <result property="id"    column="id"    />
+        <result property="mid"    column="mid"    />
+        <result property="sort"    column="sort"    />
+        <result property="itemname"    column="itemname"    />
+        <result property="weight"    column="weight"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuHrkaohesVo">
+        select id, mid, sort, itemname, weight, comid from xinhu_hrkaohes
+    </sql>
+
+    <select id="selectXinhuHrkaohesList" parameterType="XinhuHrkaohes" resultMap="XinhuHrkaohesResult">
+        <include refid="selectXinhuHrkaohesVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="itemname != null  and itemname != ''"> and itemname like concat('%', #{itemname}, '%')</if>
+            <if test="weight != null "> and weight = #{weight}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuHrkaohesById" parameterType="Long" resultMap="XinhuHrkaohesResult">
+        <include refid="selectXinhuHrkaohesVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuHrkaohes" parameterType="XinhuHrkaohes" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_hrkaohes
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mid != null">mid,</if>
+            <if test="sort != null">sort,</if>
+            <if test="itemname != null and itemname != ''">itemname,</if>
+            <if test="weight != null">weight,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mid != null">#{mid},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="itemname != null and itemname != ''">#{itemname},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuHrkaohes" parameterType="XinhuHrkaohes">
+        update xinhu_hrkaohes
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="itemname != null and itemname != ''">itemname = #{itemname},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuHrkaohesById" parameterType="Long">
+        delete from xinhu_hrkaohes where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuHrkaohesByIds" parameterType="String">
+        delete from xinhu_hrkaohes where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

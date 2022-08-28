@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.document.mapper.XinhuWordMapper">
+    
+    <resultMap type="XinhuWord" id="XinhuWordResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="fileid"    column="fileid"    />
+        <result property="shateid"    column="shateid"    />
+        <result property="shate"    column="shate"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="typeid"    column="typeid"    />
+        <result property="cid"    column="cid"    />
+        <result property="types"    column="type"    />
+        <result property="sort"    column="sort"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuWordVo">
+        select id, name, optid, optname, fileid, shateid, shate, optdt, typeid, cid, types, sort, comid from xinhu_word
+    </sql>
+
+    <select id="selectXinhuWordList" parameterType="XinhuWord" resultMap="XinhuWordResult">
+        <include refid="selectXinhuWordVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="fileid != null "> and fileid = #{fileid}</if>
+            <if test="shateid != null  and shateid != ''"> and shateid = #{shateid}</if>
+            <if test="shate != null  and shate != ''"> and shate = #{shate}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="typeid != null "> and typeid = #{typeid}</if>
+            <if test="cid != null "> and cid = #{cid}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuWordById" parameterType="Long" resultMap="XinhuWordResult">
+        <include refid="selectXinhuWordVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuWord" parameterType="XinhuWord">
+        insert into xinhu_word
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="fileid != null">fileid,</if>
+            <if test="shateid != null and shateid != ''">shateid,</if>
+            <if test="shate != null and shate != ''">shate,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="typeid != null">typeid,</if>
+            <if test="cid != null">cid,</if>
+            <if test="types != null">types,</if>
+            <if test="sort != null">sort,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="fileid != null">#{fileid},</if>
+            <if test="shateid != null and shateid != ''">#{shateid},</if>
+            <if test="shate != null and shate != ''">#{shate},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="typeid != null">#{typeid},</if>
+            <if test="cid != null">#{cid},</if>
+            <if test="types != null">#{types},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuWord" parameterType="XinhuWord">
+        update xinhu_word
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="fileid != null">fileid = #{fileid},</if>
+            <if test="shateid != null and shateid != ''">shateid = #{shateid},</if>
+            <if test="shate != null and shate != ''">shate = #{shate},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="typeid != null">typeid = #{typeid},</if>
+            <if test="cid != null">cid = #{cid},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuWordById" parameterType="Long">
+        delete from xinhu_word where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuWordByIds" parameterType="String">
+        delete from xinhu_word where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.XinhuWotplMapper">
+    
+    <resultMap type="XinhuWotpl" id="XinhuWotplResult">
+        <result property="id"    column="id"    />
+        <result property="templateId"    column="template_id"    />
+        <result property="title"    column="title"    />
+        <result property="primaryIndustry"    column="primary_industry"    />
+        <result property="deputyIndustry"    column="deputy_industry"    />
+        <result property="content"    column="content"    />
+        <result property="example"    column="example"    />
+        <result property="modename"    column="modename"    />
+        <result property="modeparams"    column="modeparams"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectXinhuWotplVo">
+        select id, template_id, title, primary_industry, deputy_industry, content, example, modename, modeparams, status from xinhu_wotpl
+    </sql>
+
+    <select id="selectXinhuWotplList" parameterType="XinhuWotpl" resultMap="XinhuWotplResult">
+        <include refid="selectXinhuWotplVo"/>
+        <where>  
+            <if test="templateId != null  and templateId != ''"> and template_id = #{templateId}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="primaryIndustry != null  and primaryIndustry != ''"> and primary_industry = #{primaryIndustry}</if>
+            <if test="deputyIndustry != null  and deputyIndustry != ''"> and deputy_industry = #{deputyIndustry}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="example != null  and example != ''"> and example = #{example}</if>
+            <if test="modename != null  and modename != ''"> and modename like concat('%', #{modename}, '%')</if>
+            <if test="modeparams != null  and modeparams != ''"> and modeparams = #{modeparams}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuWotplById" parameterType="Long" resultMap="XinhuWotplResult">
+        <include refid="selectXinhuWotplVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuWotpl" parameterType="XinhuWotpl">
+        insert into xinhu_wotpl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="templateId != null and templateId != ''">template_id,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="primaryIndustry != null and primaryIndustry != ''">primary_industry,</if>
+            <if test="deputyIndustry != null and deputyIndustry != ''">deputy_industry,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="example != null and example != ''">example,</if>
+            <if test="modename != null and modename != ''">modename,</if>
+            <if test="modeparams != null and modeparams != ''">modeparams,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="templateId != null and templateId != ''">#{templateId},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="primaryIndustry != null and primaryIndustry != ''">#{primaryIndustry},</if>
+            <if test="deputyIndustry != null and deputyIndustry != ''">#{deputyIndustry},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="example != null and example != ''">#{example},</if>
+            <if test="modename != null and modename != ''">#{modename},</if>
+            <if test="modeparams != null and modeparams != ''">#{modeparams},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuWotpl" parameterType="XinhuWotpl">
+        update xinhu_wotpl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="templateId != null and templateId != ''">template_id = #{templateId},</if>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="primaryIndustry != null and primaryIndustry != ''">primary_industry = #{primaryIndustry},</if>
+            <if test="deputyIndustry != null and deputyIndustry != ''">deputy_industry = #{deputyIndustry},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="example != null and example != ''">example = #{example},</if>
+            <if test="modename != null and modename != ''">modename = #{modename},</if>
+            <if test="modeparams != null and modeparams != ''">modeparams = #{modeparams},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuWotplById" parameterType="Long">
+        delete from xinhu_wotpl where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuWotplByIds" parameterType="String">
+        delete from xinhu_wotpl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

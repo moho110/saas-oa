@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuImMenuMapper">
+    
+    <resultMap type="XinhuImMenu" id="XinhuImMenuResult">
+        <result property="id"    column="id"    />
+        <result property="mid"    column="mid"    />
+        <result property="pid"    column="pid"    />
+        <result property="name"    column="name"    />
+        <result property="sort"    column="sort"    />
+        <result property="types"    column="types"    />
+        <result property="url"    column="url"    />
+        <result property="num"    column="num"    />
+        <result property="color"    column="color"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+    </resultMap>
+
+    <sql id="selectXinhuImMenuVo">
+        select id, mid, pid, name, sort, types, url, num, color, receid, recename from xinhu_im_menu
+    </sql>
+
+    <select id="selectXinhuImMenuList" parameterType="XinhuImMenu" resultMap="XinhuImMenuResult">
+        <include refid="selectXinhuImMenuVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="pid != null "> and pid = #{pid}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="color != null  and color != ''"> and color = #{color}</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuImMenuById" parameterType="Long" resultMap="XinhuImMenuResult">
+        <include refid="selectXinhuImMenuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuImMenu" parameterType="XinhuImMenu">
+        insert into xinhu_im_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="mid != null">mid,</if>
+            <if test="pid != null">pid,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="sort != null">sort,</if>
+            <if test="types != null">types,</if>
+            <if test="url != null and url != ''">url,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="color != null and color != ''">color,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="pid != null">#{pid},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="types != null">#{types},</if>
+            <if test="url != null and url != ''">#{url},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="color != null and color != ''">#{color},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuImMenu" parameterType="XinhuImMenu">
+        update xinhu_im_menu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="url != null and url != ''">url = #{url},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="color != null and color != ''">color = #{color},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuImMenuById" parameterType="Long">
+        delete from xinhu_im_menu where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuImMenuByIds" parameterType="String">
+        delete from xinhu_im_menu where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

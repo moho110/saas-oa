@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.person.mapper.XinhuAdminMapper">
+    
+    <resultMap type="XinhuAdmin" id="XinhuAdminResult">
+        <result property="id"    column="id"    />
+        <result property="num"    column="num"    />
+        <result property="user"    column="user"    />
+        <result property="name"    column="name"    />
+        <result property="pass"    column="pass"    />
+        <result property="loginci"    column="loginci"    />
+        <result property="status"    column="status"    />
+        <result property="types"    column="types"    />
+        <result property="sex"    column="sex"    />
+        <result property="tel"    column="tel"    />
+        <result property="face"    column="face"    />
+        <result property="deptid"    column="deptid"    />
+        <result property="deptname"    column="deptname"    />
+        <result property="deptids"    column="deptids"    />
+        <result property="deptnames"    column="deptnames"    />
+        <result property="rankings"    column="rankings"    />
+        <result property="deptallname"    column="deptallname"    />
+        <result property="superid"    column="superid"    />
+        <result property="superman"    column="superman"    />
+        <result property="ranking"    column="ranking"    />
+        <result property="sorts"    column="sorts"    />
+        <result property="deptpath"    column="deptpath"    />
+        <result property="superpath"    column="superpath"    />
+        <result property="groupname"    column="groupname"    />
+        <result property="mobile"    column="mobile"    />
+        <result property="apptx"    column="apptx"    />
+        <result property="workdate"    column="workdate"    />
+        <result property="email"    column="email"    />
+        <result property="lastpush"    column="lastpush"    />
+        <result property="adddt"    column="adddt"    />
+        <result property="weixinid"    column="weixinid"    />
+        <result property="quitdt"    column="quitdt"    />
+        <result property="style"    column="style"    />
+        <result property="pingyin"    column="pingyin"    />
+        <result property="emailpass"    column="emailpass"    />
+        <result property="companyid"    column="companyid"    />
+        <result property="online"    column="online"    />
+        <result property="lastonline"    column="lastonline"    />
+        <result property="isvcard"    column="isvcard"    />
+        <result property="randslat"    column="randslat"    />
+        <result property="dwid"    column="dwid"    />
+        <result property="editpass"    column="editpass"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuAdminVo">
+        select id, num, user, name, pass, loginci, status, types, sex, tel, face, deptid, deptname, deptids, deptnames, rankings, deptallname, superid, superman, ranking, sorts, deptpath, superpath, groupname, mobile, apptx, workdate, email, lastpush, adddt, weixinid, quitdt, style, pingyin, emailpass, companyid, online, lastonline, isvcard, randslat, dwid, editpass, comid from xinhu_admin
+    </sql>
+
+    <select id="selectXinhuAdminList" parameterType="XinhuAdmin" resultMap="XinhuAdminResult">
+        <include refid="selectXinhuAdminVo"/>
+        <where>  
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="user != null  and user != ''"> and user like concat('%',#{user},'%')</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="pass != null  and pass != ''"> and pass = #{pass}</if>
+            <if test="loginci != null "> and loginci = #{loginci}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="tel != null  and tel != ''"> and tel = #{tel}</if>
+            <if test="face != null  and face != ''"> and face = #{face}</if>
+            <if test="deptid != null "> and deptid = #{deptid}</if>
+            <if test="deptname != null  and deptname != ''"> and deptname like concat('%', #{deptname}, '%')</if>
+            <if test="deptids != null  and deptids != ''"> and deptids = #{deptids}</if>
+            <if test="deptnames != null  and deptnames != ''"> and deptnames = #{deptnames}</if>
+            <if test="rankings != null  and rankings != ''"> and rankings = #{rankings}</if>
+            <if test="deptallname != null  and deptallname != ''"> and deptallname like concat('%', #{deptallname}, '%')</if>
+            <if test="superid != null  and superid != ''"> and superid = #{superid}</if>
+            <if test="superman != null  and superman != ''"> and superman = #{superman}</if>
+            <if test="ranking != null  and ranking != ''"> and ranking = #{ranking}</if>
+            <if test="sorts != null "> and sorts = #{sorts}</if>
+            <if test="deptpath != null  and deptpath != ''"> and deptpath = #{deptpath}</if>
+            <if test="superpath != null  and superpath != ''"> and superpath = #{superpath}</if>
+            <if test="groupname != null  and groupname != ''"> and groupname like concat('%', #{groupname}, '%')</if>
+            <if test="mobile != null  and mobile != ''"> and mobile = #{mobile}</if>
+            <if test="apptx != null "> and apptx = #{apptx}</if>
+            <if test="workdate != null "> and workdate = #{workdate}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="lastpush != null "> and lastpush = #{lastpush}</if>
+            <if test="adddt != null "> and adddt = #{adddt}</if>
+            <if test="weixinid != null  and weixinid != ''"> and weixinid = #{weixinid}</if>
+            <if test="quitdt != null "> and quitdt = #{quitdt}</if>
+            <if test="style != null "> and style = #{style}</if>
+            <if test="pingyin != null  and pingyin != ''"> and pingyin = #{pingyin}</if>
+            <if test="emailpass != null  and emailpass != ''"> and emailpass = #{emailpass}</if>
+            <if test="companyid != null "> and companyid = #{companyid}</if>
+            <if test="online != null "> and online = #{online}</if>
+            <if test="lastonline != null "> and lastonline = #{lastonline}</if>
+            <if test="isvcard != null "> and isvcard = #{isvcard}</if>
+            <if test="randslat != null  and randslat != ''"> and randslat = #{randslat}</if>
+            <if test="dwid != null  and dwid != ''"> and dwid = #{dwid}</if>
+            <if test="editpass != null "> and editpass = #{editpass}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuAdminById" parameterType="Long" resultMap="XinhuAdminResult">
+        <include refid="selectXinhuAdminVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuAdmin" parameterType="XinhuAdmin" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_admin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="num != null and num != ''">num,</if>
+            <if test="user != null and user != ''">user,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="pass != null and pass != ''">pass,</if>
+            <if test="loginci != null">loginci,</if>
+            <if test="status != null">status,</if>
+            <if test="types != null">types,</if>
+            <if test="sex != null and sex != ''">sex,</if>
+            <if test="tel != null and tel != ''">tel,</if>
+            <if test="face != null and face != ''">face,</if>
+            <if test="deptid != null">deptid,</if>
+            <if test="deptname != null and deptname != ''">deptname,</if>
+            <if test="deptids != null and deptids != ''">deptids,</if>
+            <if test="deptnames != null and deptnames != ''">deptnames,</if>
+            <if test="rankings != null and rankings != ''">rankings,</if>
+            <if test="deptallname != null and deptallname != ''">deptallname,</if>
+            <if test="superid != null and superid != ''">superid,</if>
+            <if test="superman != null and superman != ''">superman,</if>
+            <if test="ranking != null and ranking != ''">ranking,</if>
+            <if test="sorts != null">sorts,</if>
+            <if test="deptpath != null and deptpath != ''">deptpath,</if>
+            <if test="superpath != null and superpath != ''">superpath,</if>
+            <if test="groupname != null and groupname != ''">groupname,</if>
+            <if test="mobile != null and mobile != ''">mobile,</if>
+            <if test="apptx != null">apptx,</if>
+            <if test="workdate != null">workdate,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="lastpush != null">lastpush,</if>
+            <if test="adddt != null">adddt,</if>
+            <if test="weixinid != null and weixinid != ''">weixinid,</if>
+            <if test="quitdt != null">quitdt,</if>
+            <if test="style != null">style,</if>
+            <if test="pingyin != null and pingyin != ''">pingyin,</if>
+            <if test="emailpass != null and emailpass != ''">emailpass,</if>
+            <if test="companyid != null">companyid,</if>
+            <if test="online != null">online,</if>
+            <if test="lastonline != null">lastonline,</if>
+            <if test="isvcard != null">isvcard,</if>
+            <if test="randslat != null and randslat != ''">randslat,</if>
+            <if test="dwid != null and dwid != ''">dwid,</if>
+            <if test="editpass != null">editpass,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="user != null and user != ''">#{user},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="pass != null and pass != ''">#{pass},</if>
+            <if test="loginci != null">#{loginci},</if>
+            <if test="status != null">#{status},</if>
+            <if test="types != null">#{types},</if>
+            <if test="sex != null and sex != ''">#{sex},</if>
+            <if test="tel != null and tel != ''">#{tel},</if>
+            <if test="face != null and face != ''">#{face},</if>
+            <if test="deptid != null">#{deptid},</if>
+            <if test="deptname != null and deptname != ''">#{deptname},</if>
+            <if test="deptids != null and deptids != ''">#{deptids},</if>
+            <if test="deptnames != null and deptnames != ''">#{deptnames},</if>
+            <if test="rankings != null and rankings != ''">#{rankings},</if>
+            <if test="deptallname != null and deptallname != ''">#{deptallname},</if>
+            <if test="superid != null and superid != ''">#{superid},</if>
+            <if test="superman != null and superman != ''">#{superman},</if>
+            <if test="ranking != null and ranking != ''">#{ranking},</if>
+            <if test="sorts != null">#{sorts},</if>
+            <if test="deptpath != null and deptpath != ''">#{deptpath},</if>
+            <if test="superpath != null and superpath != ''">#{superpath},</if>
+            <if test="groupname != null and groupname != ''">#{groupname},</if>
+            <if test="mobile != null and mobile != ''">#{mobile},</if>
+            <if test="apptx != null">#{apptx},</if>
+            <if test="workdate != null">#{workdate},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="lastpush != null">#{lastpush},</if>
+            <if test="adddt != null">#{adddt},</if>
+            <if test="weixinid != null and weixinid != ''">#{weixinid},</if>
+            <if test="quitdt != null">#{quitdt},</if>
+            <if test="style != null">#{style},</if>
+            <if test="pingyin != null and pingyin != ''">#{pingyin},</if>
+            <if test="emailpass != null and emailpass != ''">#{emailpass},</if>
+            <if test="companyid != null">#{companyid},</if>
+            <if test="online != null">#{online},</if>
+            <if test="lastonline != null">#{lastonline},</if>
+            <if test="isvcard != null">#{isvcard},</if>
+            <if test="randslat != null and randslat != ''">#{randslat},</if>
+            <if test="dwid != null and dwid != ''">#{dwid},</if>
+            <if test="editpass != null">#{editpass},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuAdmin" parameterType="XinhuAdmin">
+        update xinhu_admin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="user != null and user != ''">user = #{user},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="pass != null and pass != ''">pass = #{pass},</if>
+            <if test="loginci != null">loginci = #{loginci},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="sex != null and sex != ''">sex = #{sex},</if>
+            <if test="tel != null and tel != ''">tel = #{tel},</if>
+            <if test="face != null and face != ''">face = #{face},</if>
+            <if test="deptid != null">deptid = #{deptid},</if>
+            <if test="deptname != null and deptname != ''">deptname = #{deptname},</if>
+            <if test="deptids != null and deptids != ''">deptids = #{deptids},</if>
+            <if test="deptnames != null and deptnames != ''">deptnames = #{deptnames},</if>
+            <if test="rankings != null and rankings != ''">rankings = #{rankings},</if>
+            <if test="deptallname != null and deptallname != ''">deptallname = #{deptallname},</if>
+            <if test="superid != null and superid != ''">superid = #{superid},</if>
+            <if test="superman != null and superman != ''">superman = #{superman},</if>
+            <if test="ranking != null and ranking != ''">ranking = #{ranking},</if>
+            <if test="sorts != null">sorts = #{sorts},</if>
+            <if test="deptpath != null and deptpath != ''">deptpath = #{deptpath},</if>
+            <if test="superpath != null and superpath != ''">superpath = #{superpath},</if>
+            <if test="groupname != null and groupname != ''">groupname = #{groupname},</if>
+            <if test="mobile != null and mobile != ''">mobile = #{mobile},</if>
+            <if test="apptx != null">apptx = #{apptx},</if>
+            <if test="workdate != null">workdate = #{workdate},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="lastpush != null">lastpush = #{lastpush},</if>
+            <if test="adddt != null">adddt = #{adddt},</if>
+            <if test="weixinid != null and weixinid != ''">weixinid = #{weixinid},</if>
+            <if test="quitdt != null">quitdt = #{quitdt},</if>
+            <if test="style != null">style = #{style},</if>
+            <if test="pingyin != null and pingyin != ''">pingyin = #{pingyin},</if>
+            <if test="emailpass != null and emailpass != ''">emailpass = #{emailpass},</if>
+            <if test="companyid != null">companyid = #{companyid},</if>
+            <if test="online != null">online = #{online},</if>
+            <if test="lastonline != null">lastonline = #{lastonline},</if>
+            <if test="isvcard != null">isvcard = #{isvcard},</if>
+            <if test="randslat != null and randslat != ''">randslat = #{randslat},</if>
+            <if test="dwid != null and dwid != ''">dwid = #{dwid},</if>
+            <if test="editpass != null">editpass = #{editpass},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuAdminById" parameterType="Long">
+        delete from xinhu_admin where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuAdminByIds" parameterType="String">
+        delete from xinhu_admin where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

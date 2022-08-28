@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.flow.mapper.XinhuFlowModetplMapper">
+    
+    <resultMap type="XinhuFlowModetpl" id="XinhuFlowModetplResult">
+        <result property="id"    column="id"    />
+        <result property="setid"    column="setid"    />
+        <result property="tplname"    column="tplname"    />
+        <result property="tplnum"    column="tplnum"    />
+        <result property="fieldsluru"    column="fieldsluru"    />
+        <result property="fieldsbitian"    column="fieldsbitian"    />
+        <result property="content"    column="content"    />
+        <result property="recename"    column="recename"    />
+        <result property="receid"    column="receid"    />
+        <result property="status"    column="status"    />
+        <result property="sort"    column="sort"    />
+    </resultMap>
+
+    <sql id="selectXinhuFlowModetplVo">
+        select id, setid, tplname, tplnum, fieldsluru, fieldsbitian, content, recename, receid, status, sort from xinhu_flow_modetpl
+    </sql>
+
+    <select id="selectXinhuFlowModetplList" parameterType="XinhuFlowModetpl" resultMap="XinhuFlowModetplResult">
+        <include refid="selectXinhuFlowModetplVo"/>
+        <where>  
+            <if test="setid != null "> and setid = #{setid}</if>
+            <if test="tplname != null  and tplname != ''"> and tplname like concat('%', #{tplname}, '%')</if>
+            <if test="tplnum != null  and tplnum != ''"> and tplnum = #{tplnum}</if>
+            <if test="fieldsluru != null  and fieldsluru != ''"> and fieldsluru = #{fieldsluru}</if>
+            <if test="fieldsbitian != null  and fieldsbitian != ''"> and fieldsbitian = #{fieldsbitian}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuFlowModetplById" parameterType="Long" resultMap="XinhuFlowModetplResult">
+        <include refid="selectXinhuFlowModetplVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuFlowModetpl" parameterType="XinhuFlowModetpl" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_flow_modetpl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="setid != null">setid,</if>
+            <if test="tplname != null and tplname != ''">tplname,</if>
+            <if test="tplnum != null and tplnum != ''">tplnum,</if>
+            <if test="fieldsluru != null and fieldsluru != ''">fieldsluru,</if>
+            <if test="fieldsbitian != null and fieldsbitian != ''">fieldsbitian,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="status != null">status,</if>
+            <if test="sort != null">sort,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="setid != null">#{setid},</if>
+            <if test="tplname != null and tplname != ''">#{tplname},</if>
+            <if test="tplnum != null and tplnum != ''">#{tplnum},</if>
+            <if test="fieldsluru != null and fieldsluru != ''">#{fieldsluru},</if>
+            <if test="fieldsbitian != null and fieldsbitian != ''">#{fieldsbitian},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="status != null">#{status},</if>
+            <if test="sort != null">#{sort},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuFlowModetpl" parameterType="XinhuFlowModetpl">
+        update xinhu_flow_modetpl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="setid != null">setid = #{setid},</if>
+            <if test="tplname != null and tplname != ''">tplname = #{tplname},</if>
+            <if test="tplnum != null and tplnum != ''">tplnum = #{tplnum},</if>
+            <if test="fieldsluru != null and fieldsluru != ''">fieldsluru = #{fieldsluru},</if>
+            <if test="fieldsbitian != null and fieldsbitian != ''">fieldsbitian = #{fieldsbitian},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="sort != null">sort = #{sort},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuFlowModetplById" parameterType="Long">
+        delete from xinhu_flow_modetpl where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuFlowModetplByIds" parameterType="String">
+        delete from xinhu_flow_modetpl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

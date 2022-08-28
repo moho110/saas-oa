@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.document.mapper.XinhuSealaplMapper">
+    
+    <resultMap type="XinhuSealapl" id="XinhuSealaplResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="content"    column="content"    />
+        <result property="status"    column="status"    />
+        <result property="isturn"    column="isturn"    />
+        <result property="sealid"    column="sealid"    />
+        <result property="sealname"    column="sealname"    />
+        <result property="isout"    column="isout"    />
+        <result property="mknum"    column="mknum"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuSealaplVo">
+        select id, uid, optdt, optid, optname, applydt, content, status, isturn, sealid, sealname, isout, mknum, comid from xinhu_sealapl
+    </sql>
+
+    <select id="selectXinhuSealaplList" parameterType="XinhuSealapl" resultMap="XinhuSealaplResult">
+        <include refid="selectXinhuSealaplVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+            <if test="sealid != null  and sealid != ''"> and sealid = #{sealid}</if>
+            <if test="sealname != null  and sealname != ''"> and sealname like concat('%', #{sealname}, '%')</if>
+            <if test="isout != null "> and isout = #{isout}</if>
+            <if test="mknum != null  and mknum != ''"> and mknum = #{mknum}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuSealaplById" parameterType="Long" resultMap="XinhuSealaplResult">
+        <include refid="selectXinhuSealaplVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuSealapl" parameterType="XinhuSealapl" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_sealapl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uid != null">uid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="status != null">status,</if>
+            <if test="isturn != null">isturn,</if>
+            <if test="sealid != null and sealid != ''">sealid,</if>
+            <if test="sealname != null and sealname != ''">sealname,</if>
+            <if test="isout != null">isout,</if>
+            <if test="mknum != null and mknum != ''">mknum,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">#{uid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isturn != null">#{isturn},</if>
+            <if test="sealid != null and sealid != ''">#{sealid},</if>
+            <if test="sealname != null and sealname != ''">#{sealname},</if>
+            <if test="isout != null">#{isout},</if>
+            <if test="mknum != null and mknum != ''">#{mknum},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuSealapl" parameterType="XinhuSealapl">
+        update xinhu_sealapl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+            <if test="sealid != null and sealid != ''">sealid = #{sealid},</if>
+            <if test="sealname != null and sealname != ''">sealname = #{sealname},</if>
+            <if test="isout != null">isout = #{isout},</if>
+            <if test="mknum != null and mknum != ''">mknum = #{mknum},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuSealaplById" parameterType="Long">
+        delete from xinhu_sealapl where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuSealaplByIds" parameterType="String">
+        delete from xinhu_sealapl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

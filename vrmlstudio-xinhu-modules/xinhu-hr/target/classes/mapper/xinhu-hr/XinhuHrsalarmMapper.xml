@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuHrsalarmMapper">
+    
+    <resultMap type="XinhuHrsalarm" id="XinhuHrsalarmResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+        <result property="content"    column="content"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="atype"    column="atype"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="sort"    column="sort"    />
+        <result property="status"    column="status"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuHrsalarmVo">
+        select id, title, receid, recename, content, optid, optname, optdt, atype, startdt, enddt, sort, status, comid from xinhu_hrsalarm
+    </sql>
+
+    <select id="selectXinhuHrsalarmList" parameterType="XinhuHrsalarm" resultMap="XinhuHrsalarmResult">
+        <include refid="selectXinhuHrsalarmVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="atype != null  and atype != ''"> and atype = #{atype}</if>
+            <if test="startdt != null  and startdt != ''"> and startdt = #{startdt}</if>
+            <if test="enddt != null  and enddt != ''"> and enddt = #{enddt}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuHrsalarmById" parameterType="Long" resultMap="XinhuHrsalarmResult">
+        <include refid="selectXinhuHrsalarmVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuHrsalarm" parameterType="XinhuHrsalarm">
+        insert into xinhu_hrsalarm
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="atype != null and atype != ''">atype,</if>
+            <if test="startdt != null and startdt != ''">startdt,</if>
+            <if test="enddt != null and enddt != ''">enddt,</if>
+            <if test="sort != null">sort,</if>
+            <if test="status != null">status,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="atype != null and atype != ''">#{atype},</if>
+            <if test="startdt != null and startdt != ''">#{startdt},</if>
+            <if test="enddt != null and enddt != ''">#{enddt},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="status != null">#{status},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuHrsalarm" parameterType="XinhuHrsalarm">
+        update xinhu_hrsalarm
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="atype != null and atype != ''">atype = #{atype},</if>
+            <if test="startdt != null and startdt != ''">startdt = #{startdt},</if>
+            <if test="enddt != null and enddt != ''">enddt = #{enddt},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuHrsalarmById" parameterType="Long">
+        delete from xinhu_hrsalarm where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuHrsalarmByIds" parameterType="String">
+        delete from xinhu_hrsalarm where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

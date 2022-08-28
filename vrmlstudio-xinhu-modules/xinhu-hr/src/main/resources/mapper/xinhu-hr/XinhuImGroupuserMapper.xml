@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuImGroupuserMapper">
+    
+    <resultMap type="XinhuImGroupuser" id="XinhuImGroupuserResult">
+        <result property="id"    column="id"    />
+        <result property="gid"    column="gid"    />
+        <result property="uid"    column="uid"    />
+        <result property="istx"    column="istx"    />
+    </resultMap>
+
+    <sql id="selectXinhuImGroupuserVo">
+        select id, gid, uid, istx from xinhu_im_groupuser
+    </sql>
+
+    <select id="selectXinhuImGroupuserList" parameterType="XinhuImGroupuser" resultMap="XinhuImGroupuserResult">
+        <include refid="selectXinhuImGroupuserVo"/>
+        <where>  
+            <if test="gid != null "> and gid = #{gid}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="istx != null "> and istx = #{istx}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuImGroupuserById" parameterType="Long" resultMap="XinhuImGroupuserResult">
+        <include refid="selectXinhuImGroupuserVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuImGroupuser" parameterType="XinhuImGroupuser">
+        insert into xinhu_im_groupuser
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="gid != null">gid,</if>
+            <if test="uid != null">uid,</if>
+            <if test="istx != null">istx,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="gid != null">#{gid},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="istx != null">#{istx},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuImGroupuser" parameterType="XinhuImGroupuser">
+        update xinhu_im_groupuser
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="gid != null">gid = #{gid},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="istx != null">istx = #{istx},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuImGroupuserById" parameterType="Long">
+        delete from xinhu_im_groupuser where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuImGroupuserByIds" parameterType="String">
+        delete from xinhu_im_groupuser where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

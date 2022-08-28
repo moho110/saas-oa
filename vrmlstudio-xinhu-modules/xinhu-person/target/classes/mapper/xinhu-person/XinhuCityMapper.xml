@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.person.mapper.XinhuCityMapper">
+    
+    <resultMap type="XinhuCity" id="XinhuCityResult">
+        <result property="id"    column="id"    />
+        <result property="pid"    column="pid"    />
+        <result property="name"    column="name"    />
+        <result property="types"    column="types"    />
+        <result property="sorts"    column="sorts"    />
+        <result property="pinyin"    column="pinyin"    />
+        <result property="pinyins"    column="pinyins"    />
+    </resultMap>
+
+    <sql id="selectXinhuCityVo">
+        select id, pid, name, types, sorts, pinyin, pinyins from xinhu_city
+    </sql>
+
+    <select id="selectXinhuCityList" parameterType="XinhuCity" resultMap="XinhuCityResult">
+        <include refid="selectXinhuCityVo"/>
+        <where>  
+            <if test="pid != null "> and pid = #{pid}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="sorts != null "> and sorts = #{sorts}</if>
+            <if test="pinyin != null  and pinyin != ''"> and pinyin = #{pinyin}</if>
+            <if test="pinyins != null  and pinyins != ''"> and pinyins = #{pinyins}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuCityById" parameterType="Long" resultMap="XinhuCityResult">
+        <include refid="selectXinhuCityVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuCity" parameterType="XinhuCity" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_city
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pid != null">pid,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="types != null">types,</if>
+            <if test="sorts != null">sorts,</if>
+            <if test="pinyin != null and pinyin != ''">pinyin,</if>
+            <if test="pinyins != null and pinyins != ''">pinyins,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pid != null">#{pid},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="types != null">#{types},</if>
+            <if test="sorts != null">#{sorts},</if>
+            <if test="pinyin != null and pinyin != ''">#{pinyin},</if>
+            <if test="pinyins != null and pinyins != ''">#{pinyins},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuCity" parameterType="XinhuCity">
+        update xinhu_city
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="sorts != null">sorts = #{sorts},</if>
+            <if test="pinyin != null and pinyin != ''">pinyin = #{pinyin},</if>
+            <if test="pinyins != null and pinyins != ''">pinyins = #{pinyins},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuCityById" parameterType="Long">
+        delete from xinhu_city where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuCityByIds" parameterType="String">
+        delete from xinhu_city where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

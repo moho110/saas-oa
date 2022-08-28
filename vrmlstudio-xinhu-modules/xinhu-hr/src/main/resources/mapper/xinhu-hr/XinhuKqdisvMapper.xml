@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuKqdisvMapper">
+    
+    <resultMap type="XinhuKqdisv" id="XinhuKqdisvResult">
+        <result property="id"    column="id"    />
+        <result property="plx"    column="plx"    />
+        <result property="receid"    column="receid"    />
+        <result property="dt"    column="dt"    />
+        <result property="types"    column="types"    />
+        <result property="mid"    column="mid"    />
+    </resultMap>
+
+    <sql id="selectXinhuKqdisvVo">
+        select id, plx, receid, dt, types, mid from xinhu_kqdisv
+    </sql>
+
+    <select id="selectXinhuKqdisvList" parameterType="XinhuKqdisv" resultMap="XinhuKqdisvResult">
+        <include refid="selectXinhuKqdisvVo"/>
+        <where>  
+            <if test="plx != null "> and plx = #{plx}</if>
+            <if test="receid != null "> and receid = #{receid}</if>
+            <if test="dt != null "> and dt = #{dt}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuKqdisvById" parameterType="Long" resultMap="XinhuKqdisvResult">
+        <include refid="selectXinhuKqdisvVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuKqdisv" parameterType="XinhuKqdisv" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_kqdisv
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="plx != null">plx,</if>
+            <if test="receid != null">receid,</if>
+            <if test="dt != null">dt,</if>
+            <if test="types != null">types,</if>
+            <if test="mid != null">mid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="plx != null">#{plx},</if>
+            <if test="receid != null">#{receid},</if>
+            <if test="dt != null">#{dt},</if>
+            <if test="types != null">#{types},</if>
+            <if test="mid != null">#{mid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuKqdisv" parameterType="XinhuKqdisv">
+        update xinhu_kqdisv
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="plx != null">plx = #{plx},</if>
+            <if test="receid != null">receid = #{receid},</if>
+            <if test="dt != null">dt = #{dt},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="mid != null">mid = #{mid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuKqdisvById" parameterType="Long">
+        delete from xinhu_kqdisv where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuKqdisvByIds" parameterType="String">
+        delete from xinhu_kqdisv where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

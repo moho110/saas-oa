@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.flow.mapper.XinhuFlowChecksMapper">
+    
+    <resultMap type="XinhuFlowChecks" id="XinhuFlowChecksResult">
+        <result property="id"    column="id"    />
+        <result property="tables"    column="tables"    />
+        <result property="mid"    column="mid"    />
+        <result property="modeid"    column="modeid"    />
+        <result property="courseid"    column="courseid"    />
+        <result property="checkid"    column="checkid"    />
+        <result property="checkname"    column="checkname"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="status"    column="status"    />
+        <result property="addlx"    column="addlx"    />
+    </resultMap>
+
+    <sql id="selectXinhuFlowChecksVo">
+        select id, tables, mid, modeid, courseid, checkid, checkname, optid, optname, optdt, status, addlx from xinhu_flow_checks
+    </sql>
+
+    <select id="selectXinhuFlowChecksList" parameterType="XinhuFlowChecks" resultMap="XinhuFlowChecksResult">
+        <include refid="selectXinhuFlowChecksVo"/>
+        <where>  
+            <if test="tables != null  and tables != ''"> and tables = #{tables}</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="modeid != null "> and modeid = #{modeid}</if>
+            <if test="courseid != null "> and courseid = #{courseid}</if>
+            <if test="checkid != null  and checkid != ''"> and checkid = #{checkid}</if>
+            <if test="checkname != null  and checkname != ''"> and checkname like concat('%', #{checkname}, '%')</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="optdt != null "> and optdt like concat('%', #{optdt}, '%')</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="addlx != null "> and addlx = #{addlx}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuFlowChecksById" parameterType="Long" resultMap="XinhuFlowChecksResult">
+        <include refid="selectXinhuFlowChecksVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuFlowChecks" parameterType="XinhuFlowChecks" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_flow_checks
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tables != null and tables != ''">tables,</if>
+            <if test="mid != null">mid,</if>
+            <if test="modeid != null">modeid,</if>
+            <if test="courseid != null">courseid,</if>
+            <if test="checkid != null and checkid != ''">checkid,</if>
+            <if test="checkname != null and checkname != ''">checkname,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="status != null">status,</if>
+            <if test="addlx != null">addlx,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tables != null and tables != ''">#{tables},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="modeid != null">#{modeid},</if>
+            <if test="courseid != null">#{courseid},</if>
+            <if test="checkid != null and checkid != ''">#{checkid},</if>
+            <if test="checkname != null and checkname != ''">#{checkname},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="status != null">#{status},</if>
+            <if test="addlx != null">#{addlx},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuFlowChecks" parameterType="XinhuFlowChecks">
+        update xinhu_flow_checks
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tables != null and tables != ''">tables = #{tables},</if>
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="modeid != null">modeid = #{modeid},</if>
+            <if test="courseid != null">courseid = #{courseid},</if>
+            <if test="checkid != null and checkid != ''">checkid = #{checkid},</if>
+            <if test="checkname != null and checkname != ''">checkname = #{checkname},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="addlx != null">addlx = #{addlx},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuFlowChecksById" parameterType="Long">
+        delete from xinhu_flow_checks where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuFlowChecksByIds" parameterType="String">
+        delete from xinhu_flow_checks where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

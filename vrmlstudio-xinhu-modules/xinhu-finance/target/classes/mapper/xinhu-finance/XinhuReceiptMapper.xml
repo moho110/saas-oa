@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.finance.mapper.XinhuReceiptMapper">
+    
+    <resultMap type="XinhuReceipt" id="XinhuReceiptResult">
+        <result property="id"    column="id"    />
+        <result property="modenum"    column="modenum"    />
+        <result property="modename"    column="modename"    />
+        <result property="tables"    column="tables"    />
+        <result property="mid"    column="mid"    />
+        <result property="uid"    column="uid"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+        <result property="receids"    column="receids"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="content"    column="content"    />
+        <result property="ushuz"    column="ushuz"    />
+        <result property="ushuy"    column="ushuy"    />
+        <result property="status"    column="status"    />
+        <result property="optname"    column="optname"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuReceiptVo">
+        select id, modenum, modename, tables, mid, uid, receid, recename, receids, optdt, content, ushuz, ushuy, status, optname, comid from xinhu_receipt
+    </sql>
+
+    <select id="selectXinhuReceiptList" parameterType="XinhuReceipt" resultMap="XinhuReceiptResult">
+        <include refid="selectXinhuReceiptVo"/>
+        <where>  
+            <if test="modenum != null  and modenum != ''"> and modenum = #{modenum}</if>
+            <if test="modename != null  and modename != ''"> and modename like concat('%', #{modename}, '%')</if>
+            <if test="tables != null  and tables != ''"> and tables = #{tables}</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="receids != null  and receids != ''"> and receids = #{receids}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="ushuz != null "> and ushuz = #{ushuz}</if>
+            <if test="ushuy != null "> and ushuy = #{ushuy}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuReceiptById" parameterType="Long" resultMap="XinhuReceiptResult">
+        <include refid="selectXinhuReceiptVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuReceipt" parameterType="XinhuReceipt" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_receipt
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="modenum != null and modenum != ''">modenum,</if>
+            <if test="modename != null and modename != ''">modename,</if>
+            <if test="tables != null and tables != ''">tables,</if>
+            <if test="mid != null">mid,</if>
+            <if test="uid != null">uid,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="receids != null and receids != ''">receids,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="ushuz != null">ushuz,</if>
+            <if test="ushuy != null">ushuy,</if>
+            <if test="status != null">status,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="modenum != null and modenum != ''">#{modenum},</if>
+            <if test="modename != null and modename != ''">#{modename},</if>
+            <if test="tables != null and tables != ''">#{tables},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="receids != null and receids != ''">#{receids},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="ushuz != null">#{ushuz},</if>
+            <if test="ushuy != null">#{ushuy},</if>
+            <if test="status != null">#{status},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuReceipt" parameterType="XinhuReceipt">
+        update xinhu_receipt
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="modenum != null and modenum != ''">modenum = #{modenum},</if>
+            <if test="modename != null and modename != ''">modename = #{modename},</if>
+            <if test="tables != null and tables != ''">tables = #{tables},</if>
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="receids != null and receids != ''">receids = #{receids},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="ushuz != null">ushuz = #{ushuz},</if>
+            <if test="ushuy != null">ushuy = #{ushuy},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuReceiptById" parameterType="Long">
+        delete from xinhu_receipt where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuReceiptByIds" parameterType="String">
+        delete from xinhu_receipt where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

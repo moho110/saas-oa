@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.police.mapper.XinhuGoodsMapper">
+    
+    <resultMap type="XinhuGoods" id="XinhuGoodsResult">
+        <result property="id"    column="id"    />
+        <result property="typeid"    column="typeid"    />
+        <result property="num"    column="num"    />
+        <result property="name"    column="name"    />
+        <result property="guige"    column="guige"    />
+        <result property="xinghao"    column="xinghao"    />
+        <result property="content"    column="content"    />
+        <result property="price"    column="price"    />
+        <result property="unit"    column="unit"    />
+        <result property="adddt"    column="adddt"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="stock"    column="stock"    />
+        <result property="stockcs"    column="stockcs"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuGoodsVo">
+        select id, typeid, num, name, guige, xinghao, content, price, unit, adddt, optdt, optid, optname, stock, stockcs, comid from xinhu_goods
+    </sql>
+
+    <select id="selectXinhuGoodsList" parameterType="XinhuGoods" resultMap="XinhuGoodsResult">
+        <include refid="selectXinhuGoodsVo"/>
+        <where>  
+            <if test="typeid != null "> and typeid = #{typeid}</if>
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="guige != null  and guige != ''"> and guige = #{guige}</if>
+            <if test="xinghao != null  and xinghao != ''"> and xinghao = #{xinghao}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="adddt != null "> and adddt = #{adddt}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="stock != null "> and stock = #{stock}</if>
+            <if test="stockcs != null "> and stockcs = #{stockcs}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuGoodsById" parameterType="Long" resultMap="XinhuGoodsResult">
+        <include refid="selectXinhuGoodsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuGoods" parameterType="XinhuGoods" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="typeid != null">typeid,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="guige != null and guige != ''">guige,</if>
+            <if test="xinghao != null and xinghao != ''">xinghao,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="price != null">price,</if>
+            <if test="unit != null and unit != ''">unit,</if>
+            <if test="adddt != null">adddt,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="stock != null">stock,</if>
+            <if test="stockcs != null">stockcs,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="typeid != null">#{typeid},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="guige != null and guige != ''">#{guige},</if>
+            <if test="xinghao != null and xinghao != ''">#{xinghao},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="price != null">#{price},</if>
+            <if test="unit != null and unit != ''">#{unit},</if>
+            <if test="adddt != null">#{adddt},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="stock != null">#{stock},</if>
+            <if test="stockcs != null">#{stockcs},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuGoods" parameterType="XinhuGoods">
+        update xinhu_goods
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="typeid != null">typeid = #{typeid},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="guige != null and guige != ''">guige = #{guige},</if>
+            <if test="xinghao != null and xinghao != ''">xinghao = #{xinghao},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="unit != null and unit != ''">unit = #{unit},</if>
+            <if test="adddt != null">adddt = #{adddt},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="stock != null">stock = #{stock},</if>
+            <if test="stockcs != null">stockcs = #{stockcs},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuGoodsById" parameterType="Long">
+        delete from xinhu_goods where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuGoodsByIds" parameterType="String">
+        delete from xinhu_goods where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

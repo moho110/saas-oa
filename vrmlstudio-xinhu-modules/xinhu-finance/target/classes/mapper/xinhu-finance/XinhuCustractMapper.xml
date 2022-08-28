@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.finance.mapper.XinhuCustractMapper">
+    
+    <resultMap type="XinhuCustract" id="XinhuCustractResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="num"    column="num"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optname"    column="optname"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="contents"    column="contents"    />
+        <result property="status"    column="status"    />
+        <result property="custid"    column="custid"    />
+        <result property="custname"    column="custname"    />
+        <result property="linkman"    column="linkman"    />
+        <result property="money"    column="money"    />
+        <result property="moneys"    column="moneys"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="content"    column="content"    />
+        <result property="saleid"    column="saleid"    />
+        <result property="isturn"    column="isturn"    />
+        <result property="signdt"    column="signdt"    />
+        <result property="types"    column="types"    />
+        <result property="ispay"    column="ispay"    />
+        <result property="isover"    column="isover"    />
+        <result property="createname"    column="createname"    />
+        <result property="createid"    column="createid"    />
+        <result property="xiaoid"    column="xiaoid"    />
+        <result property="comid"    column="comid"    />
+        <result property="fenlei"    column="fenlei"    />
+        <result property="htfileid"    column="htfileid"    />
+    </resultMap>
+
+    <sql id="selectXinhuCustractVo">
+        select id, uid, num, optdt, optname, applydt, contents, status, custid, custname, linkman, money, moneys, startdt, enddt, content, saleid, isturn, signdt, types, ispay, isover, createname, createid, xiaoid, comid, fenlei, htfileid from xinhu_custract
+    </sql>
+
+    <select id="selectXinhuCustractList" parameterType="XinhuCustract" resultMap="XinhuCustractResult">
+        <include refid="selectXinhuCustractVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="contents != null  and contents != ''"> and contents = #{contents}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="custid != null "> and custid = #{custid}</if>
+            <if test="custname != null  and custname != ''"> and custname like concat('%', #{custname}, '%')</if>
+            <if test="linkman != null  and linkman != ''"> and linkman = #{linkman}</if>
+            <if test="money != null "> and money = #{money}</if>
+            <if test="moneys != null "> and moneys = #{moneys}</if>
+            <if test="startdt != null "> and startdt = #{startdt}</if>
+            <if test="enddt != null "> and enddt = #{enddt}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="saleid != null "> and saleid = #{saleid}</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+            <if test="signdt != null "> and signdt = #{signdt}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="ispay != null "> and ispay = #{ispay}</if>
+            <if test="isover != null "> and isover = #{isover}</if>
+            <if test="createname != null  and createname != ''"> and createname like concat('%', #{createname}, '%')</if>
+            <if test="createid != null "> and createid = #{createid}</if>
+            <if test="xiaoid != null "> and xiaoid = #{xiaoid}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="fenlei != null  and fenlei != ''"> and fenlei = #{fenlei}</if>
+            <if test="htfileid != null  and htfileid != ''"> and htfileid = #{htfileid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuCustractById" parameterType="Long" resultMap="XinhuCustractResult">
+        <include refid="selectXinhuCustractVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuCustract" parameterType="XinhuCustract" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_custract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uid != null">uid,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="contents != null and contents != ''">contents,</if>
+            <if test="status != null">status,</if>
+            <if test="custid != null">custid,</if>
+            <if test="custname != null and custname != ''">custname,</if>
+            <if test="linkman != null and linkman != ''">linkman,</if>
+            <if test="money != null">money,</if>
+            <if test="moneys != null">moneys,</if>
+            <if test="startdt != null">startdt,</if>
+            <if test="enddt != null">enddt,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="saleid != null">saleid,</if>
+            <if test="isturn != null">isturn,</if>
+            <if test="signdt != null">signdt,</if>
+            <if test="types != null">types,</if>
+            <if test="ispay != null">ispay,</if>
+            <if test="isover != null">isover,</if>
+            <if test="createname != null and createname != ''">createname,</if>
+            <if test="createid != null">createid,</if>
+            <if test="xiaoid != null">xiaoid,</if>
+            <if test="comid != null">comid,</if>
+            <if test="fenlei != null and fenlei != ''">fenlei,</if>
+            <if test="htfileid != null and htfileid != ''">htfileid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">#{uid},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="contents != null and contents != ''">#{contents},</if>
+            <if test="status != null">#{status},</if>
+            <if test="custid != null">#{custid},</if>
+            <if test="custname != null and custname != ''">#{custname},</if>
+            <if test="linkman != null and linkman != ''">#{linkman},</if>
+            <if test="money != null">#{money},</if>
+            <if test="moneys != null">#{moneys},</if>
+            <if test="startdt != null">#{startdt},</if>
+            <if test="enddt != null">#{enddt},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="saleid != null">#{saleid},</if>
+            <if test="isturn != null">#{isturn},</if>
+            <if test="signdt != null">#{signdt},</if>
+            <if test="types != null">#{types},</if>
+            <if test="ispay != null">#{ispay},</if>
+            <if test="isover != null">#{isover},</if>
+            <if test="createname != null and createname != ''">#{createname},</if>
+            <if test="createid != null">#{createid},</if>
+            <if test="xiaoid != null">#{xiaoid},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="fenlei != null and fenlei != ''">#{fenlei},</if>
+            <if test="htfileid != null and htfileid != ''">#{htfileid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuCustract" parameterType="XinhuCustract">
+        update xinhu_custract
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="contents != null and contents != ''">contents = #{contents},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="custid != null">custid = #{custid},</if>
+            <if test="custname != null and custname != ''">custname = #{custname},</if>
+            <if test="linkman != null and linkman != ''">linkman = #{linkman},</if>
+            <if test="money != null">money = #{money},</if>
+            <if test="moneys != null">moneys = #{moneys},</if>
+            <if test="startdt != null">startdt = #{startdt},</if>
+            <if test="enddt != null">enddt = #{enddt},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="saleid != null">saleid = #{saleid},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+            <if test="signdt != null">signdt = #{signdt},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="ispay != null">ispay = #{ispay},</if>
+            <if test="isover != null">isover = #{isover},</if>
+            <if test="createname != null and createname != ''">createname = #{createname},</if>
+            <if test="createid != null">createid = #{createid},</if>
+            <if test="xiaoid != null">xiaoid = #{xiaoid},</if>
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="fenlei != null and fenlei != ''">fenlei = #{fenlei},</if>
+            <if test="htfileid != null and htfileid != ''">htfileid = #{htfileid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuCustractById" parameterType="Long">
+        delete from xinhu_custract where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuCustractByIds" parameterType="String">
+        delete from xinhu_custract where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

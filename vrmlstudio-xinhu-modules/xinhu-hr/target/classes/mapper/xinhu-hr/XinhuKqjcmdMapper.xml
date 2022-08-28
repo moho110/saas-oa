@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuKqjcmdMapper">
+    
+    <resultMap type="XinhuKqjcmd" id="XinhuKqjcmdResult">
+        <result property="id"    column="id"    />
+        <result property="snid"    column="snid"    />
+        <result property="cmd"    column="cmd"    />
+        <result property="status"    column="status"    />
+        <result property="qjtime"    column="qjtime"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="cjtime"    column="cjtime"    />
+        <result property="atype"    column="atype"    />
+        <result property="others"    column="others"    />
+    </resultMap>
+
+    <sql id="selectXinhuKqjcmdVo">
+        select id, snid, cmd, status, qjtime, optdt, cjtime, atype, others from xinhu_kqjcmd
+    </sql>
+
+    <select id="selectXinhuKqjcmdList" parameterType="XinhuKqjcmd" resultMap="XinhuKqjcmdResult">
+        <include refid="selectXinhuKqjcmdVo"/>
+        <where>  
+            <if test="snid != null "> and snid = #{snid}</if>
+            <if test="cmd != null  and cmd != ''"> and cmd = #{cmd}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="qjtime != null "> and qjtime = #{qjtime}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="cjtime != null "> and cjtime = #{cjtime}</if>
+            <if test="atype != null  and atype != ''"> and atype = #{atype}</if>
+            <if test="others != null  and others != ''"> and others = #{others}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuKqjcmdById" parameterType="Long" resultMap="XinhuKqjcmdResult">
+        <include refid="selectXinhuKqjcmdVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuKqjcmd" parameterType="XinhuKqjcmd">
+        insert into xinhu_kqjcmd
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="snid != null">snid,</if>
+            <if test="cmd != null and cmd != ''">cmd,</if>
+            <if test="status != null">status,</if>
+            <if test="qjtime != null">qjtime,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="cjtime != null">cjtime,</if>
+            <if test="atype != null and atype != ''">atype,</if>
+            <if test="others != null and others != ''">others,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="snid != null">#{snid},</if>
+            <if test="cmd != null and cmd != ''">#{cmd},</if>
+            <if test="status != null">#{status},</if>
+            <if test="qjtime != null">#{qjtime},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="cjtime != null">#{cjtime},</if>
+            <if test="atype != null and atype != ''">#{atype},</if>
+            <if test="others != null and others != ''">#{others},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuKqjcmd" parameterType="XinhuKqjcmd">
+        update xinhu_kqjcmd
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="snid != null">snid = #{snid},</if>
+            <if test="cmd != null and cmd != ''">cmd = #{cmd},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="qjtime != null">qjtime = #{qjtime},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="cjtime != null">cjtime = #{cjtime},</if>
+            <if test="atype != null and atype != ''">atype = #{atype},</if>
+            <if test="others != null and others != ''">others = #{others},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuKqjcmdById" parameterType="Long">
+        delete from xinhu_kqjcmd where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuKqjcmdByIds" parameterType="String">
+        delete from xinhu_kqjcmd where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

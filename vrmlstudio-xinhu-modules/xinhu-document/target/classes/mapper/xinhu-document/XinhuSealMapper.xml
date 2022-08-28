@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.document.mapper.XinhuSealMapper">
+    
+    <resultMap type="XinhuSeal" id="XinhuSealResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="types"    column="types"    />
+        <result property="bgname"    column="bgname"    />
+        <result property="bgid"    column="bgid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="sort"    column="sort"    />
+        <result property="sealimg"    column="sealimg"    />
+        <result property="content"    column="content"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuSealVo">
+        select id, name, types, bgname, bgid, optdt, sort, sealimg, content, startdt, enddt, comid from xinhu_seal
+    </sql>
+
+    <select id="selectXinhuSealList" parameterType="XinhuSeal" resultMap="XinhuSealResult">
+        <include refid="selectXinhuSealVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="types != null  and types != ''"> and types = #{types}</if>
+            <if test="bgname != null  and bgname != ''"> and bgname like concat('%', #{bgname}, '%')</if>
+            <if test="bgid != null  and bgid != ''"> and bgid = #{bgid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="sealimg != null  and sealimg != ''"> and sealimg = #{sealimg}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="startdt != null "> and startdt = #{startdt}</if>
+            <if test="enddt != null "> and enddt = #{enddt}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuSealById" parameterType="Long" resultMap="XinhuSealResult">
+        <include refid="selectXinhuSealVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuSeal" parameterType="XinhuSeal" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_seal
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="types != null and types != ''">types,</if>
+            <if test="bgname != null and bgname != ''">bgname,</if>
+            <if test="bgid != null and bgid != ''">bgid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="sort != null">sort,</if>
+            <if test="sealimg != null and sealimg != ''">sealimg,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="startdt != null">startdt,</if>
+            <if test="enddt != null">enddt,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="types != null and types != ''">#{types},</if>
+            <if test="bgname != null and bgname != ''">#{bgname},</if>
+            <if test="bgid != null and bgid != ''">#{bgid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="sealimg != null and sealimg != ''">#{sealimg},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="startdt != null">#{startdt},</if>
+            <if test="enddt != null">#{enddt},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuSeal" parameterType="XinhuSeal">
+        update xinhu_seal
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="types != null and types != ''">types = #{types},</if>
+            <if test="bgname != null and bgname != ''">bgname = #{bgname},</if>
+            <if test="bgid != null and bgid != ''">bgid = #{bgid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="sealimg != null and sealimg != ''">sealimg = #{sealimg},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="startdt != null">startdt = #{startdt},</if>
+            <if test="enddt != null">enddt = #{enddt},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuSealById" parameterType="Long">
+        delete from xinhu_seal where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuSealByIds" parameterType="String">
+        delete from xinhu_seal where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

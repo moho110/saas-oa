@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio.iml" filepath="$PROJECT_DIR$/vrmlstudio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-admin/vrmlstudio-admin.iml" filepath="$PROJECT_DIR$/vrmlstudio-admin/vrmlstudio-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-common/vrmlstudio-common.iml" filepath="$PROJECT_DIR$/vrmlstudio-common/vrmlstudio-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-framework/vrmlstudio-framework.iml" filepath="$PROJECT_DIR$/vrmlstudio-framework/vrmlstudio-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-system/vrmlstudio-system.iml" filepath="$PROJECT_DIR$/vrmlstudio-system/vrmlstudio-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-tenant/vrmlstudio-tenant.iml" filepath="$PROJECT_DIR$/vrmlstudio-tenant/vrmlstudio-tenant.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-xinhu-modules/vrmlstudio-xinhu-modules.iml" filepath="$PROJECT_DIR$/vrmlstudio-xinhu-modules/vrmlstudio-xinhu-modules.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-xinhu-modules/xinhu-document/xinhu-document.iml" filepath="$PROJECT_DIR$/vrmlstudio-xinhu-modules/xinhu-document/xinhu-document.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-xinhu-modules/xinhu-finance/xinhu-finance.iml" filepath="$PROJECT_DIR$/vrmlstudio-xinhu-modules/xinhu-finance/xinhu-finance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-xinhu-modules/xinhu-flow/xinhu-flow.iml" filepath="$PROJECT_DIR$/vrmlstudio-xinhu-modules/xinhu-flow/xinhu-flow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-xinhu-modules/xinhu-hr/xinhu-hr.iml" filepath="$PROJECT_DIR$/vrmlstudio-xinhu-modules/xinhu-hr/xinhu-hr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-xinhu-modules/xinhu-person/xinhu-person.iml" filepath="$PROJECT_DIR$/vrmlstudio-xinhu-modules/xinhu-person/xinhu-person.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-xinhu-modules/xinhu-police/xinhu-police.iml" filepath="$PROJECT_DIR$/vrmlstudio-xinhu-modules/xinhu-police/xinhu-police.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-xinhu-modules/xinhu-resources/xinhu-resources.iml" filepath="$PROJECT_DIR$/vrmlstudio-xinhu-modules/xinhu-resources/xinhu-resources.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrmlstudio-xinhu-modules/xinhu-xsystem/xinhu-xsystem.iml" filepath="$PROJECT_DIR$/vrmlstudio-xinhu-modules/xinhu-xsystem/xinhu-xsystem.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuHrsalaryMapper">
+    
+    <resultMap type="XinhuHrsalary" id="XinhuHrsalaryResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="xuid"    column="xuid"    />
+        <result property="uname"    column="uname"    />
+        <result property="udeptname"    column="udeptname"    />
+        <result property="ranking"    column="ranking"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="content"    column="content"    />
+        <result property="status"    column="status"    />
+        <result property="isturn"    column="isturn"    />
+        <result property="month"    column="month"    />
+        <result property="base"    column="base"    />
+        <result property="money"    column="money"    />
+        <result property="mones"    column="mones"    />
+        <result property="postjt"    column="postjt"    />
+        <result property="skilljt"    column="skilljt"    />
+        <result property="travelbt"    column="travelbt"    />
+        <result property="telbt"    column="telbt"    />
+        <result property="reward"    column="reward"    />
+        <result property="punish"    column="punish"    />
+        <result property="socials"    column="socials"    />
+        <result property="socialsunit"    column="socialsunit"    />
+        <result property="taxes"    column="taxes"    />
+        <result property="taxbase"    column="taxbase"    />
+        <result property="ispay"    column="ispay"    />
+        <result property="otherzj"    column="otherzj"    />
+        <result property="otherjs"    column="otherjs"    />
+        <result property="cidao"    column="cidao"    />
+        <result property="cidaos"    column="cidaos"    />
+        <result property="zaotui"    column="zaotui"    />
+        <result property="zaotuis"    column="zaotuis"    />
+        <result property="leavet"    column="leavet"    />
+        <result property="leaves"    column="leaves"    />
+        <result property="jiaban"    column="jiaban"    />
+        <result property="jiabans"    column="jiabans"    />
+        <result property="weidk"    column="weidk"    />
+        <result property="weidks"    column="weidks"    />
+        <result property="jxjs"    column="jxjs"    />
+        <result property="jxxs"    column="jxxs"    />
+        <result property="jxdf"    column="jxdf"    />
+        <result property="jtpost"    column="jtpost"    />
+        <result property="ysbtime"    column="ysbtime"    />
+        <result property="zsbtime"    column="zsbtime"    />
+        <result property="gonggeren"    column="gonggeren"    />
+        <result property="gongunit"    column="gongunit"    />
+        <result property="foodbt"    column="foodbt"    />
+        <result property="hotbt"    column="hotbt"    />
+        <result property="dnbt"    column="dnbt"    />
+        <result property="jiansr"    column="jiansr"    />
+        <result property="otherbt"    column="otherbt"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuHrsalaryVo">
+        select id, uid, xuid, uname, udeptname, ranking, optdt, optid, optname, applydt, content, status, isturn, month, base, money, mones, postjt, skilljt, travelbt, telbt, reward, punish, socials, socialsunit, taxes, taxbase, ispay, otherzj, otherjs, cidao, cidaos, zaotui, zaotuis, leavet, leaves, jiaban, jiabans, weidk, weidks, jxjs, jxxs, jxdf, jtpost, ysbtime, zsbtime, gonggeren, gongunit, foodbt, hotbt, dnbt, jiansr, otherbt, comid from xinhu_hrsalary
+    </sql>
+
+    <select id="selectXinhuHrsalaryList" parameterType="XinhuHrsalary" resultMap="XinhuHrsalaryResult">
+        <include refid="selectXinhuHrsalaryVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="xuid != null "> and xuid = #{xuid}</if>
+            <if test="uname != null  and uname != ''"> and uname like concat('%', #{uname}, '%')</if>
+            <if test="udeptname != null  and udeptname != ''"> and udeptname like concat('%', #{udeptname}, '%')</if>
+            <if test="ranking != null  and ranking != ''"> and ranking = #{ranking}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+            <if test="month != null  and month != ''"> and month = #{month}</if>
+            <if test="base != null "> and base = #{base}</if>
+            <if test="money != null "> and money = #{money}</if>
+            <if test="mones != null "> and mones = #{mones}</if>
+            <if test="postjt != null "> and postjt = #{postjt}</if>
+            <if test="skilljt != null "> and skilljt = #{skilljt}</if>
+            <if test="travelbt != null "> and travelbt = #{travelbt}</if>
+            <if test="telbt != null "> and telbt = #{telbt}</if>
+            <if test="reward != null "> and reward = #{reward}</if>
+            <if test="punish != null "> and punish = #{punish}</if>
+            <if test="socials != null "> and socials = #{socials}</if>
+            <if test="socialsunit != null "> and socialsunit = #{socialsunit}</if>
+            <if test="taxes != null "> and taxes = #{taxes}</if>
+            <if test="taxbase != null "> and taxbase = #{taxbase}</if>
+            <if test="ispay != null "> and ispay = #{ispay}</if>
+            <if test="otherzj != null "> and otherzj = #{otherzj}</if>
+            <if test="otherjs != null "> and otherjs = #{otherjs}</if>
+            <if test="cidao != null "> and cidao = #{cidao}</if>
+            <if test="cidaos != null "> and cidaos = #{cidaos}</if>
+            <if test="zaotui != null "> and zaotui = #{zaotui}</if>
+            <if test="zaotuis != null "> and zaotuis = #{zaotuis}</if>
+            <if test="leavet != null "> and leavet = #{leavet}</if>
+            <if test="leaves != null "> and leaves = #{leaves}</if>
+            <if test="jiaban != null "> and jiaban = #{jiaban}</if>
+            <if test="jiabans != null "> and jiabans = #{jiabans}</if>
+            <if test="weidk != null "> and weidk = #{weidk}</if>
+            <if test="weidks != null "> and weidks = #{weidks}</if>
+            <if test="jxjs != null "> and jxjs = #{jxjs}</if>
+            <if test="jxxs != null "> and jxxs = #{jxxs}</if>
+            <if test="jxdf != null "> and jxdf = #{jxdf}</if>
+            <if test="jtpost != null "> and jtpost = #{jtpost}</if>
+            <if test="ysbtime != null "> and ysbtime = #{ysbtime}</if>
+            <if test="zsbtime != null "> and zsbtime = #{zsbtime}</if>
+            <if test="gonggeren != null "> and gonggeren = #{gonggeren}</if>
+            <if test="gongunit != null "> and gongunit = #{gongunit}</if>
+            <if test="foodbt != null "> and foodbt = #{foodbt}</if>
+            <if test="hotbt != null "> and hotbt = #{hotbt}</if>
+            <if test="dnbt != null "> and dnbt = #{dnbt}</if>
+            <if test="jiansr != null "> and jiansr = #{jiansr}</if>
+            <if test="otherbt != null "> and otherbt = #{otherbt}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuHrsalaryById" parameterType="Long" resultMap="XinhuHrsalaryResult">
+        <include refid="selectXinhuHrsalaryVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuHrsalary" parameterType="XinhuHrsalary">
+        insert into xinhu_hrsalary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uid != null">uid,</if>
+            <if test="xuid != null">xuid,</if>
+            <if test="uname != null and uname != ''">uname,</if>
+            <if test="udeptname != null and udeptname != ''">udeptname,</if>
+            <if test="ranking != null and ranking != ''">ranking,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="status != null">status,</if>
+            <if test="isturn != null">isturn,</if>
+            <if test="month != null and month != ''">month,</if>
+            <if test="base != null">base,</if>
+            <if test="money != null">money,</if>
+            <if test="mones != null">mones,</if>
+            <if test="postjt != null">postjt,</if>
+            <if test="skilljt != null">skilljt,</if>
+            <if test="travelbt != null">travelbt,</if>
+            <if test="telbt != null">telbt,</if>
+            <if test="reward != null">reward,</if>
+            <if test="punish != null">punish,</if>
+            <if test="socials != null">socials,</if>
+            <if test="socialsunit != null">socialsunit,</if>
+            <if test="taxes != null">taxes,</if>
+            <if test="taxbase != null">taxbase,</if>
+            <if test="ispay != null">ispay,</if>
+            <if test="otherzj != null">otherzj,</if>
+            <if test="otherjs != null">otherjs,</if>
+            <if test="cidao != null">cidao,</if>
+            <if test="cidaos != null">cidaos,</if>
+            <if test="zaotui != null">zaotui,</if>
+            <if test="zaotuis != null">zaotuis,</if>
+            <if test="leavet != null">leavet,</if>
+            <if test="leaves != null">leaves,</if>
+            <if test="jiaban != null">jiaban,</if>
+            <if test="jiabans != null">jiabans,</if>
+            <if test="weidk != null">weidk,</if>
+            <if test="weidks != null">weidks,</if>
+            <if test="jxjs != null">jxjs,</if>
+            <if test="jxxs != null">jxxs,</if>
+            <if test="jxdf != null">jxdf,</if>
+            <if test="jtpost != null">jtpost,</if>
+            <if test="ysbtime != null">ysbtime,</if>
+            <if test="zsbtime != null">zsbtime,</if>
+            <if test="gonggeren != null">gonggeren,</if>
+            <if test="gongunit != null">gongunit,</if>
+            <if test="foodbt != null">foodbt,</if>
+            <if test="hotbt != null">hotbt,</if>
+            <if test="dnbt != null">dnbt,</if>
+            <if test="jiansr != null">jiansr,</if>
+            <if test="otherbt != null">otherbt,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="xuid != null">#{xuid},</if>
+            <if test="uname != null and uname != ''">#{uname},</if>
+            <if test="udeptname != null and udeptname != ''">#{udeptname},</if>
+            <if test="ranking != null and ranking != ''">#{ranking},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isturn != null">#{isturn},</if>
+            <if test="month != null and month != ''">#{month},</if>
+            <if test="base != null">#{base},</if>
+            <if test="money != null">#{money},</if>
+            <if test="mones != null">#{mones},</if>
+            <if test="postjt != null">#{postjt},</if>
+            <if test="skilljt != null">#{skilljt},</if>
+            <if test="travelbt != null">#{travelbt},</if>
+            <if test="telbt != null">#{telbt},</if>
+            <if test="reward != null">#{reward},</if>
+            <if test="punish != null">#{punish},</if>
+            <if test="socials != null">#{socials},</if>
+            <if test="socialsunit != null">#{socialsunit},</if>
+            <if test="taxes != null">#{taxes},</if>
+            <if test="taxbase != null">#{taxbase},</if>
+            <if test="ispay != null">#{ispay},</if>
+            <if test="otherzj != null">#{otherzj},</if>
+            <if test="otherjs != null">#{otherjs},</if>
+            <if test="cidao != null">#{cidao},</if>
+            <if test="cidaos != null">#{cidaos},</if>
+            <if test="zaotui != null">#{zaotui},</if>
+            <if test="zaotuis != null">#{zaotuis},</if>
+            <if test="leavet != null">#{leavet},</if>
+            <if test="leaves != null">#{leaves},</if>
+            <if test="jiaban != null">#{jiaban},</if>
+            <if test="jiabans != null">#{jiabans},</if>
+            <if test="weidk != null">#{weidk},</if>
+            <if test="weidks != null">#{weidks},</if>
+            <if test="jxjs != null">#{jxjs},</if>
+            <if test="jxxs != null">#{jxxs},</if>
+            <if test="jxdf != null">#{jxdf},</if>
+            <if test="jtpost != null">#{jtpost},</if>
+            <if test="ysbtime != null">#{ysbtime},</if>
+            <if test="zsbtime != null">#{zsbtime},</if>
+            <if test="gonggeren != null">#{gonggeren},</if>
+            <if test="gongunit != null">#{gongunit},</if>
+            <if test="foodbt != null">#{foodbt},</if>
+            <if test="hotbt != null">#{hotbt},</if>
+            <if test="dnbt != null">#{dnbt},</if>
+            <if test="jiansr != null">#{jiansr},</if>
+            <if test="otherbt != null">#{otherbt},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuHrsalary" parameterType="XinhuHrsalary">
+        update xinhu_hrsalary
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="xuid != null">xuid = #{xuid},</if>
+            <if test="uname != null and uname != ''">uname = #{uname},</if>
+            <if test="udeptname != null and udeptname != ''">udeptname = #{udeptname},</if>
+            <if test="ranking != null and ranking != ''">ranking = #{ranking},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+            <if test="month != null and month != ''">month = #{month},</if>
+            <if test="base != null">base = #{base},</if>
+            <if test="money != null">money = #{money},</if>
+            <if test="mones != null">mones = #{mones},</if>
+            <if test="postjt != null">postjt = #{postjt},</if>
+            <if test="skilljt != null">skilljt = #{skilljt},</if>
+            <if test="travelbt != null">travelbt = #{travelbt},</if>
+            <if test="telbt != null">telbt = #{telbt},</if>
+            <if test="reward != null">reward = #{reward},</if>
+            <if test="punish != null">punish = #{punish},</if>
+            <if test="socials != null">socials = #{socials},</if>
+            <if test="socialsunit != null">socialsunit = #{socialsunit},</if>
+            <if test="taxes != null">taxes = #{taxes},</if>
+            <if test="taxbase != null">taxbase = #{taxbase},</if>
+            <if test="ispay != null">ispay = #{ispay},</if>
+            <if test="otherzj != null">otherzj = #{otherzj},</if>
+            <if test="otherjs != null">otherjs = #{otherjs},</if>
+            <if test="cidao != null">cidao = #{cidao},</if>
+            <if test="cidaos != null">cidaos = #{cidaos},</if>
+            <if test="zaotui != null">zaotui = #{zaotui},</if>
+            <if test="zaotuis != null">zaotuis = #{zaotuis},</if>
+            <if test="leavet != null">leavet = #{leavet},</if>
+            <if test="leaves != null">leaves = #{leaves},</if>
+            <if test="jiaban != null">jiaban = #{jiaban},</if>
+            <if test="jiabans != null">jiabans = #{jiabans},</if>
+            <if test="weidk != null">weidk = #{weidk},</if>
+            <if test="weidks != null">weidks = #{weidks},</if>
+            <if test="jxjs != null">jxjs = #{jxjs},</if>
+            <if test="jxxs != null">jxxs = #{jxxs},</if>
+            <if test="jxdf != null">jxdf = #{jxdf},</if>
+            <if test="jtpost != null">jtpost = #{jtpost},</if>
+            <if test="ysbtime != null">ysbtime = #{ysbtime},</if>
+            <if test="zsbtime != null">zsbtime = #{zsbtime},</if>
+            <if test="gonggeren != null">gonggeren = #{gonggeren},</if>
+            <if test="gongunit != null">gongunit = #{gongunit},</if>
+            <if test="foodbt != null">foodbt = #{foodbt},</if>
+            <if test="hotbt != null">hotbt = #{hotbt},</if>
+            <if test="dnbt != null">dnbt = #{dnbt},</if>
+            <if test="jiansr != null">jiansr = #{jiansr},</if>
+            <if test="otherbt != null">otherbt = #{otherbt},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuHrsalaryById" parameterType="Long">
+        delete from xinhu_hrsalary where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuHrsalaryByIds" parameterType="String">
+        delete from xinhu_hrsalary where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

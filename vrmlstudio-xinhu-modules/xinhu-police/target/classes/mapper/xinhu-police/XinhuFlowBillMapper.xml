@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.police.mapper.XinhuFlowBillMapper">
+    
+    <resultMap type="XinhuFlowBill" id="XinhuFlowBillResult">
+        <result property="id"    column="id"    />
+        <result property="sericnum"    column="sericnum"    />
+        <result property="tables"    column="tables"    />
+        <result property="mid"    column="mid"    />
+        <result property="modeid"    column="modeid"    />
+        <result property="modename"    column="modename"    />
+        <result property="uname"    column="uname"    />
+        <result property="uid"    column="uid"    />
+        <result property="udeptid"    column="udeptid"    />
+        <result property="udeptname"    column="udeptname"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="allcheckid"    column="allcheckid"    />
+        <result property="isdel"    column="isdel"    />
+        <result property="nstatus"    column="nstatus"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="nstatustext"    column="nstatustext"    />
+        <result property="status"    column="status"    />
+        <result property="nowcourseid"    column="nowcourseid"    />
+        <result property="nowcheckid"    column="nowcheckid"    />
+        <result property="nowcheckname"    column="nowcheckname"    />
+        <result property="checksm"    column="checksm"    />
+        <result property="updt"    column="updt"    />
+        <result property="createdt"    column="createdt"    />
+        <result property="tuiid"    column="tuiid"    />
+        <result property="isturn"    column="isturn"    />
+    </resultMap>
+
+    <sql id="selectXinhuFlowBillVo">
+        select id, sericnum, tables, mid, modeid, modename, uname, uid, udeptid, udeptname, optdt, optid, optname, allcheckid, isdel, nstatus, applydt, nstatustext, status, nowcourseid, nowcheckid, nowcheckname, checksm, updt, createdt, tuiid, isturn from xinhu_flow_bill
+    </sql>
+
+    <select id="selectXinhuFlowBillList" parameterType="XinhuFlowBill" resultMap="XinhuFlowBillResult">
+        <include refid="selectXinhuFlowBillVo"/>
+        <where>  
+            <if test="sericnum != null  and sericnum != ''"> and sericnum = #{sericnum}</if>
+            <if test="tables != null  and tables != ''"> and tables = #{tables}</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="modeid != null "> and modeid = #{modeid}</if>
+            <if test="modename != null  and modename != ''"> and modename like concat('%', #{modename}, '%')</if>
+            <if test="uname != null  and uname != ''"> and uname like concat('%', #{uname}, '%')</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="udeptid != null "> and udeptid = #{udeptid}</if>
+            <if test="udeptname != null  and udeptname != ''"> and udeptname like concat('%', #{udeptname}, '%')</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="allcheckid != null  and allcheckid != ''"> and allcheckid = #{allcheckid}</if>
+            <if test="isdel != null "> and isdel = #{isdel}</if>
+            <if test="nstatus != null "> and nstatus = #{nstatus}</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="nstatustext != null  and nstatustext != ''"> and nstatustext = #{nstatustext}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="nowcourseid != null "> and nowcourseid = #{nowcourseid}</if>
+            <if test="nowcheckid != null  and nowcheckid != ''"> and nowcheckid = #{nowcheckid}</if>
+            <if test="nowcheckname != null  and nowcheckname != ''"> and nowcheckname like concat('%', #{nowcheckname}, '%')</if>
+            <if test="checksm != null  and checksm != ''"> and checksm = #{checksm}</if>
+            <if test="updt != null "> and updt = #{updt}</if>
+            <if test="createdt != null "> and createdt = #{createdt}</if>
+            <if test="tuiid != null "> and tuiid = #{tuiid}</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuFlowBillById" parameterType="Long" resultMap="XinhuFlowBillResult">
+        <include refid="selectXinhuFlowBillVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuFlowBill" parameterType="XinhuFlowBill" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_flow_bill
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sericnum != null and sericnum != ''">sericnum,</if>
+            <if test="tables != null and tables != ''">tables,</if>
+            <if test="mid != null">mid,</if>
+            <if test="modeid != null">modeid,</if>
+            <if test="modename != null and modename != ''">modename,</if>
+            <if test="uname != null and uname != ''">uname,</if>
+            <if test="uid != null">uid,</if>
+            <if test="udeptid != null">udeptid,</if>
+            <if test="udeptname != null and udeptname != ''">udeptname,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="allcheckid != null and allcheckid != ''">allcheckid,</if>
+            <if test="isdel != null">isdel,</if>
+            <if test="nstatus != null">nstatus,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="nstatustext != null and nstatustext != ''">nstatustext,</if>
+            <if test="status != null">status,</if>
+            <if test="nowcourseid != null">nowcourseid,</if>
+            <if test="nowcheckid != null and nowcheckid != ''">nowcheckid,</if>
+            <if test="nowcheckname != null and nowcheckname != ''">nowcheckname,</if>
+            <if test="checksm != null and checksm != ''">checksm,</if>
+            <if test="updt != null">updt,</if>
+            <if test="createdt != null">createdt,</if>
+            <if test="tuiid != null">tuiid,</if>
+            <if test="isturn != null">isturn,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sericnum != null and sericnum != ''">#{sericnum},</if>
+            <if test="tables != null and tables != ''">#{tables},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="modeid != null">#{modeid},</if>
+            <if test="modename != null and modename != ''">#{modename},</if>
+            <if test="uname != null and uname != ''">#{uname},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="udeptid != null">#{udeptid},</if>
+            <if test="udeptname != null and udeptname != ''">#{udeptname},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="allcheckid != null and allcheckid != ''">#{allcheckid},</if>
+            <if test="isdel != null">#{isdel},</if>
+            <if test="nstatus != null">#{nstatus},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="nstatustext != null and nstatustext != ''">#{nstatustext},</if>
+            <if test="status != null">#{status},</if>
+            <if test="nowcourseid != null">#{nowcourseid},</if>
+            <if test="nowcheckid != null and nowcheckid != ''">#{nowcheckid},</if>
+            <if test="nowcheckname != null and nowcheckname != ''">#{nowcheckname},</if>
+            <if test="checksm != null and checksm != ''">#{checksm},</if>
+            <if test="updt != null">#{updt},</if>
+            <if test="createdt != null">#{createdt},</if>
+            <if test="tuiid != null">#{tuiid},</if>
+            <if test="isturn != null">#{isturn},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuFlowBill" parameterType="XinhuFlowBill">
+        update xinhu_flow_bill
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sericnum != null and sericnum != ''">sericnum = #{sericnum},</if>
+            <if test="tables != null and tables != ''">tables = #{tables},</if>
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="modeid != null">modeid = #{modeid},</if>
+            <if test="modename != null and modename != ''">modename = #{modename},</if>
+            <if test="uname != null and uname != ''">uname = #{uname},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="udeptid != null">udeptid = #{udeptid},</if>
+            <if test="udeptname != null and udeptname != ''">udeptname = #{udeptname},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="allcheckid != null and allcheckid != ''">allcheckid = #{allcheckid},</if>
+            <if test="isdel != null">isdel = #{isdel},</if>
+            <if test="nstatus != null">nstatus = #{nstatus},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="nstatustext != null and nstatustext != ''">nstatustext = #{nstatustext},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="nowcourseid != null">nowcourseid = #{nowcourseid},</if>
+            <if test="nowcheckid != null and nowcheckid != ''">nowcheckid = #{nowcheckid},</if>
+            <if test="nowcheckname != null and nowcheckname != ''">nowcheckname = #{nowcheckname},</if>
+            <if test="checksm != null and checksm != ''">checksm = #{checksm},</if>
+            <if test="updt != null">updt = #{updt},</if>
+            <if test="createdt != null">createdt = #{createdt},</if>
+            <if test="tuiid != null">tuiid = #{tuiid},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuFlowBillById" parameterType="Long">
+        delete from xinhu_flow_bill where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuFlowBillByIds" parameterType="String">
+        delete from xinhu_flow_bill where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

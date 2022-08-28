@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuKnowtraimMapper">
+    
+    <resultMap type="XinhuKnowtraim" id="XinhuKnowtraimResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="dxshu"    column="dxshu"    />
+        <result property="dsshu"    column="dsshu"    />
+        <result property="pdshu"    column="pdshu"    />
+        <result property="reshu"    column="reshu"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="kstime"    column="kstime"    />
+        <result property="ydshu"    column="ydshu"    />
+        <result property="status"    column="status"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+        <result property="content"    column="content"    />
+        <result property="state"    column="state"    />
+        <result property="zfenshu"    column="zfenshu"    />
+        <result property="hgfen"    column="hgfen"    />
+        <result property="tikuid"    column="tikuid"    />
+        <result property="tikuname"    column="tikuname"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuKnowtraimVo">
+        select id, title, optid, optname, optdt, dxshu, dsshu, pdshu, reshu, startdt, enddt, kstime, ydshu, status, receid, recename, content, state, zfenshu, hgfen, tikuid, tikuname, comid from xinhu_knowtraim
+    </sql>
+
+    <select id="selectXinhuKnowtraimList" parameterType="XinhuKnowtraim" resultMap="XinhuKnowtraimResult">
+        <include refid="selectXinhuKnowtraimVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="dxshu != null "> and dxshu = #{dxshu}</if>
+            <if test="dsshu != null "> and dsshu = #{dsshu}</if>
+            <if test="pdshu != null "> and pdshu = #{pdshu}</if>
+            <if test="reshu != null "> and reshu = #{reshu}</if>
+            <if test="startdt != null "> and startdt = #{startdt}</if>
+            <if test="enddt != null "> and enddt = #{enddt}</if>
+            <if test="kstime != null "> and kstime = #{kstime}</if>
+            <if test="ydshu != null "> and ydshu = #{ydshu}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="state != null "> and state = #{state}</if>
+            <if test="zfenshu != null "> and zfenshu = #{zfenshu}</if>
+            <if test="hgfen != null "> and hgfen = #{hgfen}</if>
+            <if test="tikuid != null  and tikuid != ''"> and tikuid = #{tikuid}</if>
+            <if test="tikuname != null  and tikuname != ''"> and tikuname like concat('%', #{tikuname}, '%')</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuKnowtraimById" parameterType="Long" resultMap="XinhuKnowtraimResult">
+        <include refid="selectXinhuKnowtraimVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuKnowtraim" parameterType="XinhuKnowtraim">
+        insert into xinhu_knowtraim
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="dxshu != null">dxshu,</if>
+            <if test="dsshu != null">dsshu,</if>
+            <if test="pdshu != null">pdshu,</if>
+            <if test="reshu != null">reshu,</if>
+            <if test="startdt != null">startdt,</if>
+            <if test="enddt != null">enddt,</if>
+            <if test="kstime != null">kstime,</if>
+            <if test="ydshu != null">ydshu,</if>
+            <if test="status != null">status,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="state != null">state,</if>
+            <if test="zfenshu != null">zfenshu,</if>
+            <if test="hgfen != null">hgfen,</if>
+            <if test="tikuid != null and tikuid != ''">tikuid,</if>
+            <if test="tikuname != null and tikuname != ''">tikuname,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="dxshu != null">#{dxshu},</if>
+            <if test="dsshu != null">#{dsshu},</if>
+            <if test="pdshu != null">#{pdshu},</if>
+            <if test="reshu != null">#{reshu},</if>
+            <if test="startdt != null">#{startdt},</if>
+            <if test="enddt != null">#{enddt},</if>
+            <if test="kstime != null">#{kstime},</if>
+            <if test="ydshu != null">#{ydshu},</if>
+            <if test="status != null">#{status},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="state != null">#{state},</if>
+            <if test="zfenshu != null">#{zfenshu},</if>
+            <if test="hgfen != null">#{hgfen},</if>
+            <if test="tikuid != null and tikuid != ''">#{tikuid},</if>
+            <if test="tikuname != null and tikuname != ''">#{tikuname},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuKnowtraim" parameterType="XinhuKnowtraim">
+        update xinhu_knowtraim
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="dxshu != null">dxshu = #{dxshu},</if>
+            <if test="dsshu != null">dsshu = #{dsshu},</if>
+            <if test="pdshu != null">pdshu = #{pdshu},</if>
+            <if test="reshu != null">reshu = #{reshu},</if>
+            <if test="startdt != null">startdt = #{startdt},</if>
+            <if test="enddt != null">enddt = #{enddt},</if>
+            <if test="kstime != null">kstime = #{kstime},</if>
+            <if test="ydshu != null">ydshu = #{ydshu},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="zfenshu != null">zfenshu = #{zfenshu},</if>
+            <if test="hgfen != null">hgfen = #{hgfen},</if>
+            <if test="tikuid != null and tikuid != ''">tikuid = #{tikuid},</if>
+            <if test="tikuname != null and tikuname != ''">tikuname = #{tikuname},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuKnowtraimById" parameterType="Long">
+        delete from xinhu_knowtraim where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuKnowtraimByIds" parameterType="String">
+        delete from xinhu_knowtraim where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

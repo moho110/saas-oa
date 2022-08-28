@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.document.mapper.XinhuWorcMapper">
+    
+    <resultMap type="XinhuWorc" id="XinhuWorcResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="recename"    column="recename"    />
+        <result property="receid"    column="receid"    />
+        <result property="sort"    column="sort"    />
+        <result property="guanname"    column="guanname"    />
+        <result property="guanid"    column="guanid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="uid"    column="uid"    />
+        <result property="optname"    column="optname"    />
+        <result property="uptype"    column="uptype"    />
+        <result property="upuserid"    column="upuserid"    />
+        <result property="upuser"    column="upuser"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuWorcVo">
+        select id, name, recename, receid, sort, guanname, guanid, optdt, uid, optname, uptype, upuserid, upuser, comid from xinhu_worc
+    </sql>
+
+    <select id="selectXinhuWorcList" parameterType="XinhuWorc" resultMap="XinhuWorcResult">
+        <include refid="selectXinhuWorcVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="guanname != null  and guanname != ''"> and guanname like concat('%', #{guanname}, '%')</if>
+            <if test="guanid != null  and guanid != ''"> and guanid = #{guanid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="uptype != null  and uptype != ''"> and uptype = #{uptype}</if>
+            <if test="upuserid != null  and upuserid != ''"> and upuserid = #{upuserid}</if>
+            <if test="upuser != null  and upuser != ''"> and upuser = #{upuser}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuWorcById" parameterType="Long" resultMap="XinhuWorcResult">
+        <include refid="selectXinhuWorcVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuWorc" parameterType="XinhuWorc">
+        insert into xinhu_worc
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="sort != null">sort,</if>
+            <if test="guanname != null and guanname != ''">guanname,</if>
+            <if test="guanid != null and guanid != ''">guanid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="uid != null">uid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="uptype != null and uptype != ''">uptype,</if>
+            <if test="upuserid != null and upuserid != ''">upuserid,</if>
+            <if test="upuser != null and upuser != ''">upuser,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="guanname != null and guanname != ''">#{guanname},</if>
+            <if test="guanid != null and guanid != ''">#{guanid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="uptype != null and uptype != ''">#{uptype},</if>
+            <if test="upuserid != null and upuserid != ''">#{upuserid},</if>
+            <if test="upuser != null and upuser != ''">#{upuser},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuWorc" parameterType="XinhuWorc">
+        update xinhu_worc
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="guanname != null and guanname != ''">guanname = #{guanname},</if>
+            <if test="guanid != null and guanid != ''">guanid = #{guanid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="uptype != null and uptype != ''">uptype = #{uptype},</if>
+            <if test="upuserid != null and upuserid != ''">upuserid = #{upuserid},</if>
+            <if test="upuser != null and upuser != ''">upuser = #{upuser},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuWorcById" parameterType="Long">
+        delete from xinhu_worc where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuWorcByIds" parameterType="String">
+        delete from xinhu_worc where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

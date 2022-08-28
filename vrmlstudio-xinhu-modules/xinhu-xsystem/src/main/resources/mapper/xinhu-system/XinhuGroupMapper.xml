@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.XinhuGroupMapper">
+    
+    <resultMap type="XinhuGroup" id="XinhuGroupResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="sort"    column="sort"    />
+        <result property="ispir"    column="ispir"    />
+        <result property="indate"    column="indate"    />
+        <result property="companyid"    column="companyid"    />
+    </resultMap>
+
+    <sql id="selectXinhuGroupVo">
+        select id, name, sort, ispir, indate, companyid from xinhu_group
+    </sql>
+
+    <select id="selectXinhuGroupList" parameterType="XinhuGroup" resultMap="XinhuGroupResult">
+        <include refid="selectXinhuGroupVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="ispir != null "> and ispir = #{ispir}</if>
+            <if test="indate != null "> and indate = #{indate}</if>
+            <if test="companyid != null "> and companyid = #{companyid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuGroupById" parameterType="Long" resultMap="XinhuGroupResult">
+        <include refid="selectXinhuGroupVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuGroup" parameterType="XinhuGroup" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="sort != null">sort,</if>
+            <if test="ispir != null">ispir,</if>
+            <if test="indate != null">indate,</if>
+            <if test="companyid != null">companyid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="ispir != null">#{ispir},</if>
+            <if test="indate != null">#{indate},</if>
+            <if test="companyid != null">#{companyid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuGroup" parameterType="XinhuGroup">
+        update xinhu_group
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="ispir != null">ispir = #{ispir},</if>
+            <if test="indate != null">indate = #{indate},</if>
+            <if test="companyid != null">companyid = #{companyid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuGroupById" parameterType="Long">
+        delete from xinhu_group where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuGroupByIds" parameterType="String">
+        delete from xinhu_group where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

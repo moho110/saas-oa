@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.XinhuOptionMapper">
+    
+    <resultMap type="XinhuOption" id="XinhuOptionResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="types"    column="types"    />
+        <result property="pid"    column="pid"    />
+        <result property="num"    column="num"    />
+        <result property="avalue"    column="avalue"    />
+        <result property="sort"    column="sort"    />
+        <result property="valuess"    column="valuess"    />
+        <result property="avalid"    column="avalid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+        <result property="content"    column="content"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuOptionVo">
+        select id, name, types, pid, num, avalue, sort, valuess, avalid, optdt, optid, receid, recename, content, comid from xinhu_option
+    </sql>
+
+    <select id="selectXinhuOptionList" parameterType="XinhuOption" resultMap="XinhuOptionResult">
+        <include refid="selectXinhuOptionVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="pid != null "> and pid = #{pid}</if>
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="avalue != null  and avalue != ''"> and avalue = #{avalue}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="valuess != null  and valuess != ''"> and valuess = #{valuess}</if>
+            <if test="avalid != null "> and avalid = #{avalid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuOptionById" parameterType="Long" resultMap="XinhuOptionResult">
+        <include refid="selectXinhuOptionVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuOption" parameterType="XinhuOption" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_option
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="types != null">types,</if>
+            <if test="pid != null">pid,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="avalue != null and avalue != ''">avalue,</if>
+            <if test="sort != null">sort,</if>
+            <if test="valuess != null and valuess != ''">valuess,</if>
+            <if test="avalid != null">avalid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="types != null">#{types},</if>
+            <if test="pid != null">#{pid},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="avalue != null and avalue != ''">#{avalue},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="valuess != null and valuess != ''">#{valuess},</if>
+            <if test="avalid != null">#{avalid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuOption" parameterType="XinhuOption">
+        update xinhu_option
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="avalue != null and avalue != ''">avalue = #{avalue},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="valuess != null and valuess != ''">valuess = #{valuess},</if>
+            <if test="avalid != null">avalid = #{avalid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuOptionById" parameterType="Long">
+        delete from xinhu_option where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuOptionByIds" parameterType="String">
+        delete from xinhu_option where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

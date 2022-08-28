@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.person.mapper.XinhuHomeitemsMapper">
+    
+    <resultMap type="XinhuHomeitems" id="XinhuHomeitemsResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="num"    column="num"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+        <result property="sorts"    column="sorts"    />
+        <result property="status"    column="status"    />
+        <result property="row"    column="row"    />
+    </resultMap>
+
+    <sql id="selectXinhuHomeitemsVo">
+        select id, name, num, receid, recename, sorts, status, row from xinhu_homeitems
+    </sql>
+
+    <select id="selectXinhuHomeitemsList" parameterType="XinhuHomeitems" resultMap="XinhuHomeitemsResult">
+        <include refid="selectXinhuHomeitemsVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="num != null  and num != ''"> and num like concat('%', #{num}, '%'</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="sorts != null "> and sorts = #{sorts}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="row != null "> and row = #{row}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuHomeitemsById" parameterType="Long" resultMap="XinhuHomeitemsResult">
+        <include refid="selectXinhuHomeitemsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuHomeitems" parameterType="XinhuHomeitems" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_homeitems
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="sorts != null">sorts,</if>
+            <if test="status != null">status,</if>
+            <if test="row != null">row,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="sorts != null">#{sorts},</if>
+            <if test="status != null">#{status},</if>
+            <if test="row != null">#{row},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuHomeitems" parameterType="XinhuHomeitems">
+        update xinhu_homeitems
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="sorts != null">sorts = #{sorts},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="row != null">row = #{row},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuHomeitemsById" parameterType="Long">
+        delete from xinhu_homeitems where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuHomeitemsByIds" parameterType="String">
+        delete from xinhu_homeitems where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

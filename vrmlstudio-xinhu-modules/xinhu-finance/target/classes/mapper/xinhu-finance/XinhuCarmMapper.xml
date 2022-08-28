@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.finance.mapper.XinhuCarmMapper">
+    
+    <resultMap type="XinhuCarm" id="XinhuCarmResult">
+        <result property="id"    column="id"    />
+        <result property="carnum"    column="carnum"    />
+        <result property="carbrand"    column="carbrand"    />
+        <result property="carmode"    column="carmode"    />
+        <result property="cartype"    column="cartype"    />
+        <result property="buydt"    column="buydt"    />
+        <result property="buyprice"    column="buyprice"    />
+        <result property="enginenb"    column="enginenb"    />
+        <result property="ispublic"    column="ispublic"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="adddt"    column="adddt"    />
+        <result property="createname"    column="createname"    />
+        <result property="content"    column="content"    />
+        <result property="state"    column="state"    />
+        <result property="framenum"    column="framenum"    />
+        <result property="status"    column="status"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuCarmVo">
+        select id, carnum, carbrand, carmode, cartype, buydt, buyprice, enginenb, ispublic, optdt, optid, optname, adddt, createname, content, state, framenum, status, comid from xinhu_carm
+    </sql>
+
+    <select id="selectXinhuCarmList" parameterType="XinhuCarm" resultMap="XinhuCarmResult">
+        <include refid="selectXinhuCarmVo"/>
+        <where>  
+            <if test="carnum != null  and carnum != ''"> and carnum = #{carnum}</if>
+            <if test="carbrand != null  and carbrand != ''"> and carbrand = #{carbrand}</if>
+            <if test="carmode != null  and carmode != ''"> and carmode = #{carmode}</if>
+            <if test="cartype != null  and cartype != ''"> and cartype = #{cartype}</if>
+            <if test="buydt != null "> and buydt = #{buydt}</if>
+            <if test="buyprice != null "> and buyprice = #{buyprice}</if>
+            <if test="enginenb != null  and enginenb != ''"> and enginenb = #{enginenb}</if>
+            <if test="ispublic != null "> and ispublic = #{ispublic}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="adddt != null "> and adddt = #{adddt}</if>
+            <if test="createname != null  and createname != ''"> and createname like concat('%', #{createname}, '%')</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="state != null "> and state = #{state}</if>
+            <if test="framenum != null  and framenum != ''"> and framenum = #{framenum}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuCarmById" parameterType="Long" resultMap="XinhuCarmResult">
+        <include refid="selectXinhuCarmVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuCarm" parameterType="XinhuCarm" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_carm
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="carnum != null and carnum != ''">carnum,</if>
+            <if test="carbrand != null and carbrand != ''">carbrand,</if>
+            <if test="carmode != null and carmode != ''">carmode,</if>
+            <if test="cartype != null and cartype != ''">cartype,</if>
+            <if test="buydt != null">buydt,</if>
+            <if test="buyprice != null">buyprice,</if>
+            <if test="enginenb != null and enginenb != ''">enginenb,</if>
+            <if test="ispublic != null">ispublic,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="adddt != null">adddt,</if>
+            <if test="createname != null and createname != ''">createname,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="state != null">state,</if>
+            <if test="framenum != null and framenum != ''">framenum,</if>
+            <if test="status != null">status,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="carnum != null and carnum != ''">#{carnum},</if>
+            <if test="carbrand != null and carbrand != ''">#{carbrand},</if>
+            <if test="carmode != null and carmode != ''">#{carmode},</if>
+            <if test="cartype != null and cartype != ''">#{cartype},</if>
+            <if test="buydt != null">#{buydt},</if>
+            <if test="buyprice != null">#{buyprice},</if>
+            <if test="enginenb != null and enginenb != ''">#{enginenb},</if>
+            <if test="ispublic != null">#{ispublic},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="adddt != null">#{adddt},</if>
+            <if test="createname != null and createname != ''">#{createname},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="state != null">#{state},</if>
+            <if test="framenum != null and framenum != ''">#{framenum},</if>
+            <if test="status != null">#{status},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuCarm" parameterType="XinhuCarm">
+        update xinhu_carm
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="carnum != null and carnum != ''">carnum = #{carnum},</if>
+            <if test="carbrand != null and carbrand != ''">carbrand = #{carbrand},</if>
+            <if test="carmode != null and carmode != ''">carmode = #{carmode},</if>
+            <if test="cartype != null and cartype != ''">cartype = #{cartype},</if>
+            <if test="buydt != null">buydt = #{buydt},</if>
+            <if test="buyprice != null">buyprice = #{buyprice},</if>
+            <if test="enginenb != null and enginenb != ''">enginenb = #{enginenb},</if>
+            <if test="ispublic != null">ispublic = #{ispublic},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="adddt != null">adddt = #{adddt},</if>
+            <if test="createname != null and createname != ''">createname = #{createname},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="framenum != null and framenum != ''">framenum = #{framenum},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuCarmById" parameterType="Long">
+        delete from xinhu_carm where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuCarmByIds" parameterType="String">
+        delete from xinhu_carm where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

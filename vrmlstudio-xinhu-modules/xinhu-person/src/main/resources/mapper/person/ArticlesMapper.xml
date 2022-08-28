@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.person.mapper.ArticlesMapper">
+    
+    <resultMap type="Articles" id="ArticlesResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="content"    column="content"    />
+        <result property="createtime"    column="createtime"    />
+    </resultMap>
+
+    <sql id="selectArticlesVo">
+        select id, title, content, createtime from articles
+    </sql>
+
+    <select id="selectArticlesList" parameterType="Articles" resultMap="ArticlesResult">
+        <include refid="selectArticlesVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="createtime != null  and createtime != ''"> and createtime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectArticlesById" parameterType="Long" resultMap="ArticlesResult">
+        <include refid="selectArticlesVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertArticles" parameterType="Articles" useGeneratedKeys="true" keyProperty="id">
+        insert into articles
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">title,</if>
+            <if test="content != null">content,</if>
+            <if test="createtime != null">createtime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="content != null">#{content},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateArticles" parameterType="Articles">
+        update articles
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteArticlesById" parameterType="Long">
+        delete from articles where id = #{id}
+    </delete>
+
+    <delete id="deleteArticlesByIds" parameterType="String">
+        delete from articles where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

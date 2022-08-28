@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.police.mapper.XinhuGoodnMapper">
+    
+    <resultMap type="XinhuGoodn" id="XinhuGoodnResult">
+        <result property="id"    column="id"    />
+        <result property="mid"    column="mid"    />
+        <result property="aid"    column="aid"    />
+        <result property="count"    column="count"    />
+        <result property="couns"    column="couns"    />
+        <result property="sort"    column="sort"    />
+        <result property="unit"    column="unit"    />
+        <result property="price"    column="price"    />
+        <result property="comid"    column="comid"    />
+        <result property="lygh"    column="lygh"    />
+    </resultMap>
+
+    <sql id="selectXinhuGoodnVo">
+        select id, mid, aid, count, couns, sort, unit, price, comid, lygh from xinhu_goodn
+    </sql>
+
+    <select id="selectXinhuGoodnList" parameterType="XinhuGoodn" resultMap="XinhuGoodnResult">
+        <include refid="selectXinhuGoodnVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="aid != null "> and aid = #{aid}</if>
+            <if test="count != null "> and count = #{count}</if>
+            <if test="couns != null "> and couns = #{couns}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="lygh != null "> and lygh = #{lygh}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuGoodnById" parameterType="Long" resultMap="XinhuGoodnResult">
+        <include refid="selectXinhuGoodnVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuGoodn" parameterType="XinhuGoodn" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_goodn
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mid != null">mid,</if>
+            <if test="aid != null">aid,</if>
+            <if test="count != null">count,</if>
+            <if test="couns != null">couns,</if>
+            <if test="sort != null">sort,</if>
+            <if test="unit != null and unit != ''">unit,</if>
+            <if test="price != null">price,</if>
+            <if test="comid != null">comid,</if>
+            <if test="lygh != null">lygh,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mid != null">#{mid},</if>
+            <if test="aid != null">#{aid},</if>
+            <if test="count != null">#{count},</if>
+            <if test="couns != null">#{couns},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="unit != null and unit != ''">#{unit},</if>
+            <if test="price != null">#{price},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="lygh != null">#{lygh},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuGoodn" parameterType="XinhuGoodn">
+        update xinhu_goodn
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="aid != null">aid = #{aid},</if>
+            <if test="count != null">count = #{count},</if>
+            <if test="couns != null">couns = #{couns},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="unit != null and unit != ''">unit = #{unit},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="lygh != null">lygh = #{lygh},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuGoodnById" parameterType="Long">
+        delete from xinhu_goodn where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuGoodnByIds" parameterType="String">
+        delete from xinhu_goodn where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

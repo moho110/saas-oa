@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.person.mapper.XinhuUserractMapper">
+    
+    <resultMap type="XinhuUserract" id="XinhuUserractResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="uid"    column="uid"    />
+        <result property="sort"    column="sort"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="content"    column="content"    />
+        <result property="httype"    column="httype"    />
+        <result property="state"    column="state"    />
+        <result property="tqenddt"    column="tqenddt"    />
+        <result property="company"    column="company"    />
+        <result property="uname"    column="uname"    />
+        <result property="companyid"    column="companyid"    />
+        <result property="htfid"    column="htfid"    />
+    </resultMap>
+
+    <sql id="selectXinhuUserractVo">
+        select id, name, startdt, enddt, uid, sort, optdt, content, httype, state, tqenddt, company, uname, companyid, htfid from xinhu_userract
+    </sql>
+
+    <select id="selectXinhuUserractList" parameterType="XinhuUserract" resultMap="XinhuUserractResult">
+        <include refid="selectXinhuUserractVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="startdt != null "> and startdt = #{startdt}</if>
+            <if test="enddt != null "> and enddt = #{enddt}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="httype != null  and httype != ''"> and httype = #{httype}</if>
+            <if test="state != null "> and state = #{state}</if>
+            <if test="tqenddt != null "> and tqenddt = #{tqenddt}</if>
+            <if test="company != null  and company != ''"> and company = #{company}</if>
+            <if test="uname != null  and uname != ''"> and uname like concat('%', #{uname}, '%')</if>
+            <if test="companyid != null "> and companyid = #{companyid}</if>
+            <if test="htfid != null "> and htfid = #{htfid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuUserractById" parameterType="Long" resultMap="XinhuUserractResult">
+        <include refid="selectXinhuUserractVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuUserract" parameterType="XinhuUserract">
+        insert into xinhu_userract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="startdt != null">startdt,</if>
+            <if test="enddt != null">enddt,</if>
+            <if test="uid != null">uid,</if>
+            <if test="sort != null">sort,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="httype != null and httype != ''">httype,</if>
+            <if test="state != null">state,</if>
+            <if test="tqenddt != null">tqenddt,</if>
+            <if test="company != null and company != ''">company,</if>
+            <if test="uname != null and uname != ''">uname,</if>
+            <if test="companyid != null">companyid,</if>
+            <if test="htfid != null">htfid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="startdt != null">#{startdt},</if>
+            <if test="enddt != null">#{enddt},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="httype != null and httype != ''">#{httype},</if>
+            <if test="state != null">#{state},</if>
+            <if test="tqenddt != null">#{tqenddt},</if>
+            <if test="company != null and company != ''">#{company},</if>
+            <if test="uname != null and uname != ''">#{uname},</if>
+            <if test="companyid != null">#{companyid},</if>
+            <if test="htfid != null">#{htfid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuUserract" parameterType="XinhuUserract">
+        update xinhu_userract
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="startdt != null">startdt = #{startdt},</if>
+            <if test="enddt != null">enddt = #{enddt},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="httype != null and httype != ''">httype = #{httype},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="tqenddt != null">tqenddt = #{tqenddt},</if>
+            <if test="company != null and company != ''">company = #{company},</if>
+            <if test="uname != null and uname != ''">uname = #{uname},</if>
+            <if test="companyid != null">companyid = #{companyid},</if>
+            <if test="htfid != null">htfid = #{htfid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuUserractById" parameterType="Long">
+        delete from xinhu_userract where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuUserractByIds" parameterType="String">
+        delete from xinhu_userract where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

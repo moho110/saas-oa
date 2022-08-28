@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuKqdwMapper">
+    
+    <resultMap type="XinhuKqdw" id="XinhuKqdwResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="locationX"    column="location_x"    />
+        <result property="locationY"    column="location_y"    />
+        <result property="address"    column="address"    />
+        <result property="precisions"    column="precisions"    />
+        <result property="scale"    column="scale"    />
+        <result property="wifiname"    column="wifiname"    />
+        <result property="iswgd"    column="iswgd"    />
+        <result property="dwids"    column="dwids"    />
+        <result property="ispz"    column="ispz"    />
+    </resultMap>
+
+    <sql id="selectXinhuKqdwVo">
+        select id, name, location_x, location_y, address, precisions, scale, wifiname, iswgd, dwids, ispz from xinhu_kqdw
+    </sql>
+
+    <select id="selectXinhuKqdwList" parameterType="XinhuKqdw" resultMap="XinhuKqdwResult">
+        <include refid="selectXinhuKqdwVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="locationX != null  and locationX != ''"> and location_x = #{locationX}</if>
+            <if test="locationY != null  and locationY != ''"> and location_y = #{locationY}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="precisions != null "> and precisions = #{precisions}</if>
+            <if test="scale != null "> and scale = #{scale}</if>
+            <if test="wifiname != null  and wifiname != ''"> and wifiname like concat('%', #{wifiname}, '%')</if>
+            <if test="iswgd != null "> and iswgd = #{iswgd}</if>
+            <if test="dwids != null  and dwids != ''"> and dwids = #{dwids}</if>
+            <if test="ispz != null "> and ispz = #{ispz}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuKqdwById" parameterType="Integer" resultMap="XinhuKqdwResult">
+        <include refid="selectXinhuKqdwVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuKqdw" parameterType="XinhuKqdw">
+        insert into xinhu_kqdw
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="locationX != null and locationX != ''">location_x,</if>
+            <if test="locationY != null and locationY != ''">location_y,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="precisions != null">precisions,</if>
+            <if test="scale != null">scale,</if>
+            <if test="wifiname != null and wifiname != ''">wifiname,</if>
+            <if test="iswgd != null">iswgd,</if>
+            <if test="dwids != null and dwids != ''">dwids,</if>
+            <if test="ispz != null">ispz,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="locationX != null and locationX != ''">#{locationX},</if>
+            <if test="locationY != null and locationY != ''">#{locationY},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="precisions != null">#{precisions},</if>
+            <if test="scale != null">#{scale},</if>
+            <if test="wifiname != null and wifiname != ''">#{wifiname},</if>
+            <if test="iswgd != null">#{iswgd},</if>
+            <if test="dwids != null and dwids != ''">#{dwids},</if>
+            <if test="ispz != null">#{ispz},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuKqdw" parameterType="XinhuKqdw">
+        update xinhu_kqdw
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="locationX != null and locationX != ''">location_x = #{locationX},</if>
+            <if test="locationY != null and locationY != ''">location_y = #{locationY},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="precisions != null">precisions = #{precisions},</if>
+            <if test="scale != null">scale = #{scale},</if>
+            <if test="wifiname != null and wifiname != ''">wifiname = #{wifiname},</if>
+            <if test="iswgd != null">iswgd = #{iswgd},</if>
+            <if test="dwids != null and dwids != ''">dwids = #{dwids},</if>
+            <if test="ispz != null">ispz = #{ispz},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuKqdwById" parameterType="Integer">
+        delete from xinhu_kqdw where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuKqdwByIds" parameterType="String">
+        delete from xinhu_kqdw where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

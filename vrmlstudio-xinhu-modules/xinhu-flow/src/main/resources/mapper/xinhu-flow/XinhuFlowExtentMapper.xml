@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.flow.mapper.XinhuFlowExtentMapper">
+    
+    <resultMap type="XinhuFlowExtent" id="XinhuFlowExtentResult">
+        <result property="id"    column="id"    />
+        <result property="recename"    column="recename"    />
+        <result property="receid"    column="receid"    />
+        <result property="modeid"    column="modeid"    />
+        <result property="types"    column="types"    />
+        <result property="wherestr"    column="wherestr"    />
+        <result property="content"    column="content"    />
+        <result property="status"    column="status"    />
+        <result property="whereid"    column="whereid"    />
+        <result property="fieldstr"    column="fieldstr"    />
+    </resultMap>
+
+    <sql id="selectXinhuFlowExtentVo">
+        select id, recename, receid, modeid, types, wherestr, content, status, whereid, fieldstr from xinhu_flow_extent
+    </sql>
+
+    <select id="selectXinhuFlowExtentList" parameterType="XinhuFlowExtent" resultMap="XinhuFlowExtentResult">
+        <include refid="selectXinhuFlowExtentVo"/>
+        <where>  
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="modeid != null "> and modeid = #{modeid}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="wherestr != null  and wherestr != ''"> and wherestr like concat('%', #{wherestr}, '%')</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="whereid != null "> and whereid = #{whereid}</if>
+            <if test="fieldstr != null  and fieldstr != ''"> and fieldstr like concat('%', #{fieldstr}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuFlowExtentById" parameterType="Long" resultMap="XinhuFlowExtentResult">
+        <include refid="selectXinhuFlowExtentVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuFlowExtent" parameterType="XinhuFlowExtent" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_flow_extent
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="modeid != null">modeid,</if>
+            <if test="types != null">types,</if>
+            <if test="wherestr != null and wherestr != ''">wherestr,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="status != null">status,</if>
+            <if test="whereid != null">whereid,</if>
+            <if test="fieldstr != null and fieldstr != ''">fieldstr,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="modeid != null">#{modeid},</if>
+            <if test="types != null">#{types},</if>
+            <if test="wherestr != null and wherestr != ''">#{wherestr},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="status != null">#{status},</if>
+            <if test="whereid != null">#{whereid},</if>
+            <if test="fieldstr != null and fieldstr != ''">#{fieldstr},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuFlowExtent" parameterType="XinhuFlowExtent">
+        update xinhu_flow_extent
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="modeid != null">modeid = #{modeid},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="wherestr != null and wherestr != ''">wherestr = #{wherestr},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="whereid != null">whereid = #{whereid},</if>
+            <if test="fieldstr != null and fieldstr != ''">fieldstr = #{fieldstr},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuFlowExtentById" parameterType="Long">
+        delete from xinhu_flow_extent where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuFlowExtentByIds" parameterType="String">
+        delete from xinhu_flow_extent where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

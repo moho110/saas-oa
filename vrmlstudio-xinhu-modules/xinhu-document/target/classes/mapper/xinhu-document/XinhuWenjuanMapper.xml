@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.document.mapper.XinhuWenjuanMapper">
+    
+    <resultMap type="XinhuWenjuan" id="XinhuWenjuanResult">
+        <result property="id"    column="id"    />
+        <result property="comid"    column="comid"    />
+        <result property="title"    column="title"    />
+        <result property="recename"    column="recename"    />
+        <result property="receid"    column="receid"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="uid"    column="uid"    />
+        <result property="optid"    column="optid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optname"    column="optname"    />
+        <result property="content"    column="content"    />
+        <result property="dauserids"    column="dauserids"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectXinhuWenjuanVo">
+        select id, comid, title, recename, receid, startdt, enddt, uid, optid, optdt, optname, content, dauserids, status from xinhu_wenjuan
+    </sql>
+
+    <select id="selectXinhuWenjuanList" parameterType="XinhuWenjuan" resultMap="XinhuWenjuanResult">
+        <include refid="selectXinhuWenjuanVo"/>
+        <where>  
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="startdt != null "> and startdt = #{startdt}</if>
+            <if test="enddt != null "> and enddt = #{enddt}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="dauserids != null  and dauserids != ''"> and dauserids = #{dauserids}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuWenjuanById" parameterType="Long" resultMap="XinhuWenjuanResult">
+        <include refid="selectXinhuWenjuanVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuWenjuan" parameterType="XinhuWenjuan">
+        insert into xinhu_wenjuan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="comid != null">comid,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="startdt != null">startdt,</if>
+            <if test="enddt != null">enddt,</if>
+            <if test="uid != null">uid,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="dauserids != null and dauserids != ''">dauserids,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="startdt != null">#{startdt},</if>
+            <if test="enddt != null">#{enddt},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="dauserids != null and dauserids != ''">#{dauserids},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuWenjuan" parameterType="XinhuWenjuan">
+        update xinhu_wenjuan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="startdt != null">startdt = #{startdt},</if>
+            <if test="enddt != null">enddt = #{enddt},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="dauserids != null and dauserids != ''">dauserids = #{dauserids},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuWenjuanById" parameterType="Long">
+        delete from xinhu_wenjuan where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuWenjuanByIds" parameterType="String">
+        delete from xinhu_wenjuan where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

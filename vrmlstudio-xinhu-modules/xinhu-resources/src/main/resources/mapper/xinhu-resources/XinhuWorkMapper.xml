@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.resources.mapper.XinhuWorkMapper">
+    
+    <resultMap type="XinhuWork" id="XinhuWorkResult">
+        <result property="id"    column="id"    />
+        <result property="num"    column="num"    />
+        <result property="title"    column="title"    />
+        <result property="types"    column="types"    />
+        <result property="grade"    column="grade"    />
+        <result property="distid"    column="distid"    />
+        <result property="dist"    column="dist"    />
+        <result property="content"    column="content"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="state"    column="state"    />
+        <result property="txdt"    column="txdt"    />
+        <result property="fen"    column="fen"    />
+        <result property="status"    column="status"    />
+        <result property="projectid"    column="projectid"    />
+        <result property="ddid"    column="ddid"    />
+        <result property="ddname"    column="ddname"    />
+        <result property="score"    column="score"    />
+        <result property="mark"    column="mark"    />
+        <result property="uid"    column="uid"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="isturn"    column="isturn"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuWorkVo">
+        select id, num, title, types, grade, distid, dist, content, optdt, optid, optname, startdt, enddt, state, txdt, fen, status, projectid, ddid, ddname, score, mark, uid, applydt, isturn, comid from xinhu_work
+    </sql>
+
+    <select id="selectXinhuWorkList" parameterType="XinhuWork" resultMap="XinhuWorkResult">
+        <include refid="selectXinhuWorkVo"/>
+        <where>  
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="types != null  and types != ''"> and types = #{types}</if>
+            <if test="grade != null  and grade != ''"> and grade = #{grade}</if>
+            <if test="distid != null  and distid != ''"> and distid = #{distid}</if>
+            <if test="dist != null  and dist != ''"> and dist = #{dist}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="startdt != null "> and startdt = #{startdt}</if>
+            <if test="enddt != null "> and enddt = #{enddt}</if>
+            <if test="state != null "> and state = #{state}</if>
+            <if test="txdt != null "> and txdt = #{txdt}</if>
+            <if test="fen != null "> and fen = #{fen}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="projectid != null "> and projectid = #{projectid}</if>
+            <if test="ddid != null  and ddid != ''"> and ddid = #{ddid}</if>
+            <if test="ddname != null  and ddname != ''"> and ddname like concat('%', #{ddname}, '%')</if>
+            <if test="score != null "> and score = #{score}</if>
+            <if test="mark != null "> and mark = #{mark}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuWorkById" parameterType="Long" resultMap="XinhuWorkResult">
+        <include refid="selectXinhuWorkVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuWork" parameterType="XinhuWork">
+        insert into xinhu_work
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="types != null and types != ''">types,</if>
+            <if test="grade != null and grade != ''">grade,</if>
+            <if test="distid != null and distid != ''">distid,</if>
+            <if test="dist != null and dist != ''">dist,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="startdt != null">startdt,</if>
+            <if test="enddt != null">enddt,</if>
+            <if test="state != null">state,</if>
+            <if test="txdt != null">txdt,</if>
+            <if test="fen != null">fen,</if>
+            <if test="status != null">status,</if>
+            <if test="projectid != null">projectid,</if>
+            <if test="ddid != null and ddid != ''">ddid,</if>
+            <if test="ddname != null and ddname != ''">ddname,</if>
+            <if test="score != null">score,</if>
+            <if test="mark != null">mark,</if>
+            <if test="uid != null">uid,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="isturn != null">isturn,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="types != null and types != ''">#{types},</if>
+            <if test="grade != null and grade != ''">#{grade},</if>
+            <if test="distid != null and distid != ''">#{distid},</if>
+            <if test="dist != null and dist != ''">#{dist},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="startdt != null">#{startdt},</if>
+            <if test="enddt != null">#{enddt},</if>
+            <if test="state != null">#{state},</if>
+            <if test="txdt != null">#{txdt},</if>
+            <if test="fen != null">#{fen},</if>
+            <if test="status != null">#{status},</if>
+            <if test="projectid != null">#{projectid},</if>
+            <if test="ddid != null and ddid != ''">#{ddid},</if>
+            <if test="ddname != null and ddname != ''">#{ddname},</if>
+            <if test="score != null">#{score},</if>
+            <if test="mark != null">#{mark},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="isturn != null">#{isturn},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuWork" parameterType="XinhuWork">
+        update xinhu_work
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="types != null and types != ''">types = #{types},</if>
+            <if test="grade != null and grade != ''">grade = #{grade},</if>
+            <if test="distid != null and distid != ''">distid = #{distid},</if>
+            <if test="dist != null and dist != ''">dist = #{dist},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="startdt != null">startdt = #{startdt},</if>
+            <if test="enddt != null">enddt = #{enddt},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="txdt != null">txdt = #{txdt},</if>
+            <if test="fen != null">fen = #{fen},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="projectid != null">projectid = #{projectid},</if>
+            <if test="ddid != null and ddid != ''">ddid = #{ddid},</if>
+            <if test="ddname != null and ddname != ''">ddname = #{ddname},</if>
+            <if test="score != null">score = #{score},</if>
+            <if test="mark != null">mark = #{mark},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuWorkById" parameterType="Long">
+        delete from xinhu_work where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuWorkByIds" parameterType="String">
+        delete from xinhu_work where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

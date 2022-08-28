@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuImMessMapper">
+    
+    <resultMap type="XinhuImMess" id="XinhuImMessResult">
+        <result property="id"    column="id"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="zt"    column="zt"    />
+        <result property="cont"    column="cont"    />
+        <result property="sendid"    column="sendid"    />
+        <result property="receid"    column="receid"    />
+        <result property="receuid"    column="receuid"    />
+        <result property="types"    column="types"    />
+        <result property="url"    column="url"    />
+        <result property="fileid"    column="fileid"    />
+        <result property="msgid"    column="msgid"    />
+    </resultMap>
+
+    <sql id="selectXinhuImMessVo">
+        select id, optdt, zt, cont, sendid, receid, receuid, types, url, fileid, msgid from xinhu_im_mess
+    </sql>
+
+    <select id="selectXinhuImMessList" parameterType="XinhuImMess" resultMap="XinhuImMessResult">
+        <include refid="selectXinhuImMessVo"/>
+        <where>  
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="zt != null "> and zt = #{zt}</if>
+            <if test="cont != null  and cont != ''"> and cont = #{cont}</if>
+            <if test="sendid != null "> and sendid = #{sendid}</if>
+            <if test="receid != null "> and receid = #{receid}</if>
+            <if test="receuid != null  and receuid != ''"> and receuid = #{receuid}</if>
+            <if test="types != null  and types != ''"> and types = #{types}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="fileid != null "> and fileid = #{fileid}</if>
+            <if test="msgid != null  and msgid != ''"> and msgid = #{msgid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuImMessById" parameterType="Long" resultMap="XinhuImMessResult">
+        <include refid="selectXinhuImMessVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuImMess" parameterType="XinhuImMess">
+        insert into xinhu_im_mess
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="zt != null">zt,</if>
+            <if test="cont != null and cont != ''">cont,</if>
+            <if test="sendid != null">sendid,</if>
+            <if test="receid != null">receid,</if>
+            <if test="receuid != null and receuid != ''">receuid,</if>
+            <if test="types != null and types != ''">types,</if>
+            <if test="url != null and url != ''">url,</if>
+            <if test="fileid != null">fileid,</if>
+            <if test="msgid != null and msgid != ''">msgid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="zt != null">#{zt},</if>
+            <if test="cont != null and cont != ''">#{cont},</if>
+            <if test="sendid != null">#{sendid},</if>
+            <if test="receid != null">#{receid},</if>
+            <if test="receuid != null and receuid != ''">#{receuid},</if>
+            <if test="types != null and types != ''">#{types},</if>
+            <if test="url != null and url != ''">#{url},</if>
+            <if test="fileid != null">#{fileid},</if>
+            <if test="msgid != null and msgid != ''">#{msgid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuImMess" parameterType="XinhuImMess">
+        update xinhu_im_mess
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="zt != null">zt = #{zt},</if>
+            <if test="cont != null and cont != ''">cont = #{cont},</if>
+            <if test="sendid != null">sendid = #{sendid},</if>
+            <if test="receid != null">receid = #{receid},</if>
+            <if test="receuid != null and receuid != ''">receuid = #{receuid},</if>
+            <if test="types != null and types != ''">types = #{types},</if>
+            <if test="url != null and url != ''">url = #{url},</if>
+            <if test="fileid != null">fileid = #{fileid},</if>
+            <if test="msgid != null and msgid != ''">msgid = #{msgid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuImMessById" parameterType="Long">
+        delete from xinhu_im_mess where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuImMessByIds" parameterType="String">
+        delete from xinhu_im_mess where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

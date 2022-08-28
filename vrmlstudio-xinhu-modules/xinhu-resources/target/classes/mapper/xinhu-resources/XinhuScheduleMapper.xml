@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.resources.mapper.XinhuScheduleMapper">
+    
+    <resultMap type="XinhuSchedule" id="XinhuScheduleResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="uid"    column="uid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optname"    column="optname"    />
+        <result property="mid"    column="mid"    />
+        <result property="ratecont"    column="ratecont"    />
+        <result property="content"    column="content"    />
+        <result property="rate"    column="rate"    />
+        <result property="rateval"    column="rateval"    />
+        <result property="txsj"    column="txsj"    />
+        <result property="status"    column="status"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+        <result property="comid"    column="comid"    />
+        <result property="isdai"    column="isdai"    />
+    </resultMap>
+
+    <sql id="selectXinhuScheduleVo">
+        select id, title, startdt, enddt, uid, optdt, optname, mid, ratecont, content, rate, rateval, txsj, status, receid, recename, comid, isdai from xinhu_schedule
+    </sql>
+
+    <select id="selectXinhuScheduleList" parameterType="XinhuSchedule" resultMap="XinhuScheduleResult">
+        <include refid="selectXinhuScheduleVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="startdt != null "> and startdt = #{startdt}</if>
+            <if test="enddt != null "> and enddt = #{enddt}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="ratecont != null  and ratecont != ''"> and ratecont = #{ratecont}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="rate != null  and rate != ''"> and rate = #{rate}</if>
+            <if test="rateval != null  and rateval != ''"> and rateval = #{rateval}</if>
+            <if test="txsj != null "> and txsj = #{txsj}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="isdai != null "> and isdai = #{isdai}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuScheduleById" parameterType="Long" resultMap="XinhuScheduleResult">
+        <include refid="selectXinhuScheduleVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuSchedule" parameterType="XinhuSchedule" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_schedule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">title,</if>
+            <if test="startdt != null">startdt,</if>
+            <if test="enddt != null">enddt,</if>
+            <if test="uid != null">uid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="mid != null">mid,</if>
+            <if test="ratecont != null and ratecont != ''">ratecont,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="rate != null and rate != ''">rate,</if>
+            <if test="rateval != null and rateval != ''">rateval,</if>
+            <if test="txsj != null">txsj,</if>
+            <if test="status != null">status,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="comid != null">comid,</if>
+            <if test="isdai != null">isdai,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="startdt != null">#{startdt},</if>
+            <if test="enddt != null">#{enddt},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="ratecont != null and ratecont != ''">#{ratecont},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="rate != null and rate != ''">#{rate},</if>
+            <if test="rateval != null and rateval != ''">#{rateval},</if>
+            <if test="txsj != null">#{txsj},</if>
+            <if test="status != null">#{status},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="isdai != null">#{isdai},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuSchedule" parameterType="XinhuSchedule">
+        update xinhu_schedule
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="startdt != null">startdt = #{startdt},</if>
+            <if test="enddt != null">enddt = #{enddt},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="ratecont != null and ratecont != ''">ratecont = #{ratecont},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="rate != null and rate != ''">rate = #{rate},</if>
+            <if test="rateval != null and rateval != ''">rateval = #{rateval},</if>
+            <if test="txsj != null">txsj = #{txsj},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="isdai != null">isdai = #{isdai},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuScheduleById" parameterType="Long">
+        delete from xinhu_schedule where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuScheduleByIds" parameterType="String">
+        delete from xinhu_schedule where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

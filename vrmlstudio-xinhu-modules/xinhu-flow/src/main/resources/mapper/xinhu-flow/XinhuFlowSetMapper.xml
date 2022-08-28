@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.flow.mapper.XinhuFlowSetMapper">
+    
+    <resultMap type="XinhuFlowSet" id="XinhuFlowSetResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="num"    column="num"    />
+        <result property="sort"    column="sort"    />
+        <result property="ttable"    column="ttable"    />
+        <result property="wheres"    column="wheres"    />
+        <result property="summary"    column="summary"    />
+        <result property="summarx"    column="summarx"    />
+        <result property="types"    column="types"    />
+        <result property="pctx"    column="pctx"    />
+        <result property="mctx"    column="mctx"    />
+        <result property="wxtx"    column="wxtx"    />
+        <result property="emtx"    column="emtx"    />
+        <result property="sericnum"    column="sericnum"    />
+        <result property="isflow"    column="isflow"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="status"    column="status"    />
+        <result property="islu"    column="islu"    />
+        <result property="tables"    column="tables"    />
+        <result property="names"    column="names"    />
+        <result property="statusstr"    column="statusstr"    />
+        <result property="isgbjl"    column="isgbjl"    />
+        <result property="isgbcy"    column="isgbcy"    />
+        <result property="isscl"    column="isscl"    />
+        <result property="isup"    column="isup"    />
+        <result property="ddtx"    column="ddtx"    />
+        <result property="isbxs"    column="isbxs"    />
+        <result property="lbztxs"    column="lbztxs"    />
+        <result property="isflowlx"    column="isflowlx"    />
+        <result property="iscs"    column="iscs"    />
+        <result property="zfeitime"    column="zfeitime"    />
+        <result property="ispl"    column="ispl"    />
+        <result property="istxset"    column="istxset"    />
+        <result property="ishz"    column="ishz"    />
+        <result property="istpl"    column="istpl"    />
+        <result property="sortdir"    column="sortdir"    />
+    </resultMap>
+
+    <sql id="selectXinhuFlowSetVo">
+        select id, name, num, sort, ttable, wheres, summary, summarx, types, pctx, mctx, wxtx, emtx, sericnum, isflow, receid, recename, optdt, status, islu, tables, names, statusstr, isgbjl, isgbcy, isscl, isup, ddtx, isbxs, lbztxs, isflowlx, iscs, zfeitime, ispl, istxset, ishz, istpl, sortdir from xinhu_flow_set
+    </sql>
+
+    <select id="selectXinhuFlowSetList" parameterType="XinhuFlowSet" resultMap="XinhuFlowSetResult">
+        <include refid="selectXinhuFlowSetVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="ttable != null  and ttable != ''"> and ttable = #{ttable}</if>
+            <if test="wheres != null  and wheres != ''"> and wheres = #{wheres}</if>
+            <if test="summary != null  and summary != ''"> and summary = #{summary}</if>
+            <if test="summarx != null  and summarx != ''"> and summarx = #{summarx}</if>
+            <if test="types != null  and types != ''"> and types = #{types}</if>
+            <if test="pctx != null "> and pctx = #{pctx}</if>
+            <if test="mctx != null "> and mctx = #{mctx}</if>
+            <if test="wxtx != null "> and wxtx = #{wxtx}</if>
+            <if test="emtx != null "> and emtx = #{emtx}</if>
+            <if test="sericnum != null  and sericnum != ''"> and sericnum = #{sericnum}</if>
+            <if test="isflow != null "> and isflow = #{isflow}</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="islu != null "> and islu = #{islu}</if>
+            <if test="tables != null  and tables != ''"> and tables = #{tables}</if>
+            <if test="names != null  and names != ''"> and names = #{names}</if>
+            <if test="statusstr != null  and statusstr != ''"> and statusstr = #{statusstr}</if>
+            <if test="isgbjl != null "> and isgbjl = #{isgbjl}</if>
+            <if test="isgbcy != null "> and isgbcy = #{isgbcy}</if>
+            <if test="isscl != null "> and isscl = #{isscl}</if>
+            <if test="isup != null "> and isup = #{isup}</if>
+            <if test="ddtx != null "> and ddtx = #{ddtx}</if>
+            <if test="isbxs != null "> and isbxs = #{isbxs}</if>
+            <if test="lbztxs != null "> and lbztxs = #{lbztxs}</if>
+            <if test="isflowlx != null "> and isflowlx = #{isflowlx}</if>
+            <if test="iscs != null "> and iscs = #{iscs}</if>
+            <if test="zfeitime != null "> and zfeitime = #{zfeitime}</if>
+            <if test="ispl != null "> and ispl = #{ispl}</if>
+            <if test="istxset != null "> and istxset = #{istxset}</if>
+            <if test="ishz != null "> and ishz = #{ishz}</if>
+            <if test="istpl != null "> and istpl = #{istpl}</if>
+            <if test="sortdir != null  and sortdir != ''"> and sortdir = #{sortdir}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuFlowSetById" parameterType="Long" resultMap="XinhuFlowSetResult">
+        <include refid="selectXinhuFlowSetVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuFlowSet" parameterType="XinhuFlowSet" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_flow_set
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="sort != null">sort,</if>
+            <if test="ttable != null and ttable != ''">ttable,</if>
+            <if test="wheres != null and wheres != ''">wheres,</if>
+            <if test="summary != null and summary != ''">summary,</if>
+            <if test="summarx != null and summarx != ''">summarx,</if>
+            <if test="types != null and types != ''">types,</if>
+            <if test="pctx != null">pctx,</if>
+            <if test="mctx != null">mctx,</if>
+            <if test="wxtx != null">wxtx,</if>
+            <if test="emtx != null">emtx,</if>
+            <if test="sericnum != null and sericnum != ''">sericnum,</if>
+            <if test="isflow != null">isflow,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="status != null">status,</if>
+            <if test="islu != null">islu,</if>
+            <if test="tables != null and tables != ''">tables,</if>
+            <if test="names != null and names != ''">names,</if>
+            <if test="statusstr != null and statusstr != ''">statusstr,</if>
+            <if test="isgbjl != null">isgbjl,</if>
+            <if test="isgbcy != null">isgbcy,</if>
+            <if test="isscl != null">isscl,</if>
+            <if test="isup != null">isup,</if>
+            <if test="ddtx != null">ddtx,</if>
+            <if test="isbxs != null">isbxs,</if>
+            <if test="lbztxs != null">lbztxs,</if>
+            <if test="isflowlx != null">isflowlx,</if>
+            <if test="iscs != null">iscs,</if>
+            <if test="zfeitime != null">zfeitime,</if>
+            <if test="ispl != null">ispl,</if>
+            <if test="istxset != null">istxset,</if>
+            <if test="ishz != null">ishz,</if>
+            <if test="istpl != null">istpl,</if>
+            <if test="sortdir != null and sortdir != ''">sortdir,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="ttable != null and ttable != ''">#{ttable},</if>
+            <if test="wheres != null and wheres != ''">#{wheres},</if>
+            <if test="summary != null and summary != ''">#{summary},</if>
+            <if test="summarx != null and summarx != ''">#{summarx},</if>
+            <if test="types != null and types != ''">#{types},</if>
+            <if test="pctx != null">#{pctx},</if>
+            <if test="mctx != null">#{mctx},</if>
+            <if test="wxtx != null">#{wxtx},</if>
+            <if test="emtx != null">#{emtx},</if>
+            <if test="sericnum != null and sericnum != ''">#{sericnum},</if>
+            <if test="isflow != null">#{isflow},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="status != null">#{status},</if>
+            <if test="islu != null">#{islu},</if>
+            <if test="tables != null and tables != ''">#{tables},</if>
+            <if test="names != null and names != ''">#{names},</if>
+            <if test="statusstr != null and statusstr != ''">#{statusstr},</if>
+            <if test="isgbjl != null">#{isgbjl},</if>
+            <if test="isgbcy != null">#{isgbcy},</if>
+            <if test="isscl != null">#{isscl},</if>
+            <if test="isup != null">#{isup},</if>
+            <if test="ddtx != null">#{ddtx},</if>
+            <if test="isbxs != null">#{isbxs},</if>
+            <if test="lbztxs != null">#{lbztxs},</if>
+            <if test="isflowlx != null">#{isflowlx},</if>
+            <if test="iscs != null">#{iscs},</if>
+            <if test="zfeitime != null">#{zfeitime},</if>
+            <if test="ispl != null">#{ispl},</if>
+            <if test="istxset != null">#{istxset},</if>
+            <if test="ishz != null">#{ishz},</if>
+            <if test="istpl != null">#{istpl},</if>
+            <if test="sortdir != null and sortdir != ''">#{sortdir},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuFlowSet" parameterType="XinhuFlowSet">
+        update xinhu_flow_set
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="ttable != null and ttable != ''">ttable = #{ttable},</if>
+            <if test="wheres != null and wheres != ''">wheres = #{wheres},</if>
+            <if test="summary != null and summary != ''">summary = #{summary},</if>
+            <if test="summarx != null and summarx != ''">summarx = #{summarx},</if>
+            <if test="types != null and types != ''">types = #{types},</if>
+            <if test="pctx != null">pctx = #{pctx},</if>
+            <if test="mctx != null">mctx = #{mctx},</if>
+            <if test="wxtx != null">wxtx = #{wxtx},</if>
+            <if test="emtx != null">emtx = #{emtx},</if>
+            <if test="sericnum != null and sericnum != ''">sericnum = #{sericnum},</if>
+            <if test="isflow != null">isflow = #{isflow},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="islu != null">islu = #{islu},</if>
+            <if test="tables != null and tables != ''">tables = #{tables},</if>
+            <if test="names != null and names != ''">names = #{names},</if>
+            <if test="statusstr != null and statusstr != ''">statusstr = #{statusstr},</if>
+            <if test="isgbjl != null">isgbjl = #{isgbjl},</if>
+            <if test="isgbcy != null">isgbcy = #{isgbcy},</if>
+            <if test="isscl != null">isscl = #{isscl},</if>
+            <if test="isup != null">isup = #{isup},</if>
+            <if test="ddtx != null">ddtx = #{ddtx},</if>
+            <if test="isbxs != null">isbxs = #{isbxs},</if>
+            <if test="lbztxs != null">lbztxs = #{lbztxs},</if>
+            <if test="isflowlx != null">isflowlx = #{isflowlx},</if>
+            <if test="iscs != null">iscs = #{iscs},</if>
+            <if test="zfeitime != null">zfeitime = #{zfeitime},</if>
+            <if test="ispl != null">ispl = #{ispl},</if>
+            <if test="istxset != null">istxset = #{istxset},</if>
+            <if test="ishz != null">ishz = #{ishz},</if>
+            <if test="istpl != null">istpl = #{istpl},</if>
+            <if test="sortdir != null and sortdir != ''">sortdir = #{sortdir},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuFlowSetById" parameterType="Long">
+        delete from xinhu_flow_set where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuFlowSetByIds" parameterType="String">
+        delete from xinhu_flow_set where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.flow.mapper.XinhuFlowRemindMapper">
+    
+    <resultMap type="XinhuFlowRemind" id="XinhuFlowRemindResult">
+        <result property="id"    column="id"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="uid"    column="uid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optname"    column="optname"    />
+        <result property="modenum"    column="modenum"    />
+        <result property="tables"    column="tables"    />
+        <result property="mid"    column="mid"    />
+        <result property="ratecont"    column="ratecont"    />
+        <result property="content"    column="content"    />
+        <result property="rate"    column="rate"    />
+        <result property="rateval"    column="rateval"    />
+        <result property="status"    column="status"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuFlowRemindVo">
+        select id, startdt, enddt, uid, optdt, optname, modenum, tables, mid, ratecont, content, rate, rateval, status, receid, recename, comid from xinhu_flow_remind
+    </sql>
+
+    <select id="selectXinhuFlowRemindList" parameterType="XinhuFlowRemind" resultMap="XinhuFlowRemindResult">
+        <include refid="selectXinhuFlowRemindVo"/>
+        <where>  
+            <if test="startdt != null "> and startdt = #{startdt}</if>
+            <if test="enddt != null "> and enddt = #{enddt}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="modenum != null  and modenum != ''"> and modenum = #{modenum}</if>
+            <if test="tables != null  and tables != ''"> and tables = #{tables}</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="ratecont != null  and ratecont != ''"> and ratecont = #{ratecont}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="rate != null  and rate != ''"> and rate = #{rate}</if>
+            <if test="rateval != null  and rateval != ''"> and rateval = #{rateval}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuFlowRemindById" parameterType="Long" resultMap="XinhuFlowRemindResult">
+        <include refid="selectXinhuFlowRemindVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuFlowRemind" parameterType="XinhuFlowRemind" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_flow_remind
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="startdt != null">startdt,</if>
+            <if test="enddt != null">enddt,</if>
+            <if test="uid != null">uid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="modenum != null and modenum != ''">modenum,</if>
+            <if test="tables != null and tables != ''">tables,</if>
+            <if test="mid != null">mid,</if>
+            <if test="ratecont != null and ratecont != ''">ratecont,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="rate != null and rate != ''">rate,</if>
+            <if test="rateval != null and rateval != ''">rateval,</if>
+            <if test="status != null">status,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="startdt != null">#{startdt},</if>
+            <if test="enddt != null">#{enddt},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="modenum != null and modenum != ''">#{modenum},</if>
+            <if test="tables != null and tables != ''">#{tables},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="ratecont != null and ratecont != ''">#{ratecont},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="rate != null and rate != ''">#{rate},</if>
+            <if test="rateval != null and rateval != ''">#{rateval},</if>
+            <if test="status != null">#{status},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuFlowRemind" parameterType="XinhuFlowRemind">
+        update xinhu_flow_remind
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="startdt != null">startdt = #{startdt},</if>
+            <if test="enddt != null">enddt = #{enddt},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="modenum != null and modenum != ''">modenum = #{modenum},</if>
+            <if test="tables != null and tables != ''">tables = #{tables},</if>
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="ratecont != null and ratecont != ''">ratecont = #{ratecont},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="rate != null and rate != ''">rate = #{rate},</if>
+            <if test="rateval != null and rateval != ''">rateval = #{rateval},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuFlowRemindById" parameterType="Long">
+        delete from xinhu_flow_remind where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuFlowRemindByIds" parameterType="String">
+        delete from xinhu_flow_remind where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

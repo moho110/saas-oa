@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.person.mapper.XinhuUserinfosMapper">
+    
+    <resultMap type="XinhuUserinfos" id="XinhuUserinfosResult">
+        <result property="id"    column="id"    />
+        <result property="mid"    column="mid"    />
+        <result property="sort"    column="sort"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="rank"    column="rank"    />
+        <result property="unitname"    column="unitname"    />
+        <result property="sslx"    column="sslx"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuUserinfosVo">
+        select id, mid, sort, startdt, enddt, rank, unitname, sslx, comid from xinhu_userinfos
+    </sql>
+
+    <select id="selectXinhuUserinfosList" parameterType="XinhuUserinfos" resultMap="XinhuUserinfosResult">
+        <include refid="selectXinhuUserinfosVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="startdt != null "> and startdt = #{startdt}</if>
+            <if test="enddt != null "> and enddt = #{enddt}</if>
+            <if test="rank != null  and rank != ''"> and rank = #{rank}</if>
+            <if test="unitname != null  and unitname != ''"> and unitname like concat('%', #{unitname}, '%')</if>
+            <if test="sslx != null "> and sslx = #{sslx}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuUserinfosById" parameterType="Long" resultMap="XinhuUserinfosResult">
+        <include refid="selectXinhuUserinfosVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuUserinfos" parameterType="XinhuUserinfos">
+        insert into xinhu_userinfos
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="mid != null">mid,</if>
+            <if test="sort != null">sort,</if>
+            <if test="startdt != null">startdt,</if>
+            <if test="enddt != null">enddt,</if>
+            <if test="rank != null and rank != ''">rank,</if>
+            <if test="unitname != null and unitname != ''">unitname,</if>
+            <if test="sslx != null">sslx,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="startdt != null">#{startdt},</if>
+            <if test="enddt != null">#{enddt},</if>
+            <if test="rank != null and rank != ''">#{rank},</if>
+            <if test="unitname != null and unitname != ''">#{unitname},</if>
+            <if test="sslx != null">#{sslx},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuUserinfos" parameterType="XinhuUserinfos">
+        update xinhu_userinfos
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="startdt != null">startdt = #{startdt},</if>
+            <if test="enddt != null">enddt = #{enddt},</if>
+            <if test="rank != null and rank != ''">rank = #{rank},</if>
+            <if test="unitname != null and unitname != ''">unitname = #{unitname},</if>
+            <if test="sslx != null">sslx = #{sslx},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuUserinfosById" parameterType="Long">
+        delete from xinhu_userinfos where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuUserinfosByIds" parameterType="String">
+        delete from xinhu_userinfos where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

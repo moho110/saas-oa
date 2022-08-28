@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.XinhuWouserMapper">
+    
+    <resultMap type="XinhuWouser" id="XinhuWouserResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="openid"    column="openid"    />
+        <result property="nickname"    column="nickname"    />
+        <result property="sex"    column="sex"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="country"    column="country"    />
+        <result property="headimgurl"    column="headimgurl"    />
+        <result property="adddt"    column="adddt"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="ip"    column="ip"    />
+    </resultMap>
+
+    <sql id="selectXinhuWouserVo">
+        select id, uid, openid, nickname, sex, province, city, country, headimgurl, adddt, optdt, ip from xinhu_wouser
+    </sql>
+
+    <select id="selectXinhuWouserList" parameterType="XinhuWouser" resultMap="XinhuWouserResult">
+        <include refid="selectXinhuWouserVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="openid != null  and openid != ''"> and openid = #{openid}</if>
+            <if test="nickname != null  and nickname != ''"> and nickname like concat('%', #{nickname}, '%')</if>
+            <if test="sex != null "> and sex = #{sex}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="country != null  and country != ''"> and country = #{country}</if>
+            <if test="headimgurl != null  and headimgurl != ''"> and headimgurl = #{headimgurl}</if>
+            <if test="adddt != null "> and adddt = #{adddt}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuWouserById" parameterType="Long" resultMap="XinhuWouserResult">
+        <include refid="selectXinhuWouserVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuWouser" parameterType="XinhuWouser">
+        insert into xinhu_wouser
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uid != null">uid,</if>
+            <if test="openid != null and openid != ''">openid,</if>
+            <if test="nickname != null and nickname != ''">nickname,</if>
+            <if test="sex != null">sex,</if>
+            <if test="province != null and province != ''">province,</if>
+            <if test="city != null and city != ''">city,</if>
+            <if test="country != null and country != ''">country,</if>
+            <if test="headimgurl != null and headimgurl != ''">headimgurl,</if>
+            <if test="adddt != null">adddt,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="ip != null and ip != ''">ip,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="openid != null and openid != ''">#{openid},</if>
+            <if test="nickname != null and nickname != ''">#{nickname},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="province != null and province != ''">#{province},</if>
+            <if test="city != null and city != ''">#{city},</if>
+            <if test="country != null and country != ''">#{country},</if>
+            <if test="headimgurl != null and headimgurl != ''">#{headimgurl},</if>
+            <if test="adddt != null">#{adddt},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="ip != null and ip != ''">#{ip},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuWouser" parameterType="XinhuWouser">
+        update xinhu_wouser
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="openid != null and openid != ''">openid = #{openid},</if>
+            <if test="nickname != null and nickname != ''">nickname = #{nickname},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="province != null and province != ''">province = #{province},</if>
+            <if test="city != null and city != ''">city = #{city},</if>
+            <if test="country != null and country != ''">country = #{country},</if>
+            <if test="headimgurl != null and headimgurl != ''">headimgurl = #{headimgurl},</if>
+            <if test="adddt != null">adddt = #{adddt},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="ip != null and ip != ''">ip = #{ip},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuWouserById" parameterType="Long">
+        delete from xinhu_wouser where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuWouserByIds" parameterType="String">
+        delete from xinhu_wouser where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

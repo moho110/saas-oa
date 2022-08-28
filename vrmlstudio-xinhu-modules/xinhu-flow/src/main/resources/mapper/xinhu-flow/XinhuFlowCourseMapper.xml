@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.flow.mapper.XinhuFlowCourseMapper">
+    
+    <resultMap type="XinhuFlowCourse" id="XinhuFlowCourseResult">
+        <result property="id"    column="id"    />
+        <result property="mid"    column="mid"    />
+        <result property="nid"    column="nid"    />
+        <result property="setid"    column="setid"    />
+        <result property="name"    column="name"    />
+        <result property="num"    column="num"    />
+        <result property="checktype"    column="checktype"    />
+        <result property="checktypeid"    column="checktypeid"    />
+        <result property="checktypename"    column="checktypename"    />
+        <result property="sort"    column="sort"    />
+        <result property="whereid"    column="whereid"    />
+        <result property="wheres"    column="wheres"    />
+        <result property="content"    column="content"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="status"    column="status"    />
+        <result property="courseact"    column="courseact"    />
+        <result property="checkshu"    column="checkshu"    />
+        <result property="checkfields"    column="checkfields"    />
+        <result property="pid"    column="pid"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+        <result property="iszf"    column="iszf"    />
+        <result property="isqm"    column="isqm"    />
+        <result property="coursetype"    column="coursetype"    />
+        <result property="zshtime"    column="zshtime"    />
+        <result property="zshstate"    column="zshstate"    />
+        <result property="zbrangeame"    column="zbrangeame"    />
+        <result property="zbrangeid"    column="zbrangeid"    />
+        <result property="smlx"    column="smlx"    />
+        <result property="wjlx"    column="wjlx"    />
+        <result property="isxgfj"    column="isxgfj"    />
+        <result property="cslx"    column="cslx"    />
+        <result property="csfwname"    column="csfwname"    />
+        <result property="csfwid"    column="csfwid"    />
+    </resultMap>
+
+    <sql id="selectXinhuFlowCourseVo">
+        select id, mid, nid, setid, name, num, checktype, checktypeid, checktypename, sort, whereid, wheres, content, optdt, status, courseact, checkshu, checkfields, pid, optid, optname, receid, recename, iszf, isqm, coursetype, zshtime, zshstate, zbrangeame, zbrangeid, smlx, wjlx, isxgfj, cslx, csfwname, csfwid from xinhu_flow_course
+    </sql>
+
+    <select id="selectXinhuFlowCourseList" parameterType="XinhuFlowCourse" resultMap="XinhuFlowCourseResult">
+        <include refid="selectXinhuFlowCourseVo"/>
+        <where>  
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="nid != null "> and nid = #{nid}</if>
+            <if test="setid != null "> and setid = #{setid}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="checktype != null  and checktype != ''"> and checktype = #{checktype}</if>
+            <if test="checktypeid != null  and checktypeid != ''"> and checktypeid = #{checktypeid}</if>
+            <if test="checktypename != null  and checktypename != ''"> and checktypename like concat('%', #{checktypename}, '%')</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="whereid != null "> and whereid = #{whereid}</if>
+            <if test="wheres != null  and wheres != ''"> and wheres = #{wheres}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="courseact != null  and courseact != ''"> and courseact = #{courseact}</if>
+            <if test="checkshu != null "> and checkshu = #{checkshu}</if>
+            <if test="checkfields != null  and checkfields != ''"> and checkfields = #{checkfields}</if>
+            <if test="pid != null "> and pid = #{pid}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="iszf != null "> and iszf = #{iszf}</if>
+            <if test="isqm != null "> and isqm = #{isqm}</if>
+            <if test="coursetype != null "> and coursetype = #{coursetype}</if>
+            <if test="zshtime != null "> and zshtime = #{zshtime}</if>
+            <if test="zshstate != null "> and zshstate = #{zshstate}</if>
+            <if test="zbrangeame != null  and zbrangeame != ''"> and zbrangeame = #{zbrangeame}</if>
+            <if test="zbrangeid != null  and zbrangeid != ''"> and zbrangeid = #{zbrangeid}</if>
+            <if test="smlx != null "> and smlx = #{smlx}</if>
+            <if test="wjlx != null "> and wjlx = #{wjlx}</if>
+            <if test="isxgfj != null "> and isxgfj = #{isxgfj}</if>
+            <if test="cslx != null "> and cslx = #{cslx}</if>
+            <if test="csfwname != null  and csfwname != ''"> and csfwname like concat('%', #{csfwname}, '%')</if>
+            <if test="csfwid != null  and csfwid != ''"> and csfwid = #{csfwid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuFlowCourseById" parameterType="Long" resultMap="XinhuFlowCourseResult">
+        <include refid="selectXinhuFlowCourseVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuFlowCourse" parameterType="XinhuFlowCourse" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_flow_course
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mid != null">mid,</if>
+            <if test="nid != null">nid,</if>
+            <if test="setid != null">setid,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="checktype != null and checktype != ''">checktype,</if>
+            <if test="checktypeid != null and checktypeid != ''">checktypeid,</if>
+            <if test="checktypename != null and checktypename != ''">checktypename,</if>
+            <if test="sort != null">sort,</if>
+            <if test="whereid != null">whereid,</if>
+            <if test="wheres != null and wheres != ''">wheres,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="status != null">status,</if>
+            <if test="courseact != null and courseact != ''">courseact,</if>
+            <if test="checkshu != null">checkshu,</if>
+            <if test="checkfields != null and checkfields != ''">checkfields,</if>
+            <if test="pid != null">pid,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="iszf != null">iszf,</if>
+            <if test="isqm != null">isqm,</if>
+            <if test="coursetype != null">coursetype,</if>
+            <if test="zshtime != null">zshtime,</if>
+            <if test="zshstate != null">zshstate,</if>
+            <if test="zbrangeame != null and zbrangeame != ''">zbrangeame,</if>
+            <if test="zbrangeid != null and zbrangeid != ''">zbrangeid,</if>
+            <if test="smlx != null">smlx,</if>
+            <if test="wjlx != null">wjlx,</if>
+            <if test="isxgfj != null">isxgfj,</if>
+            <if test="cslx != null">cslx,</if>
+            <if test="csfwname != null and csfwname != ''">csfwname,</if>
+            <if test="csfwid != null and csfwid != ''">csfwid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mid != null">#{mid},</if>
+            <if test="nid != null">#{nid},</if>
+            <if test="setid != null">#{setid},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="checktype != null and checktype != ''">#{checktype},</if>
+            <if test="checktypeid != null and checktypeid != ''">#{checktypeid},</if>
+            <if test="checktypename != null and checktypename != ''">#{checktypename},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="whereid != null">#{whereid},</if>
+            <if test="wheres != null and wheres != ''">#{wheres},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="status != null">#{status},</if>
+            <if test="courseact != null and courseact != ''">#{courseact},</if>
+            <if test="checkshu != null">#{checkshu},</if>
+            <if test="checkfields != null and checkfields != ''">#{checkfields},</if>
+            <if test="pid != null">#{pid},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="iszf != null">#{iszf},</if>
+            <if test="isqm != null">#{isqm},</if>
+            <if test="coursetype != null">#{coursetype},</if>
+            <if test="zshtime != null">#{zshtime},</if>
+            <if test="zshstate != null">#{zshstate},</if>
+            <if test="zbrangeame != null and zbrangeame != ''">#{zbrangeame},</if>
+            <if test="zbrangeid != null and zbrangeid != ''">#{zbrangeid},</if>
+            <if test="smlx != null">#{smlx},</if>
+            <if test="wjlx != null">#{wjlx},</if>
+            <if test="isxgfj != null">#{isxgfj},</if>
+            <if test="cslx != null">#{cslx},</if>
+            <if test="csfwname != null and csfwname != ''">#{csfwname},</if>
+            <if test="csfwid != null and csfwid != ''">#{csfwid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuFlowCourse" parameterType="XinhuFlowCourse">
+        update xinhu_flow_course
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="nid != null">nid = #{nid},</if>
+            <if test="setid != null">setid = #{setid},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="checktype != null and checktype != ''">checktype = #{checktype},</if>
+            <if test="checktypeid != null and checktypeid != ''">checktypeid = #{checktypeid},</if>
+            <if test="checktypename != null and checktypename != ''">checktypename = #{checktypename},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="whereid != null">whereid = #{whereid},</if>
+            <if test="wheres != null and wheres != ''">wheres = #{wheres},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="courseact != null and courseact != ''">courseact = #{courseact},</if>
+            <if test="checkshu != null">checkshu = #{checkshu},</if>
+            <if test="checkfields != null and checkfields != ''">checkfields = #{checkfields},</if>
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="iszf != null">iszf = #{iszf},</if>
+            <if test="isqm != null">isqm = #{isqm},</if>
+            <if test="coursetype != null">coursetype = #{coursetype},</if>
+            <if test="zshtime != null">zshtime = #{zshtime},</if>
+            <if test="zshstate != null">zshstate = #{zshstate},</if>
+            <if test="zbrangeame != null and zbrangeame != ''">zbrangeame = #{zbrangeame},</if>
+            <if test="zbrangeid != null and zbrangeid != ''">zbrangeid = #{zbrangeid},</if>
+            <if test="smlx != null">smlx = #{smlx},</if>
+            <if test="wjlx != null">wjlx = #{wjlx},</if>
+            <if test="isxgfj != null">isxgfj = #{isxgfj},</if>
+            <if test="cslx != null">cslx = #{cslx},</if>
+            <if test="csfwname != null and csfwname != ''">csfwname = #{csfwname},</if>
+            <if test="csfwid != null and csfwid != ''">csfwid = #{csfwid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuFlowCourseById" parameterType="Long">
+        delete from xinhu_flow_course where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuFlowCourseByIds" parameterType="String">
+        delete from xinhu_flow_course where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

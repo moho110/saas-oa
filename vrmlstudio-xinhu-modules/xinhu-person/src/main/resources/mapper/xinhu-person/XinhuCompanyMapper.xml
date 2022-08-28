@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.person.mapper.XinhuCompanyMapper">
+    
+    <resultMap type="XinhuCompany" id="XinhuCompanyResult">
+        <result property="id"    column="id"    />
+        <result property="logo"    column="logo"    />
+        <result property="name"    column="name"    />
+        <result property="nameen"    column="nameen"    />
+        <result property="oaname"    column="oaname"    />
+        <result property="oanemes"    column="oanemes"    />
+        <result property="tel"    column="tel"    />
+        <result property="fax"    column="fax"    />
+        <result property="pid"    column="pid"    />
+        <result property="sorts"    column="sorts"    />
+        <result property="fuzeid"    column="fuzeid"    />
+        <result property="fuzename"    column="fuzename"    />
+        <result property="address"    column="address"    />
+        <result property="city"    column="city"    />
+        <result property="num"    column="num"    />
+        <result property="comid"    column="comid"    />
+        <result property="iscreate"    column="iscreate"    />
+        <result property="yuming"    column="yuming"    />
+    </resultMap>
+
+    <sql id="selectXinhuCompanyVo">
+        select id, logo, name, nameen, oaname, oanemes, tel, fax, pid, sorts, fuzeid, fuzename, address, city, num, comid, iscreate, yuming from xinhu_company
+    </sql>
+
+    <select id="selectXinhuCompanyList" parameterType="XinhuCompany" resultMap="XinhuCompanyResult">
+        <include refid="selectXinhuCompanyVo"/>
+        <where>  
+            <if test="logo != null  and logo != ''"> and logo = #{logo}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="nameen != null  and nameen != ''"> and nameen = #{nameen}</if>
+            <if test="oaname != null  and oaname != ''"> and oaname like concat('%', #{oaname}, '%')</if>
+            <if test="oanemes != null  and oanemes != ''"> and oanemes = #{oanemes}</if>
+            <if test="tel != null  and tel != ''"> and tel like concat('%',#{tel}, '%')</if>
+            <if test="fax != null  and fax != ''"> and fax = #{fax}</if>
+            <if test="pid != null "> and pid = #{pid}</if>
+            <if test="sorts != null "> and sorts = #{sorts}</if>
+            <if test="fuzeid != null  and fuzeid != ''"> and fuzeid = #{fuzeid}</if>
+            <if test="fuzename != null  and fuzename != ''"> and fuzename like concat('%', #{fuzename}, '%')</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="iscreate != null "> and iscreate = #{iscreate}</if>
+            <if test="yuming != null  and yuming != ''"> and yuming = #{yuming}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuCompanyById" parameterType="Long" resultMap="XinhuCompanyResult">
+        <include refid="selectXinhuCompanyVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuCompany" parameterType="XinhuCompany" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_company
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="logo != null and logo != ''">logo,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="nameen != null and nameen != ''">nameen,</if>
+            <if test="oaname != null and oaname != ''">oaname,</if>
+            <if test="oanemes != null and oanemes != ''">oanemes,</if>
+            <if test="tel != null and tel != ''">tel,</if>
+            <if test="fax != null and fax != ''">fax,</if>
+            <if test="pid != null">pid,</if>
+            <if test="sorts != null">sorts,</if>
+            <if test="fuzeid != null and fuzeid != ''">fuzeid,</if>
+            <if test="fuzename != null and fuzename != ''">fuzename,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="city != null and city != ''">city,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="comid != null">comid,</if>
+            <if test="iscreate != null">iscreate,</if>
+            <if test="yuming != null and yuming != ''">yuming,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="logo != null and logo != ''">#{logo},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="nameen != null and nameen != ''">#{nameen},</if>
+            <if test="oaname != null and oaname != ''">#{oaname},</if>
+            <if test="oanemes != null and oanemes != ''">#{oanemes},</if>
+            <if test="tel != null and tel != ''">#{tel},</if>
+            <if test="fax != null and fax != ''">#{fax},</if>
+            <if test="pid != null">#{pid},</if>
+            <if test="sorts != null">#{sorts},</if>
+            <if test="fuzeid != null and fuzeid != ''">#{fuzeid},</if>
+            <if test="fuzename != null and fuzename != ''">#{fuzename},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="city != null and city != ''">#{city},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="iscreate != null">#{iscreate},</if>
+            <if test="yuming != null and yuming != ''">#{yuming},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuCompany" parameterType="XinhuCompany">
+        update xinhu_company
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="logo != null and logo != ''">logo = #{logo},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="nameen != null and nameen != ''">nameen = #{nameen},</if>
+            <if test="oaname != null and oaname != ''">oaname = #{oaname},</if>
+            <if test="oanemes != null and oanemes != ''">oanemes = #{oanemes},</if>
+            <if test="tel != null and tel != ''">tel = #{tel},</if>
+            <if test="fax != null and fax != ''">fax = #{fax},</if>
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="sorts != null">sorts = #{sorts},</if>
+            <if test="fuzeid != null and fuzeid != ''">fuzeid = #{fuzeid},</if>
+            <if test="fuzename != null and fuzename != ''">fuzename = #{fuzename},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="city != null and city != ''">city = #{city},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="iscreate != null">iscreate = #{iscreate},</if>
+            <if test="yuming != null and yuming != ''">yuming = #{yuming},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuCompanyById" parameterType="Long">
+        delete from xinhu_company where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuCompanyByIds" parameterType="String">
+        delete from xinhu_company where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

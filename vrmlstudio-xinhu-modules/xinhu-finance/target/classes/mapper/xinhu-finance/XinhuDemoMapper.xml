@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.finance.mapper.XinhuDemoMapper">
+    
+    <resultMap type="XinhuDemo" id="XinhuDemoResult">
+        <result property="id"    column="id"    />
+        <result property="sheng"    column="sheng"    />
+        <result property="shi"    column="shi"    />
+        <result property="xian"    column="xian"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="uid"    column="uid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="content"    column="content"    />
+        <result property="status"    column="status"    />
+        <result property="isturn"    column="isturn"    />
+        <result property="tanxuan"    column="tanxuan"    />
+        <result property="tanxuancheck"    column="tanxuancheck"    />
+        <result property="upfile1"    column="upfile1"    />
+        <result property="upfile2"    column="upfile2"    />
+        <result property="testfirs"    column="testfirs"    />
+        <result property="custname"    column="custname"    />
+        <result property="custid"    column="custid"    />
+        <result property="money"    column="money"    />
+        <result property="tanxuanid"    column="tanxuanid"    />
+        <result property="fengmian"    column="fengmian"    />
+        <result property="num"    column="num"    />
+        <result property="mid"    column="mid"    />
+        <result property="comid"    column="comid"    />
+        <result property="sort"    column="sort"    />
+        <result property="sslx"    column="sslx"    />
+        <result property="htmlcont"    column="htmlcont"    />
+        <result property="xuanren"    column="xuanren"    />
+        <result property="xuanrenid"    column="xuanrenid"    />
+    </resultMap>
+
+    <sql id="selectXinhuDemoVo">
+        select id, sheng, shi, xian, applydt, uid, optdt, optid, optname, content, status, isturn, tanxuan, tanxuancheck, upfile1, upfile2, testfirs, custname, custid, money, tanxuanid, fengmian, num, mid, comid, sort, sslx, htmlcont, xuanren, xuanrenid from xinhu_demo
+    </sql>
+
+    <select id="selectXinhuDemoList" parameterType="XinhuDemo" resultMap="XinhuDemoResult">
+        <include refid="selectXinhuDemoVo"/>
+        <where>  
+            <if test="sheng != null  and sheng != ''"> and sheng = #{sheng}</if>
+            <if test="shi != null  and shi != ''"> and shi = #{shi}</if>
+            <if test="xian != null  and xian != ''"> and xian = #{xian}</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+            <if test="tanxuan != null  and tanxuan != ''"> and tanxuan = #{tanxuan}</if>
+            <if test="tanxuancheck != null  and tanxuancheck != ''"> and tanxuancheck = #{tanxuancheck}</if>
+            <if test="upfile1 != null  and upfile1 != ''"> and upfile1 = #{upfile1}</if>
+            <if test="upfile2 != null  and upfile2 != ''"> and upfile2 = #{upfile2}</if>
+            <if test="testfirs != null  and testfirs != ''"> and testfirs = #{testfirs}</if>
+            <if test="custname != null  and custname != ''"> and custname like concat('%', #{custname}, '%')</if>
+            <if test="custid != null "> and custid = #{custid}</if>
+            <if test="money != null "> and money = #{money}</if>
+            <if test="tanxuanid != null "> and tanxuanid = #{tanxuanid}</if>
+            <if test="fengmian != null  and fengmian != ''"> and fengmian = #{fengmian}</if>
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="mid != null "> and mid = #{mid}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="sslx != null "> and sslx = #{sslx}</if>
+            <if test="htmlcont != null  and htmlcont != ''"> and htmlcont = #{htmlcont}</if>
+            <if test="xuanren != null  and xuanren != ''"> and xuanren = #{xuanren}</if>
+            <if test="xuanrenid != null  and xuanrenid != ''"> and xuanrenid = #{xuanrenid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuDemoById" parameterType="Long" resultMap="XinhuDemoResult">
+        <include refid="selectXinhuDemoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuDemo" parameterType="XinhuDemo" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_demo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sheng != null and sheng != ''">sheng,</if>
+            <if test="shi != null and shi != ''">shi,</if>
+            <if test="xian != null and xian != ''">xian,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="uid != null">uid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="status != null">status,</if>
+            <if test="isturn != null">isturn,</if>
+            <if test="tanxuan != null and tanxuan != ''">tanxuan,</if>
+            <if test="tanxuancheck != null and tanxuancheck != ''">tanxuancheck,</if>
+            <if test="upfile1 != null and upfile1 != ''">upfile1,</if>
+            <if test="upfile2 != null and upfile2 != ''">upfile2,</if>
+            <if test="testfirs != null and testfirs != ''">testfirs,</if>
+            <if test="custname != null and custname != ''">custname,</if>
+            <if test="custid != null">custid,</if>
+            <if test="money != null">money,</if>
+            <if test="tanxuanid != null">tanxuanid,</if>
+            <if test="fengmian != null and fengmian != ''">fengmian,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="mid != null">mid,</if>
+            <if test="comid != null">comid,</if>
+            <if test="sort != null">sort,</if>
+            <if test="sslx != null">sslx,</if>
+            <if test="htmlcont != null and htmlcont != ''">htmlcont,</if>
+            <if test="xuanren != null and xuanren != ''">xuanren,</if>
+            <if test="xuanrenid != null and xuanrenid != ''">xuanrenid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sheng != null and sheng != ''">#{sheng},</if>
+            <if test="shi != null and shi != ''">#{shi},</if>
+            <if test="xian != null and xian != ''">#{xian},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isturn != null">#{isturn},</if>
+            <if test="tanxuan != null and tanxuan != ''">#{tanxuan},</if>
+            <if test="tanxuancheck != null and tanxuancheck != ''">#{tanxuancheck},</if>
+            <if test="upfile1 != null and upfile1 != ''">#{upfile1},</if>
+            <if test="upfile2 != null and upfile2 != ''">#{upfile2},</if>
+            <if test="testfirs != null and testfirs != ''">#{testfirs},</if>
+            <if test="custname != null and custname != ''">#{custname},</if>
+            <if test="custid != null">#{custid},</if>
+            <if test="money != null">#{money},</if>
+            <if test="tanxuanid != null">#{tanxuanid},</if>
+            <if test="fengmian != null and fengmian != ''">#{fengmian},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="mid != null">#{mid},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="sslx != null">#{sslx},</if>
+            <if test="htmlcont != null and htmlcont != ''">#{htmlcont},</if>
+            <if test="xuanren != null and xuanren != ''">#{xuanren},</if>
+            <if test="xuanrenid != null and xuanrenid != ''">#{xuanrenid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuDemo" parameterType="XinhuDemo">
+        update xinhu_demo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sheng != null and sheng != ''">sheng = #{sheng},</if>
+            <if test="shi != null and shi != ''">shi = #{shi},</if>
+            <if test="xian != null and xian != ''">xian = #{xian},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+            <if test="tanxuan != null and tanxuan != ''">tanxuan = #{tanxuan},</if>
+            <if test="tanxuancheck != null and tanxuancheck != ''">tanxuancheck = #{tanxuancheck},</if>
+            <if test="upfile1 != null and upfile1 != ''">upfile1 = #{upfile1},</if>
+            <if test="upfile2 != null and upfile2 != ''">upfile2 = #{upfile2},</if>
+            <if test="testfirs != null and testfirs != ''">testfirs = #{testfirs},</if>
+            <if test="custname != null and custname != ''">custname = #{custname},</if>
+            <if test="custid != null">custid = #{custid},</if>
+            <if test="money != null">money = #{money},</if>
+            <if test="tanxuanid != null">tanxuanid = #{tanxuanid},</if>
+            <if test="fengmian != null and fengmian != ''">fengmian = #{fengmian},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="mid != null">mid = #{mid},</if>
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="sslx != null">sslx = #{sslx},</if>
+            <if test="htmlcont != null and htmlcont != ''">htmlcont = #{htmlcont},</if>
+            <if test="xuanren != null and xuanren != ''">xuanren = #{xuanren},</if>
+            <if test="xuanrenid != null and xuanrenid != ''">xuanrenid = #{xuanrenid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuDemoById" parameterType="Long">
+        delete from xinhu_demo where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuDemoByIds" parameterType="String">
+        delete from xinhu_demo where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

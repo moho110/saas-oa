@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.finance.mapper.XinhuDeptMapper">
+    
+    <resultMap type="XinhuDept" id="XinhuDeptResult">
+        <result property="id"    column="id"    />
+        <result property="num"    column="num"    />
+        <result property="name"    column="name"    />
+        <result property="pid"    column="pid"    />
+        <result property="sort"    column="sort"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="headman"    column="headman"    />
+        <result property="headid"    column="headid"    />
+        <result property="companyid"    column="companyid"    />
+    </resultMap>
+
+    <sql id="selectXinhuDeptVo">
+        select id, num, name, pid, sort, optdt, headman, headid, companyid from xinhu_dept
+    </sql>
+
+    <select id="selectXinhuDeptList" parameterType="XinhuDept" resultMap="XinhuDeptResult">
+        <include refid="selectXinhuDeptVo"/>
+        <where>  
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="pid != null "> and pid = #{pid}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="headman != null  and headman != ''"> and headman = #{headman}</if>
+            <if test="headid != null  and headid != ''"> and headid = #{headid}</if>
+            <if test="companyid != null "> and companyid = #{companyid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuDeptById" parameterType="Long" resultMap="XinhuDeptResult">
+        <include refid="selectXinhuDeptVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectDeptAll" resultMap="XinhuDeptResult">
+        <include refid="selectXinhuDeptVo"/>
+    </select>
+
+    <select id="selectDeptListByUserId" parameterType="Long" resultType="Long">
+		select d.id
+        from xinhu_dept d
+	        left join dept_admin da on da.dept_id = d.id
+	        left join  xinhu_admin a on a.id = da.user_id
+	    where a.id = #{id}
+	</select>
+        
+    <insert id="insertXinhuDept" parameterType="XinhuDept" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_dept
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="num != null and num != ''">num,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="pid != null">pid,</if>
+            <if test="sort != null">sort,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="headman != null and headman != ''">headman,</if>
+            <if test="headid != null and headid != ''">headid,</if>
+            <if test="companyid != null">companyid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="pid != null">#{pid},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="headman != null and headman != ''">#{headman},</if>
+            <if test="headid != null and headid != ''">#{headid},</if>
+            <if test="companyid != null">#{companyid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuDept" parameterType="XinhuDept">
+        update xinhu_dept
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="headman != null and headman != ''">headman = #{headman},</if>
+            <if test="headid != null and headid != ''">headid = #{headid},</if>
+            <if test="companyid != null">companyid = #{companyid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuDeptById" parameterType="Long">
+        delete from xinhu_dept where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuDeptByIds" parameterType="String">
+        delete from xinhu_dept where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

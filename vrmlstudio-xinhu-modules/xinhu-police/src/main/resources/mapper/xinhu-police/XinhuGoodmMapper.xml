@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.police.mapper.XinhuGoodmMapper">
+    
+    <resultMap type="XinhuGoodm" id="XinhuGoodmResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="num"    column="num"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="applydt"    column="applydt"    />
+        <result property="content"    column="content"    />
+        <result property="status"    column="status"    />
+        <result property="isturn"    column="isturn"    />
+        <result property="types"    column="types"    />
+        <result property="money"    column="money"    />
+        <result property="custid"    column="custid"    />
+        <result property="custname"    column="custname"    />
+        <result property="discount"    column="discount"    />
+        <result property="state"    column="state"    />
+        <result property="custractid"    column="custractid"    />
+        <result property="ispay"    column="ispay"    />
+        <result property="comid"    column="comid"    />
+        <result property="leixing"    column="leixing"    />
+    </resultMap>
+
+    <sql id="selectXinhuGoodmVo">
+        select id, uid, num, optdt, optid, optname, applydt, content, status, isturn, types, money, custid, custname, discount, state, custractid, ispay, comid, leixing from xinhu_goodm
+    </sql>
+
+    <select id="selectXinhuGoodmList" parameterType="XinhuGoodm" resultMap="XinhuGoodmResult">
+        <include refid="selectXinhuGoodmVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="applydt != null "> and applydt = #{applydt}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="isturn != null "> and isturn = #{isturn}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="money != null "> and money = #{money}</if>
+            <if test="custid != null "> and custid = #{custid}</if>
+            <if test="custname != null  and custname != ''"> and custname like concat('%', #{custname}, '%')</if>
+            <if test="discount != null "> and discount = #{discount}</if>
+            <if test="state != null "> and state = #{state}</if>
+            <if test="custractid != null "> and custractid = #{custractid}</if>
+            <if test="ispay != null "> and ispay = #{ispay}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="leixing != null  and leixing != ''"> and leixing = #{leixing}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuGoodmById" parameterType="Long" resultMap="XinhuGoodmResult">
+        <include refid="selectXinhuGoodmVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuGoodm" parameterType="XinhuGoodm" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_goodm
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uid != null">uid,</if>
+            <if test="num != null and num != ''">num,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="applydt != null">applydt,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="status != null">status,</if>
+            <if test="isturn != null">isturn,</if>
+            <if test="types != null">types,</if>
+            <if test="money != null">money,</if>
+            <if test="custid != null">custid,</if>
+            <if test="custname != null and custname != ''">custname,</if>
+            <if test="discount != null">discount,</if>
+            <if test="state != null">state,</if>
+            <if test="custractid != null">custractid,</if>
+            <if test="ispay != null">ispay,</if>
+            <if test="comid != null">comid,</if>
+            <if test="leixing != null and leixing != ''">leixing,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">#{uid},</if>
+            <if test="num != null and num != ''">#{num},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="applydt != null">#{applydt},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isturn != null">#{isturn},</if>
+            <if test="types != null">#{types},</if>
+            <if test="money != null">#{money},</if>
+            <if test="custid != null">#{custid},</if>
+            <if test="custname != null and custname != ''">#{custname},</if>
+            <if test="discount != null">#{discount},</if>
+            <if test="state != null">#{state},</if>
+            <if test="custractid != null">#{custractid},</if>
+            <if test="ispay != null">#{ispay},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="leixing != null and leixing != ''">#{leixing},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuGoodm" parameterType="XinhuGoodm">
+        update xinhu_goodm
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="applydt != null">applydt = #{applydt},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isturn != null">isturn = #{isturn},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="money != null">money = #{money},</if>
+            <if test="custid != null">custid = #{custid},</if>
+            <if test="custname != null and custname != ''">custname = #{custname},</if>
+            <if test="discount != null">discount = #{discount},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="custractid != null">custractid = #{custractid},</if>
+            <if test="ispay != null">ispay = #{ispay},</if>
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="leixing != null and leixing != ''">leixing = #{leixing},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuGoodmById" parameterType="Long">
+        delete from xinhu_goodm where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuGoodmByIds" parameterType="String">
+        delete from xinhu_goodm where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

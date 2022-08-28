@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuHrshebaoMapper">
+    
+    <resultMap type="XinhuHrshebao" id="XinhuHrshebaoResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="recename"    column="recename"    />
+        <result property="receid"    column="receid"    />
+        <result property="status"    column="status"    />
+        <result property="gongjishu"    column="gongjishu"    />
+        <result property="yljishu"    column="yljishu"    />
+        <result property="ylgeren"    column="ylgeren"    />
+        <result property="ylunit"    column="ylunit"    />
+        <result property="syjishu"    column="syjishu"    />
+        <result property="sygeren"    column="sygeren"    />
+        <result property="syunit"    column="syunit"    />
+        <result property="gsjishu"    column="gsjishu"    />
+        <result property="gsgeren"    column="gsgeren"    />
+        <result property="gsunit"    column="gsunit"    />
+        <result property="syujishu"    column="syujishu"    />
+        <result property="syugeren"    column="syugeren"    />
+        <result property="syuunit"    column="syuunit"    />
+        <result property="yijishu"    column="yijishu"    />
+        <result property="yigeren"    column="yigeren"    />
+        <result property="yiunit"    column="yiunit"    />
+        <result property="dbgeren"    column="dbgeren"    />
+        <result property="gjjgeren"    column="gjjgeren"    />
+        <result property="gjjunit"    column="gjjunit"    />
+        <result property="shebaogeren"    column="shebaogeren"    />
+        <result property="shebaounit"    column="shebaounit"    />
+        <result property="sctime"    column="sctime"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="gonggeren"    column="gonggeren"    />
+        <result property="gongunit"    column="gongunit"    />
+        <result property="explian"    column="explian"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="comid"    column="comid"    />
+    </resultMap>
+
+    <sql id="selectXinhuHrshebaoVo">
+        select id, title, recename, receid, status, gongjishu, yljishu, ylgeren, ylunit, syjishu, sygeren, syunit, gsjishu, gsgeren, gsunit, syujishu, syugeren, syuunit, yijishu, yigeren, yiunit, dbgeren, gjjgeren, gjjunit, shebaogeren, shebaounit, sctime, optdt, gonggeren, gongunit, explian, startdt, enddt, comid from xinhu_hrshebao
+    </sql>
+
+    <select id="selectXinhuHrshebaoList" parameterType="XinhuHrshebao" resultMap="XinhuHrshebaoResult">
+        <include refid="selectXinhuHrshebaoVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="gongjishu != null "> and gongjishu = #{gongjishu}</if>
+            <if test="yljishu != null "> and yljishu = #{yljishu}</if>
+            <if test="ylgeren != null "> and ylgeren = #{ylgeren}</if>
+            <if test="ylunit != null "> and ylunit = #{ylunit}</if>
+            <if test="syjishu != null "> and syjishu = #{syjishu}</if>
+            <if test="sygeren != null "> and sygeren = #{sygeren}</if>
+            <if test="syunit != null "> and syunit = #{syunit}</if>
+            <if test="gsjishu != null "> and gsjishu = #{gsjishu}</if>
+            <if test="gsgeren != null "> and gsgeren = #{gsgeren}</if>
+            <if test="gsunit != null "> and gsunit = #{gsunit}</if>
+            <if test="syujishu != null "> and syujishu = #{syujishu}</if>
+            <if test="syugeren != null "> and syugeren = #{syugeren}</if>
+            <if test="syuunit != null "> and syuunit = #{syuunit}</if>
+            <if test="yijishu != null "> and yijishu = #{yijishu}</if>
+            <if test="yigeren != null "> and yigeren = #{yigeren}</if>
+            <if test="yiunit != null "> and yiunit = #{yiunit}</if>
+            <if test="dbgeren != null "> and dbgeren = #{dbgeren}</if>
+            <if test="gjjgeren != null "> and gjjgeren = #{gjjgeren}</if>
+            <if test="gjjunit != null "> and gjjunit = #{gjjunit}</if>
+            <if test="shebaogeren != null "> and shebaogeren = #{shebaogeren}</if>
+            <if test="shebaounit != null "> and shebaounit = #{shebaounit}</if>
+            <if test="sctime != null  and sctime != ''"> and sctime = #{sctime}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="gonggeren != null "> and gonggeren = #{gonggeren}</if>
+            <if test="gongunit != null "> and gongunit = #{gongunit}</if>
+            <if test="explian != null  and explian != ''"> and explian = #{explian}</if>
+            <if test="startdt != null  and startdt != ''"> and startdt = #{startdt}</if>
+            <if test="enddt != null  and enddt != ''"> and enddt = #{enddt}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuHrshebaoById" parameterType="Long" resultMap="XinhuHrshebaoResult">
+        <include refid="selectXinhuHrshebaoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuHrshebao" parameterType="XinhuHrshebao">
+        insert into xinhu_hrshebao
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="status != null">status,</if>
+            <if test="gongjishu != null">gongjishu,</if>
+            <if test="yljishu != null">yljishu,</if>
+            <if test="ylgeren != null">ylgeren,</if>
+            <if test="ylunit != null">ylunit,</if>
+            <if test="syjishu != null">syjishu,</if>
+            <if test="sygeren != null">sygeren,</if>
+            <if test="syunit != null">syunit,</if>
+            <if test="gsjishu != null">gsjishu,</if>
+            <if test="gsgeren != null">gsgeren,</if>
+            <if test="gsunit != null">gsunit,</if>
+            <if test="syujishu != null">syujishu,</if>
+            <if test="syugeren != null">syugeren,</if>
+            <if test="syuunit != null">syuunit,</if>
+            <if test="yijishu != null">yijishu,</if>
+            <if test="yigeren != null">yigeren,</if>
+            <if test="yiunit != null">yiunit,</if>
+            <if test="dbgeren != null">dbgeren,</if>
+            <if test="gjjgeren != null">gjjgeren,</if>
+            <if test="gjjunit != null">gjjunit,</if>
+            <if test="shebaogeren != null">shebaogeren,</if>
+            <if test="shebaounit != null">shebaounit,</if>
+            <if test="sctime != null and sctime != ''">sctime,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="gonggeren != null">gonggeren,</if>
+            <if test="gongunit != null">gongunit,</if>
+            <if test="explian != null and explian != ''">explian,</if>
+            <if test="startdt != null and startdt != ''">startdt,</if>
+            <if test="enddt != null and enddt != ''">enddt,</if>
+            <if test="comid != null">comid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="status != null">#{status},</if>
+            <if test="gongjishu != null">#{gongjishu},</if>
+            <if test="yljishu != null">#{yljishu},</if>
+            <if test="ylgeren != null">#{ylgeren},</if>
+            <if test="ylunit != null">#{ylunit},</if>
+            <if test="syjishu != null">#{syjishu},</if>
+            <if test="sygeren != null">#{sygeren},</if>
+            <if test="syunit != null">#{syunit},</if>
+            <if test="gsjishu != null">#{gsjishu},</if>
+            <if test="gsgeren != null">#{gsgeren},</if>
+            <if test="gsunit != null">#{gsunit},</if>
+            <if test="syujishu != null">#{syujishu},</if>
+            <if test="syugeren != null">#{syugeren},</if>
+            <if test="syuunit != null">#{syuunit},</if>
+            <if test="yijishu != null">#{yijishu},</if>
+            <if test="yigeren != null">#{yigeren},</if>
+            <if test="yiunit != null">#{yiunit},</if>
+            <if test="dbgeren != null">#{dbgeren},</if>
+            <if test="gjjgeren != null">#{gjjgeren},</if>
+            <if test="gjjunit != null">#{gjjunit},</if>
+            <if test="shebaogeren != null">#{shebaogeren},</if>
+            <if test="shebaounit != null">#{shebaounit},</if>
+            <if test="sctime != null and sctime != ''">#{sctime},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="gonggeren != null">#{gonggeren},</if>
+            <if test="gongunit != null">#{gongunit},</if>
+            <if test="explian != null and explian != ''">#{explian},</if>
+            <if test="startdt != null and startdt != ''">#{startdt},</if>
+            <if test="enddt != null and enddt != ''">#{enddt},</if>
+            <if test="comid != null">#{comid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuHrshebao" parameterType="XinhuHrshebao">
+        update xinhu_hrshebao
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="gongjishu != null">gongjishu = #{gongjishu},</if>
+            <if test="yljishu != null">yljishu = #{yljishu},</if>
+            <if test="ylgeren != null">ylgeren = #{ylgeren},</if>
+            <if test="ylunit != null">ylunit = #{ylunit},</if>
+            <if test="syjishu != null">syjishu = #{syjishu},</if>
+            <if test="sygeren != null">sygeren = #{sygeren},</if>
+            <if test="syunit != null">syunit = #{syunit},</if>
+            <if test="gsjishu != null">gsjishu = #{gsjishu},</if>
+            <if test="gsgeren != null">gsgeren = #{gsgeren},</if>
+            <if test="gsunit != null">gsunit = #{gsunit},</if>
+            <if test="syujishu != null">syujishu = #{syujishu},</if>
+            <if test="syugeren != null">syugeren = #{syugeren},</if>
+            <if test="syuunit != null">syuunit = #{syuunit},</if>
+            <if test="yijishu != null">yijishu = #{yijishu},</if>
+            <if test="yigeren != null">yigeren = #{yigeren},</if>
+            <if test="yiunit != null">yiunit = #{yiunit},</if>
+            <if test="dbgeren != null">dbgeren = #{dbgeren},</if>
+            <if test="gjjgeren != null">gjjgeren = #{gjjgeren},</if>
+            <if test="gjjunit != null">gjjunit = #{gjjunit},</if>
+            <if test="shebaogeren != null">shebaogeren = #{shebaogeren},</if>
+            <if test="shebaounit != null">shebaounit = #{shebaounit},</if>
+            <if test="sctime != null and sctime != ''">sctime = #{sctime},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="gonggeren != null">gonggeren = #{gonggeren},</if>
+            <if test="gongunit != null">gongunit = #{gongunit},</if>
+            <if test="explian != null and explian != ''">explian = #{explian},</if>
+            <if test="startdt != null and startdt != ''">startdt = #{startdt},</if>
+            <if test="enddt != null and enddt != ''">enddt = #{enddt},</if>
+            <if test="comid != null">comid = #{comid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuHrshebaoById" parameterType="Long">
+        delete from xinhu_hrshebao where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuHrshebaoByIds" parameterType="String">
+        delete from xinhu_hrshebao where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

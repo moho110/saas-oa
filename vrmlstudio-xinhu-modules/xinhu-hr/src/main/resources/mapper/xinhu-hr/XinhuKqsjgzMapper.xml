@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuKqsjgzMapper">
+    
+    <resultMap type="XinhuKqsjgz" id="XinhuKqsjgzResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="sort"    column="sort"    />
+        <result property="pid"    column="pid"    />
+        <result property="stime"    column="stime"    />
+        <result property="etime"    column="etime"    />
+        <result property="qtype"    column="qtype"    />
+        <result property="iskt"    column="iskt"    />
+        <result property="iskq"    column="iskq"    />
+        <result property="isxx"    column="isxx"    />
+    </resultMap>
+
+    <sql id="selectXinhuKqsjgzVo">
+        select id, name, sort, pid, stime, etime, qtype, iskt, iskq, isxx from xinhu_kqsjgz
+    </sql>
+
+    <select id="selectXinhuKqsjgzList" parameterType="XinhuKqsjgz" resultMap="XinhuKqsjgzResult">
+        <include refid="selectXinhuKqsjgzVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="pid != null "> and pid = #{pid}</if>
+            <if test="stime != null  and stime != ''"> and stime = #{stime}</if>
+            <if test="etime != null  and etime != ''"> and etime = #{etime}</if>
+            <if test="qtype != null "> and qtype = #{qtype}</if>
+            <if test="iskt != null "> and iskt = #{iskt}</if>
+            <if test="iskq != null "> and iskq = #{iskq}</if>
+            <if test="isxx != null "> and isxx = #{isxx}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuKqsjgzById" parameterType="Integer" resultMap="XinhuKqsjgzResult">
+        <include refid="selectXinhuKqsjgzVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuKqsjgz" parameterType="XinhuKqsjgz">
+        insert into xinhu_kqsjgz
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="sort != null">sort,</if>
+            <if test="pid != null">pid,</if>
+            <if test="stime != null and stime != ''">stime,</if>
+            <if test="etime != null and etime != ''">etime,</if>
+            <if test="qtype != null">qtype,</if>
+            <if test="iskt != null">iskt,</if>
+            <if test="iskq != null">iskq,</if>
+            <if test="isxx != null">isxx,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="pid != null">#{pid},</if>
+            <if test="stime != null and stime != ''">#{stime},</if>
+            <if test="etime != null and etime != ''">#{etime},</if>
+            <if test="qtype != null">#{qtype},</if>
+            <if test="iskt != null">#{iskt},</if>
+            <if test="iskq != null">#{iskq},</if>
+            <if test="isxx != null">#{isxx},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuKqsjgz" parameterType="XinhuKqsjgz">
+        update xinhu_kqsjgz
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="stime != null and stime != ''">stime = #{stime},</if>
+            <if test="etime != null and etime != ''">etime = #{etime},</if>
+            <if test="qtype != null">qtype = #{qtype},</if>
+            <if test="iskt != null">iskt = #{iskt},</if>
+            <if test="iskq != null">iskq = #{iskq},</if>
+            <if test="isxx != null">isxx = #{isxx},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuKqsjgzById" parameterType="Integer">
+        delete from xinhu_kqsjgz where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuKqsjgzByIds" parameterType="String">
+        delete from xinhu_kqsjgz where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

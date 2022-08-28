@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.xsystem.mapper.XinhuLogintokenMapper">
+    
+    <resultMap type="XinhuLogintoken" id="XinhuLogintokenResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="name"    column="name"    />
+        <result property="token"    column="token"    />
+        <result property="adddt"    column="adddt"    />
+        <result property="moddt"    column="moddt"    />
+        <result property="cfrom"    column="cfrom"    />
+        <result property="device"    column="device"    />
+        <result property="ip"    column="ip"    />
+        <result property="web"    column="web"    />
+        <result property="online"    column="online"    />
+        <result property="ispush"    column="ispush"    />
+        <result property="pushtoken"    column="pushtoken"    />
+    </resultMap>
+
+    <sql id="selectXinhuLogintokenVo">
+        select id, uid, name, token, adddt, moddt, cfrom, device, ip, web, online, ispush, pushtoken from xinhu_logintoken
+    </sql>
+
+    <select id="selectXinhuLogintokenList" parameterType="XinhuLogintoken" resultMap="XinhuLogintokenResult">
+        <include refid="selectXinhuLogintokenVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="token != null  and token != ''"> and token = #{token}</if>
+            <if test="adddt != null "> and adddt = #{adddt}</if>
+            <if test="moddt != null "> and moddt = #{moddt}</if>
+            <if test="cfrom != null  and cfrom != ''"> and cfrom = #{cfrom}</if>
+            <if test="device != null  and device != ''"> and device = #{device}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+            <if test="web != null  and web != ''"> and web = #{web}</if>
+            <if test="online != null "> and online = #{online}</if>
+            <if test="ispush != null "> and ispush = #{ispush}</if>
+            <if test="pushtoken != null  and pushtoken != ''"> and pushtoken = #{pushtoken}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuLogintokenById" parameterType="Long" resultMap="XinhuLogintokenResult">
+        <include refid="selectXinhuLogintokenVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuLogintoken" parameterType="XinhuLogintoken">
+        insert into xinhu_logintoken
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="uid != null">uid,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="token != null and token != ''">token,</if>
+            <if test="adddt != null">adddt,</if>
+            <if test="moddt != null">moddt,</if>
+            <if test="cfrom != null and cfrom != ''">cfrom,</if>
+            <if test="device != null and device != ''">device,</if>
+            <if test="ip != null and ip != ''">ip,</if>
+            <if test="web != null and web != ''">web,</if>
+            <if test="online != null">online,</if>
+            <if test="ispush != null">ispush,</if>
+            <if test="pushtoken != null and pushtoken != ''">pushtoken,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="token != null and token != ''">#{token},</if>
+            <if test="adddt != null">#{adddt},</if>
+            <if test="moddt != null">#{moddt},</if>
+            <if test="cfrom != null and cfrom != ''">#{cfrom},</if>
+            <if test="device != null and device != ''">#{device},</if>
+            <if test="ip != null and ip != ''">#{ip},</if>
+            <if test="web != null and web != ''">#{web},</if>
+            <if test="online != null">#{online},</if>
+            <if test="ispush != null">#{ispush},</if>
+            <if test="pushtoken != null and pushtoken != ''">#{pushtoken},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuLogintoken" parameterType="XinhuLogintoken">
+        update xinhu_logintoken
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="token != null and token != ''">token = #{token},</if>
+            <if test="adddt != null">adddt = #{adddt},</if>
+            <if test="moddt != null">moddt = #{moddt},</if>
+            <if test="cfrom != null and cfrom != ''">cfrom = #{cfrom},</if>
+            <if test="device != null and device != ''">device = #{device},</if>
+            <if test="ip != null and ip != ''">ip = #{ip},</if>
+            <if test="web != null and web != ''">web = #{web},</if>
+            <if test="online != null">online = #{online},</if>
+            <if test="ispush != null">ispush = #{ispush},</if>
+            <if test="pushtoken != null and pushtoken != ''">pushtoken = #{pushtoken},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuLogintokenById" parameterType="Long">
+        delete from xinhu_logintoken where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuLogintokenByIds" parameterType="String">
+        delete from xinhu_logintoken where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

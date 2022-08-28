@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.police.mapper.XinhuFilesMapper">
+    
+    <resultMap type="XinhuFiles" id="XinhuFilesResult">
+        <result property="id"    column="id"    />
+        <result property="optname"    column="optname"    />
+        <result property="fileid"    column="fileid"    />
+        <result property="optid"    column="optid"    />
+        <result property="types"    column="types"    />
+        <result property="ip"    column="ip"    />
+        <result property="web"    column="web"    />
+        <result property="optdt"    column="optdt"    />
+    </resultMap>
+
+    <sql id="selectXinhuFilesVo">
+        select id, optname, fileid, optid, type, ip, web, optdt from xinhu_files
+    </sql>
+
+    <select id="selectXinhuFilesList" parameterType="XinhuFiles" resultMap="XinhuFilesResult">
+        <include refid="selectXinhuFilesVo"/>
+        <where>  
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="fileid != null "> and fileid = #{fileid}</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="types != null "> and types = #{types}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+            <if test="web != null  and web != ''"> and web = #{web}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuFilesById" parameterType="Long" resultMap="XinhuFilesResult">
+        <include refid="selectXinhuFilesVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuFiles" parameterType="XinhuFiles" useGeneratedKeys="true" keyProperty="id">
+        insert into xinhu_files
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="fileid != null">fileid,</if>
+            <if test="optid != null">optid,</if>
+            <if test="types != null">types,</if>
+            <if test="ip != null and ip != ''">ip,</if>
+            <if test="web != null and web != ''">web,</if>
+            <if test="optdt != null">optdt,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="fileid != null">#{fileid},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="types != null">#{types},</if>
+            <if test="ip != null and ip != ''">#{ip},</if>
+            <if test="web != null and web != ''">#{web},</if>
+            <if test="optdt != null">#{optdt},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuFiles" parameterType="XinhuFiles">
+        update xinhu_files
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="fileid != null">fileid = #{fileid},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="types != null">types = #{types},</if>
+            <if test="ip != null and ip != ''">ip = #{ip},</if>
+            <if test="web != null and web != ''">web = #{web},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuFilesById" parameterType="Long">
+        delete from xinhu_files where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuFilesByIds" parameterType="String">
+        delete from xinhu_files where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

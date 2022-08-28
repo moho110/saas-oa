@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.hr.mapper.XinhuImHistoryMapper">
+    
+    <resultMap type="XinhuImHistory" id="XinhuImHistoryResult">
+        <result property="id"    column="id"    />
+        <result property="types"    column="types"    />
+        <result property="receid"    column="receid"    />
+        <result property="uid"    column="uid"    />
+        <result property="sendid"    column="sendid"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="cont"    column="cont"    />
+        <result property="stotal"    column="stotal"    />
+        <result property="title"    column="title"    />
+        <result property="xgurl"    column="xgurl"    />
+        <result property="messid"    column="messid"    />
+    </resultMap>
+
+    <sql id="selectXinhuImHistoryVo">
+        select id, types, receid, uid, sendid, optdt, cont, stotal, title, xgurl, messid from xinhu_im_history
+    </sql>
+
+    <select id="selectXinhuImHistoryList" parameterType="XinhuImHistory" resultMap="XinhuImHistoryResult">
+        <include refid="selectXinhuImHistoryVo"/>
+        <where>  
+            <if test="types != null  and types != ''"> and types = #{types}</if>
+            <if test="receid != null "> and receid = #{receid}</if>
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="sendid != null "> and sendid = #{sendid}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="cont != null  and cont != ''"> and cont = #{cont}</if>
+            <if test="stotal != null "> and stotal = #{stotal}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="xgurl != null  and xgurl != ''"> and xgurl = #{xgurl}</if>
+            <if test="messid != null "> and messid = #{messid}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuImHistoryById" parameterType="Long" resultMap="XinhuImHistoryResult">
+        <include refid="selectXinhuImHistoryVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuImHistory" parameterType="XinhuImHistory">
+        insert into xinhu_im_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="types != null and types != ''">types,</if>
+            <if test="receid != null">receid,</if>
+            <if test="uid != null">uid,</if>
+            <if test="sendid != null">sendid,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="cont != null and cont != ''">cont,</if>
+            <if test="stotal != null">stotal,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="xgurl != null and xgurl != ''">xgurl,</if>
+            <if test="messid != null">messid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="types != null and types != ''">#{types},</if>
+            <if test="receid != null">#{receid},</if>
+            <if test="uid != null">#{uid},</if>
+            <if test="sendid != null">#{sendid},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="cont != null and cont != ''">#{cont},</if>
+            <if test="stotal != null">#{stotal},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="xgurl != null and xgurl != ''">#{xgurl},</if>
+            <if test="messid != null">#{messid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuImHistory" parameterType="XinhuImHistory">
+        update xinhu_im_history
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="types != null and types != ''">types = #{types},</if>
+            <if test="receid != null">receid = #{receid},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="sendid != null">sendid = #{sendid},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="cont != null and cont != ''">cont = #{cont},</if>
+            <if test="stotal != null">stotal = #{stotal},</if>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="xgurl != null and xgurl != ''">xgurl = #{xgurl},</if>
+            <if test="messid != null">messid = #{messid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuImHistoryById" parameterType="Long">
+        delete from xinhu_im_history where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuImHistoryByIds" parameterType="String">
+        delete from xinhu_im_history where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

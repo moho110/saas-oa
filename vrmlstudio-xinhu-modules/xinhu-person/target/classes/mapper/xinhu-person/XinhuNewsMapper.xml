@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrmlstudio.person.mapper.XinhuNewsMapper">
+    
+    <resultMap type="XinhuNews" id="XinhuNewsResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="optdt"    column="optdt"    />
+        <result property="typename"    column="typename"    />
+        <result property="content"    column="content"    />
+        <result property="url"    column="url"    />
+        <result property="receid"    column="receid"    />
+        <result property="recename"    column="recename"    />
+        <result property="optid"    column="optid"    />
+        <result property="optname"    column="optname"    />
+        <result property="enddt"    column="enddt"    />
+        <result property="startdt"    column="startdt"    />
+        <result property="zuozhe"    column="zuozhe"    />
+        <result property="indate"    column="indate"    />
+        <result property="status"    column="status"    />
+        <result property="fengmian"    column="fengmian"    />
+        <result property="mintou"    column="mintou"    />
+        <result property="maxtou"    column="maxtou"    />
+        <result property="issms"    column="issms"    />
+        <result property="istop"    column="istop"    />
+        <result property="comid"    column="comid"    />
+        <result property="appxs"    column="appxs"    />
+    </resultMap>
+
+    <sql id="selectXinhuNewsVo">
+        select id, title, optdt, typename, content, url, receid, recename, optid, optname, enddt, startdt, zuozhe, indate, status, fengmian, mintou, maxtou, issms, istop, comid, appxs from xinhu_news
+    </sql>
+
+    <select id="selectXinhuNewsList" parameterType="XinhuNews" resultMap="XinhuNewsResult">
+        <include refid="selectXinhuNewsVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="optdt != null "> and optdt = #{optdt}</if>
+            <if test="typename != null  and typename != ''"> and typename like concat('%', #{typename}, '%')</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="receid != null  and receid != ''"> and receid = #{receid}</if>
+            <if test="recename != null  and recename != ''"> and recename like concat('%', #{recename}, '%')</if>
+            <if test="optid != null "> and optid = #{optid}</if>
+            <if test="optname != null  and optname != ''"> and optname like concat('%', #{optname}, '%')</if>
+            <if test="enddt != null "> and enddt = #{enddt}</if>
+            <if test="startdt != null "> and startdt = #{startdt}</if>
+            <if test="zuozhe != null  and zuozhe != ''"> and zuozhe = #{zuozhe}</if>
+            <if test="indate != null "> and indate = #{indate}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="fengmian != null  and fengmian != ''"> and fengmian = #{fengmian}</if>
+            <if test="mintou != null "> and mintou = #{mintou}</if>
+            <if test="maxtou != null "> and maxtou = #{maxtou}</if>
+            <if test="issms != null "> and issms = #{issms}</if>
+            <if test="istop != null "> and istop = #{istop}</if>
+            <if test="comid != null "> and comid = #{comid}</if>
+            <if test="appxs != null "> and appxs = #{appxs}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinhuNewsById" parameterType="Long" resultMap="XinhuNewsResult">
+        <include refid="selectXinhuNewsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinhuNews" parameterType="XinhuNews">
+        insert into xinhu_news
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="optdt != null">optdt,</if>
+            <if test="typename != null and typename != ''">typename,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="url != null and url != ''">url,</if>
+            <if test="receid != null and receid != ''">receid,</if>
+            <if test="recename != null and recename != ''">recename,</if>
+            <if test="optid != null">optid,</if>
+            <if test="optname != null and optname != ''">optname,</if>
+            <if test="enddt != null">enddt,</if>
+            <if test="startdt != null">startdt,</if>
+            <if test="zuozhe != null and zuozhe != ''">zuozhe,</if>
+            <if test="indate != null">indate,</if>
+            <if test="status != null">status,</if>
+            <if test="fengmian != null and fengmian != ''">fengmian,</if>
+            <if test="mintou != null">mintou,</if>
+            <if test="maxtou != null">maxtou,</if>
+            <if test="issms != null">issms,</if>
+            <if test="istop != null">istop,</if>
+            <if test="comid != null">comid,</if>
+            <if test="appxs != null">appxs,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="optdt != null">#{optdt},</if>
+            <if test="typename != null and typename != ''">#{typename},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="url != null and url != ''">#{url},</if>
+            <if test="receid != null and receid != ''">#{receid},</if>
+            <if test="recename != null and recename != ''">#{recename},</if>
+            <if test="optid != null">#{optid},</if>
+            <if test="optname != null and optname != ''">#{optname},</if>
+            <if test="enddt != null">#{enddt},</if>
+            <if test="startdt != null">#{startdt},</if>
+            <if test="zuozhe != null and zuozhe != ''">#{zuozhe},</if>
+            <if test="indate != null">#{indate},</if>
+            <if test="status != null">#{status},</if>
+            <if test="fengmian != null and fengmian != ''">#{fengmian},</if>
+            <if test="mintou != null">#{mintou},</if>
+            <if test="maxtou != null">#{maxtou},</if>
+            <if test="issms != null">#{issms},</if>
+            <if test="istop != null">#{istop},</if>
+            <if test="comid != null">#{comid},</if>
+            <if test="appxs != null">#{appxs},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinhuNews" parameterType="XinhuNews">
+        update xinhu_news
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="optdt != null">optdt = #{optdt},</if>
+            <if test="typename != null and typename != ''">typename = #{typename},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="url != null and url != ''">url = #{url},</if>
+            <if test="receid != null and receid != ''">receid = #{receid},</if>
+            <if test="recename != null and recename != ''">recename = #{recename},</if>
+            <if test="optid != null">optid = #{optid},</if>
+            <if test="optname != null and optname != ''">optname = #{optname},</if>
+            <if test="enddt != null">enddt = #{enddt},</if>
+            <if test="startdt != null">startdt = #{startdt},</if>
+            <if test="zuozhe != null and zuozhe != ''">zuozhe = #{zuozhe},</if>
+            <if test="indate != null">indate = #{indate},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="fengmian != null and fengmian != ''">fengmian = #{fengmian},</if>
+            <if test="mintou != null">mintou = #{mintou},</if>
+            <if test="maxtou != null">maxtou = #{maxtou},</if>
+            <if test="issms != null">issms = #{issms},</if>
+            <if test="istop != null">istop = #{istop},</if>
+            <if test="comid != null">comid = #{comid},</if>
+            <if test="appxs != null">appxs = #{appxs},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinhuNewsById" parameterType="Long">
+        delete from xinhu_news where id = #{id}
+    </delete>
+
+    <delete id="deleteXinhuNewsByIds" parameterType="String">
+        delete from xinhu_news where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
